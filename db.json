@@ -1,0 +1,447 @@
+{
+  "users": {
+    "Abubakr": {
+      "properties": []
+    },
+    "undefined": {
+      "properties": [],
+      "portfolioAudit": "Zero assets, maximum liquidity. Operational risk: Negligible. Strategic risk: Stagnation."
+    },
+    "Abubakr1": {
+      "operatorId": "Abubakr1",
+      "accessKey": "Abubakr123",
+      "clearance": "psps2025rate@gmail.com",
+      "balance": 23353.40479969676,
+      "portfolio": [
+        {
+          "id": "btc",
+          "symbol": "BTC",
+          "name": "Bitcoin",
+          "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+          "current_price": 76853.52,
+          "price_change_percentage_24h": -0.146,
+          "high_24h": 77800,
+          "low_24h": 76051,
+          "market_cap": 1537421829636,
+          "total_volume": 1373912434.8339944,
+          "amount": 0.01,
+          "avgPrice": 76853.52
+        }
+      ],
+      "learningXP": 320,
+      "impactPoints": 0,
+      "portfolioAudit": "Bitcoin: 0.01.  Хавфи шадид.  Ҳушёри сифат.  Парвоз ё фурӯш.  Ҳисобкунӣ.",
+      "academyDirectives": "Awaiting cognitive mapping for optimized learning paths.",
+      "infrastructure": [
+        {
+          "id": "node_neural_1",
+          "name": "Neural Bio-Interface Lab",
+          "type": "quantum_rig",
+          "cost": 15000,
+          "yieldPerSecond": 0.35,
+          "description": "Specialized laboratory designing smart neural links for human-machine telemetry.",
+          "ltvCac": "3.5x",
+          "risk": "Low",
+          "educationalTakeaway": "Early-stage hardware operations require high research capital but command high defensibility through proprietary technology.",
+          "realWorldMetric": "R&D Efficiency: 86%",
+          "strategyDocs": "Bio-link development requires strict regulatory compliance. Capitalizing on IP scaling is key.",
+          "owned": 1,
+          "marketingLevel": 0,
+          "efficiencyLevel": 0,
+          "customYieldMultiplier": 1.56
+        },
+        {
+          "id": "node_media_1",
+          "name": "Decentralized Media Hub",
+          "type": "data_center",
+          "cost": 350000,
+          "yieldPerSecond": 6,
+          "description": "Peer-to-peer content CDN nodes fueled by autonomous ad-revenue protocols.",
+          "ltvCac": "6.2x",
+          "risk": "High",
+          "educationalTakeaway": "P2P content networks achieve zero host cost but require heavy user acquisition spend to kickstart standard monetization cycles.",
+          "realWorldMetric": "MAU Growth: +14.2%",
+          "strategyDocs": "Growth relies on community engagement metrics. Onboarding content syndicates maximizes ad impressions.",
+          "owned": 1,
+          "marketingLevel": 0,
+          "efficiencyLevel": 0,
+          "customYieldMultiplier": 1
+        },
+        {
+          "id": "node_dc_1",
+          "name": "SaaS Enterprise Platform",
+          "type": "data_center",
+          "cost": 40000,
+          "yieldPerSecond": 0.8,
+          "description": "Cloud-based enterprise automation software with recurring licenses.",
+          "ltvCac": "4.2x",
+          "risk": "Medium",
+          "educationalTakeaway": "Software-as-a-Service scales fast because recurring subscription revenue (ARR) creates highly predictable cash flows with low variable delivery costs. To expand, focus heavily on improving the LTV/CAC ratio through CAC optimization.",
+          "realWorldMetric": "Monthly Churn: 2.1%",
+          "strategyDocs": "SaaS growth is highly dependent on compound customer retention. Lowering churn is the highest leverage action for value accumulation.",
+          "owned": 1,
+          "marketingLevel": 0,
+          "efficiencyLevel": 0,
+          "customYieldMultiplier": 1
+        }
+      ],
+      "savingsDeposited": 0,
+      "activeLoan": null,
+      "properties": [],
+      "fiscalDays": 3883.024999998271,
+      "achievements": [
+        {
+          "id": "first_invest",
+          "title": "Аввалин Сармоягузорӣ",
+          "description": "Хуш омадед ба бозор! Ягон дороиро бомуваффақият харидорӣ намоед.",
+          "xpReward": 100,
+          "progress": 0,
+          "target": 1,
+          "current": 0,
+          "unlockedAt": null
+        },
+        {
+          "id": "empire_owner",
+          "title": "Императори Саноатӣ",
+          "description": "Аввалин гиреҳи инфрасохтории худро дар Империя харидорӣ кунед.",
+          "xpReward": 200,
+          "progress": 100,
+          "target": 1,
+          "current": 1,
+          "unlockedAt": "2026-05-26T03:14:34.200Z"
+        },
+        {
+          "id": "savings_master",
+          "title": "Наҷотбахши Молиявӣ",
+          "description": "Маблағи $50,000 ё бештарро дар суратҳисоби амонатӣ пасандоз кунед.",
+          "xpReward": 150,
+          "progress": 0,
+          "target": 50000,
+          "current": 0,
+          "unlockedAt": null
+        },
+        {
+          "id": "scholar_lvl",
+          "title": "Олими Иқтисод",
+          "description": "Сатҳи дониши худро бо ба даст овардани 500 XP дар Академия баланд бардоред.",
+          "xpReward": 300,
+          "progress": 0,
+          "target": 500,
+          "current": 0,
+          "unlockedAt": null
+        },
+        {
+          "id": "millionaire_dream",
+          "title": "Миллиардери Оянда",
+          "description": "Арзиши умумии сармояи худро (Net Worth) ба $1,000,000 расонед.",
+          "xpReward": 500,
+          "progress": 0,
+          "target": 1000000,
+          "current": 9349.133999695996,
+          "unlockedAt": null
+        },
+        {
+          "id": "neural_audit",
+          "title": "Алоқаи Нейронӣ",
+          "description": "Дархости таҳлили нейронии портфел ё дастури академияро пешниҳод кунед.",
+          "xpReward": 120,
+          "progress": 100,
+          "target": 1,
+          "current": 1,
+          "unlockedAt": "2026-05-21T05:52:54.169Z"
+        }
+      ],
+      "lastActive": 1779765988609,
+      "lastSavedTimestamp": 1779772914495
+    }
+  },
+  "currentUser": {
+    "operatorId": "Abubakr1",
+    "accessKey": "Abubakr123",
+    "clearance": "psps2025rate@gmail.com",
+    "balance": 23353.40479969676,
+    "portfolio": [
+      {
+        "id": "btc",
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+        "current_price": 76853.52,
+        "price_change_percentage_24h": -0.146,
+        "high_24h": 77800,
+        "low_24h": 76051,
+        "market_cap": 1537421829636,
+        "total_volume": 1373912434.8339944,
+        "amount": 0.01,
+        "avgPrice": 76853.52
+      }
+    ],
+    "learningXP": 320,
+    "impactPoints": 0,
+    "portfolioAudit": "Bitcoin: 0.01.  Хавфи шадид.  Ҳушёри сифат.  Парвоз ё фурӯш.  Ҳисобкунӣ.",
+    "academyDirectives": "Awaiting cognitive mapping for optimized learning paths.",
+    "infrastructure": [
+      {
+        "id": "node_neural_1",
+        "name": "Neural Bio-Interface Lab",
+        "type": "quantum_rig",
+        "cost": 15000,
+        "yieldPerSecond": 0.35,
+        "description": "Specialized laboratory designing smart neural links for human-machine telemetry.",
+        "ltvCac": "3.5x",
+        "risk": "Low",
+        "educationalTakeaway": "Early-stage hardware operations require high research capital but command high defensibility through proprietary technology.",
+        "realWorldMetric": "R&D Efficiency: 86%",
+        "strategyDocs": "Bio-link development requires strict regulatory compliance. Capitalizing on IP scaling is key.",
+        "owned": 1,
+        "marketingLevel": 0,
+        "efficiencyLevel": 0,
+        "customYieldMultiplier": 1.56
+      },
+      {
+        "id": "node_media_1",
+        "name": "Decentralized Media Hub",
+        "type": "data_center",
+        "cost": 350000,
+        "yieldPerSecond": 6,
+        "description": "Peer-to-peer content CDN nodes fueled by autonomous ad-revenue protocols.",
+        "ltvCac": "6.2x",
+        "risk": "High",
+        "educationalTakeaway": "P2P content networks achieve zero host cost but require heavy user acquisition spend to kickstart standard monetization cycles.",
+        "realWorldMetric": "MAU Growth: +14.2%",
+        "strategyDocs": "Growth relies on community engagement metrics. Onboarding content syndicates maximizes ad impressions.",
+        "owned": 1,
+        "marketingLevel": 0,
+        "efficiencyLevel": 0,
+        "customYieldMultiplier": 1
+      },
+      {
+        "id": "node_dc_1",
+        "name": "SaaS Enterprise Platform",
+        "type": "data_center",
+        "cost": 40000,
+        "yieldPerSecond": 0.8,
+        "description": "Cloud-based enterprise automation software with recurring licenses.",
+        "ltvCac": "4.2x",
+        "risk": "Medium",
+        "educationalTakeaway": "Software-as-a-Service scales fast because recurring subscription revenue (ARR) creates highly predictable cash flows with low variable delivery costs. To expand, focus heavily on improving the LTV/CAC ratio through CAC optimization.",
+        "realWorldMetric": "Monthly Churn: 2.1%",
+        "strategyDocs": "SaaS growth is highly dependent on compound customer retention. Lowering churn is the highest leverage action for value accumulation.",
+        "owned": 1,
+        "marketingLevel": 0,
+        "efficiencyLevel": 0,
+        "customYieldMultiplier": 1
+      }
+    ],
+    "savingsDeposited": 0,
+    "activeLoan": null,
+    "properties": [],
+    "fiscalDays": 3883.024999998271,
+    "achievements": [
+      {
+        "id": "first_invest",
+        "title": "Аввалин Сармоягузорӣ",
+        "description": "Хуш омадед ба бозор! Ягон дороиро бомуваффақият харидорӣ намоед.",
+        "xpReward": 100,
+        "progress": 0,
+        "target": 1,
+        "current": 0,
+        "unlockedAt": null
+      },
+      {
+        "id": "empire_owner",
+        "title": "Императори Саноатӣ",
+        "description": "Аввалин гиреҳи инфрасохтории худро дар Империя харидорӣ кунед.",
+        "xpReward": 200,
+        "progress": 100,
+        "target": 1,
+        "current": 1,
+        "unlockedAt": "2026-05-26T03:14:34.200Z"
+      },
+      {
+        "id": "savings_master",
+        "title": "Наҷотбахши Молиявӣ",
+        "description": "Маблағи $50,000 ё бештарро дар суратҳисоби амонатӣ пасандоз кунед.",
+        "xpReward": 150,
+        "progress": 0,
+        "target": 50000,
+        "current": 0,
+        "unlockedAt": null
+      },
+      {
+        "id": "scholar_lvl",
+        "title": "Олими Иқтисод",
+        "description": "Сатҳи дониши худро бо ба даст овардани 500 XP дар Академия баланд бардоред.",
+        "xpReward": 300,
+        "progress": 0,
+        "target": 500,
+        "current": 0,
+        "unlockedAt": null
+      },
+      {
+        "id": "millionaire_dream",
+        "title": "Миллиардери Оянда",
+        "description": "Арзиши умумии сармояи худро (Net Worth) ба $1,000,000 расонед.",
+        "xpReward": 500,
+        "progress": 0,
+        "target": 1000000,
+        "current": 9349.133999695996,
+        "unlockedAt": null
+      },
+      {
+        "id": "neural_audit",
+        "title": "Алоқаи Нейронӣ",
+        "description": "Дархости таҳлили нейронии портфел ё дастури академияро пешниҳод кунед.",
+        "xpReward": 120,
+        "progress": 100,
+        "target": 1,
+        "current": 1,
+        "unlockedAt": "2026-05-21T05:52:54.169Z"
+      }
+    ],
+    "lastActive": 1779765988609,
+    "lastSavedTimestamp": 1779772914495
+  },
+  "isAuthenticated": true,
+  "balance": 23353.40479969676,
+  "portfolio": [
+    {
+      "id": "btc",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+      "current_price": 76853.52,
+      "price_change_percentage_24h": -0.146,
+      "high_24h": 77800,
+      "low_24h": 76051,
+      "market_cap": 1537421829636,
+      "total_volume": 1373912434.8339944,
+      "amount": 0.01,
+      "avgPrice": 76853.52
+    }
+  ],
+  "learningXP": 320,
+  "impactPoints": 0,
+  "portfolioAudit": "Bitcoin: 0.01.  Хавфи шадид.  Ҳушёри сифат.  Парвоз ё фурӯш.  Ҳисобкунӣ.",
+  "academyDirectives": "Awaiting cognitive mapping for optimized learning paths.",
+  "infrastructure": [
+    {
+      "id": "node_neural_1",
+      "name": "Neural Bio-Interface Lab",
+      "type": "quantum_rig",
+      "cost": 15000,
+      "yieldPerSecond": 0.35,
+      "description": "Specialized laboratory designing smart neural links for human-machine telemetry.",
+      "ltvCac": "3.5x",
+      "risk": "Low",
+      "educationalTakeaway": "Early-stage hardware operations require high research capital but command high defensibility through proprietary technology.",
+      "realWorldMetric": "R&D Efficiency: 86%",
+      "strategyDocs": "Bio-link development requires strict regulatory compliance. Capitalizing on IP scaling is key.",
+      "owned": 1,
+      "marketingLevel": 0,
+      "efficiencyLevel": 0,
+      "customYieldMultiplier": 1.56
+    },
+    {
+      "id": "node_media_1",
+      "name": "Decentralized Media Hub",
+      "type": "data_center",
+      "cost": 350000,
+      "yieldPerSecond": 6,
+      "description": "Peer-to-peer content CDN nodes fueled by autonomous ad-revenue protocols.",
+      "ltvCac": "6.2x",
+      "risk": "High",
+      "educationalTakeaway": "P2P content networks achieve zero host cost but require heavy user acquisition spend to kickstart standard monetization cycles.",
+      "realWorldMetric": "MAU Growth: +14.2%",
+      "strategyDocs": "Growth relies on community engagement metrics. Onboarding content syndicates maximizes ad impressions.",
+      "owned": 1,
+      "marketingLevel": 0,
+      "efficiencyLevel": 0,
+      "customYieldMultiplier": 1
+    },
+    {
+      "id": "node_dc_1",
+      "name": "SaaS Enterprise Platform",
+      "type": "data_center",
+      "cost": 40000,
+      "yieldPerSecond": 0.8,
+      "description": "Cloud-based enterprise automation software with recurring licenses.",
+      "ltvCac": "4.2x",
+      "risk": "Medium",
+      "educationalTakeaway": "Software-as-a-Service scales fast because recurring subscription revenue (ARR) creates highly predictable cash flows with low variable delivery costs. To expand, focus heavily on improving the LTV/CAC ratio through CAC optimization.",
+      "realWorldMetric": "Monthly Churn: 2.1%",
+      "strategyDocs": "SaaS growth is highly dependent on compound customer retention. Lowering churn is the highest leverage action for value accumulation.",
+      "owned": 1,
+      "marketingLevel": 0,
+      "efficiencyLevel": 0,
+      "customYieldMultiplier": 1
+    }
+  ],
+  "savingsDeposited": 0,
+  "activeLoan": null,
+  "properties": [],
+  "fiscalDays": 3883.024999998271,
+  "achievements": [
+    {
+      "id": "first_invest",
+      "title": "Аввалин Сармоягузорӣ",
+      "description": "Хуш омадед ба бозор! Ягон дороиро бомуваффақият харидорӣ намоед.",
+      "xpReward": 100,
+      "progress": 0,
+      "target": 1,
+      "current": 0,
+      "unlockedAt": null
+    },
+    {
+      "id": "empire_owner",
+      "title": "Императори Саноатӣ",
+      "description": "Аввалин гиреҳи инфрасохтории худро дар Империя харидорӣ кунед.",
+      "xpReward": 200,
+      "progress": 100,
+      "target": 1,
+      "current": 1,
+      "unlockedAt": "2026-05-26T03:14:34.200Z"
+    },
+    {
+      "id": "savings_master",
+      "title": "Наҷотбахши Молиявӣ",
+      "description": "Маблағи $50,000 ё бештарро дар суратҳисоби амонатӣ пасандоз кунед.",
+      "xpReward": 150,
+      "progress": 0,
+      "target": 50000,
+      "current": 0,
+      "unlockedAt": null
+    },
+    {
+      "id": "scholar_lvl",
+      "title": "Олими Иқтисод",
+      "description": "Сатҳи дониши худро бо ба даст овардани 500 XP дар Академия баланд бардоред.",
+      "xpReward": 300,
+      "progress": 0,
+      "target": 500,
+      "current": 0,
+      "unlockedAt": null
+    },
+    {
+      "id": "millionaire_dream",
+      "title": "Миллиардери Оянда",
+      "description": "Арзиши умумии сармояи худро (Net Worth) ба $1,000,000 расонед.",
+      "xpReward": 500,
+      "progress": 0,
+      "target": 1000000,
+      "current": 9349.133999695996,
+      "unlockedAt": null
+    },
+    {
+      "id": "neural_audit",
+      "title": "Алоқаи Нейронӣ",
+      "description": "Дархости таҳлили нейронии портфел ё дастури академияро пешниҳод кунед.",
+      "xpReward": 120,
+      "progress": 100,
+      "target": 1,
+      "current": 1,
+      "unlockedAt": "2026-05-21T05:52:54.169Z"
+    }
+  ],
+  "lastActive": 1779765988609
+}

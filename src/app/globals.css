@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+:root {
+  --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-ibm-plex-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, Menlo, monospace;
+}
+
+@theme {
+  /* === BINANCE DESIGN SYSTEM === */
+
+  /* Backgrounds */
+  --color-background:        #0B0E11;
+  --color-surface:           #1E2026;
+  --color-surface-elevated:  #2B2F36;
+  --color-surface-hover:     #363C45;
+
+  /* Borders */
+  --color-border:            #2B2F36;
+  --color-border-strong:     #474D57;
+
+  /* Binance Yellow — Primary CTA / Accent */
+  --color-bnb:               #F0B90B;
+  --color-bnb-hover:         #F8D33A;
+  --color-bnb-dim:           rgba(240, 185, 11, 0.12);
+
+  /* Market States */
+  --color-buy:               #F0B90B;
+  --color-buy-dim:           rgba(240, 185, 11, 0.12);
+  --color-sell:              #F6465D;
+  --color-sell-dim:          rgba(246, 70, 93, 0.12);
+
+  /* Text hierarchy */
+  --color-foreground:        #EAECEF;
+  --color-text-secondary:    #848E9C;
+  --color-text-muted:        #474D57;
+
+  /* Legacy aliases — mapped to new system */
+  --color-mercury:           #848E9C;
+  --color-monolith:          #1E2026;
+  --color-cyber-lime:        #F0B90B;
+  --color-cyber-pink:        #F6465D;
+  --color-cyber-violet:      #F0B90B;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-inter);
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+@layer components {
+  /* Binance-style card */
+  .monolith-card {
+    background-color: #1E2026;
+    border: 1px solid #2B2F36;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle pulse for live indicators */
+  .scanning-line {
+    display: none;
+  }
+
+  /* Keep corner-bracket class but make invisible by default */
+  .corner-bracket {
+    display: none;
+  }
+
+  /* Binance badge */
+  .bnb-badge {
+    background-color: var(--color-bnb-dim);
+    border: 1px solid rgba(240, 185, 11, 0.25);
+    color: var(--color-bnb);
+  }
+
+  /* Buy state */
+  .buy-badge {
+    background-color: var(--color-buy-dim);
+    border: 1px solid rgba(14, 203, 129, 0.25);
+    color: var(--color-buy);
+  }
+
+  /* Sell state */
+  .sell-badge {
+    background-color: var(--color-sell-dim);
+    border: 1px solid rgba(246, 70, 93, 0.25);
+    color: var(--color-sell);
+  }
+}
+
+/* === Binance-style subtle grid === */
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom Scrollbar — Binance style */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #1E2026; }
+::-webkit-scrollbar-thumb { background: #2B2F36; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #474D57; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.perspective-1000 { perspective: 1000px; }
+
+/* Binance Yellow glow — use sparingly */
+.bnb-glow {
+  box-shadow: 0 0 20px rgba(240, 185, 11, 0.15), 0 0 40px rgba(240, 185, 11, 0.05);
+}
+
+/* Buy/Sell glow */
+.buy-glow  { box-shadow: 0 0 20px rgba(14, 203, 129, 0.12); }
+.sell-glow { box-shadow: 0 0 20px rgba(246, 70, 93, 0.12); }
+
+/* Data table row hover */
+.data-row {
+  border-bottom: 1px solid #2B2F36;
+  transition: background-color 0.15s ease;
+}
+.data-row:hover { background-color: #2B2F36; }
+
+/* Binance-style number font */
+.font-data {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* Status dot */
+.status-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #F0B90B;
+  animation: pulse-buy 2s ease-in-out infinite;
+}
+
+@keyframes pulse-buy {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(240, 185, 11, 0.4); }
+  50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(240, 185, 11, 0); }
+}
+
+@keyframes pulse-mercury {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.35; }
+}
+
+/* Deprecate scanline animation */
+@keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
