@@ -6,6 +6,10 @@ import { Brain, X, Send, Sparkles, AlertCircle, RefreshCw, CornerDownLeft } from
 import { useVantageStore } from "@/store/useVantageStore";
 import { generateSynapseResponse } from "@/services/aiOracle";
 
+declare var pendo: { trackAgent: (eventType: string, metadata: object) => void };
+
+const SYNAPSE_AGENT_ID = "5goOAE0liKfeZ54h-ByzxCtrbi8";
+
 interface Message {
   sender: "user" | "synapse";
   text: string;
@@ -25,6 +29,7 @@ export function SynapseTutor() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const conversationIdRef = useRef(crypto.randomUUID());
 
   const presets = [
     { label: "ARR/CAC Rules", query: "Explain the optimal ARR recovery and CAC optimization mechanisms under VANTAGE protocol constraints." },
@@ -38,8 +43,10 @@ export function SynapseTutor() {
     }
   }, [messages, loading]);
 
-  const handleSend = async (textToSend: string) => {
+  const handleSend = async (textToSend: string, isSuggestedPrompt = false) => {
     if (!textToSend.trim() || loading) return;
+
+    const promptMessageId = crypto.randomUUID();
 
     const userMsg: Message = {
       sender: "user",
@@ -51,14 +58,34 @@ export function SynapseTutor() {
     setInput("");
     setLoading(true);
 
+    if (typeof pendo !== "undefined") {
+      pendo.trackAgent("prompt", {
+        agentId: SYNAPSE_AGENT_ID,
+        conversationId: conversationIdRef.current,
+        messageId: promptMessageId,
+        content: textToSend,
+        suggestedPrompt: isSuggestedPrompt,
+      });
+    }
+
     try {
       const responseText = await generateSynapseResponse(textToSend, learningXP);
-      
+
       setMessages(prev => [...prev, {
         sender: "synapse",
         text: responseText,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }]);
+
+      if (typeof pendo !== "undefined") {
+        pendo.trackAgent("agent_response", {
+          agentId: SYNAPSE_AGENT_ID,
+          conversationId: conversationIdRef.current,
+          messageId: crypto.randomUUID(),
+          content: responseText,
+          modelUsed: "gemini-2.5-flash-lite",
+        });
+      }
     } catch (error) {
       setMessages(prev => [...prev, {
         sender: "synapse",
@@ -170,7 +197,7 @@ export function SynapseTutor() {
                     {presets.map((p, idx) => (
                       <button
                         key={idx}
-                        onClick={() => handleSend(p.query)}
+                        onClick={() => handleSend(p.query, true)}
                         className="px-2.5 py-1.5 bg-[#2B2F36]/40 border border-[#2B2F36] hover:border-[#F0B90B]/30 text-[9px] uppercase tracking-wider text-[#848E9C] hover:text-[#F0B90B] transition-all rounded-lg font-mono"
                       >
                         {p.label}
