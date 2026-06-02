@@ -5,6 +5,8 @@ import { useVantageStore } from "@/store/useVantageStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldAlert, BookOpen, TrendingDown, Brain, Lock, CheckCircle2, ChevronRight, Award, HelpCircle, AlertTriangle } from "lucide-react";
 
+declare var pendo: any;
+
 export function CasinoView() {
   const { learningXP, addXP } = useVantageStore();
   const [prankActive, setPrankActive] = useState(true);
@@ -31,6 +33,13 @@ export function CasinoView() {
         setSimBalance(0);
         setLessonCompleted(true);
         addXP(150); // Reward operator for completing this cognitive lesson
+        if (typeof pendo !== "undefined") {
+          pendo.track("casino_simulation_completed", {
+            finalBalance: currentBal,
+            roundsPlayed: step,
+            xpAwarded: 150
+          });
+        }
         return;
       }
 

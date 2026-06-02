@@ -5,6 +5,8 @@ import { useVantageStore } from "@/store/useVantageStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Wallet, AlertTriangle, CheckCircle2 } from "lucide-react";
 
+declare var pendo: any;
+
 interface MissionModalProps {
   onClose: () => void;
 }
@@ -23,6 +25,13 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
       setStep(4);
       if (newBudget > 0) {
         completeMission("liquidity-quest", 100, 50);
+      }
+      if (typeof pendo !== "undefined") {
+        pendo.track("liquidity_quest_completed", {
+          finalBudget: newBudget,
+          passed: newBudget > 0,
+          choicesMade: step
+        });
       }
     }
   };

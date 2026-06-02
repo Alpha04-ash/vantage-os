@@ -14,6 +14,8 @@ import { generateCorporateStrategies, CorporateStrategy } from "@/services/aiOra
 
 import { AVAILABLE_NODES, EducationalBusiness } from "@/data/empireNodes";
 
+declare var pendo: any;
+
 const ICONS = {
   data_center: Server,
   orbital_satellite: Building,
@@ -80,6 +82,13 @@ export function EmpireView() {
           escalatedCost
         );
         setAiStrategies(results);
+        if (typeof pendo !== "undefined") {
+          pendo.track("corporate_strategies_generated", {
+            nodeId: selectedDef.id,
+            nodeName: selectedDef.name,
+            strategiesCount: results.length
+          });
+        }
       } catch (err) {
         console.error("Failed loading AI strategies", err);
       } finally {

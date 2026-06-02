@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Leaf, Sparkles, AlertCircle, BarChart3, Globe } from "lucide-react";
 import { generateSynapseResponse } from "@/services/aiOracle";
 
+declare var pendo: any;
+
 interface MissionModalProps {
   onClose: () => void;
 }
@@ -49,6 +51,14 @@ export function ESGGauntlet({ onClose }: MissionModalProps) {
       setStep(4);
       if (newImpact > 120) {
         completeMission("esg-gauntlet", 250, 200);
+      }
+      if (typeof pendo !== "undefined") {
+        pendo.track("esg_gauntlet_completed", {
+          finalProfit: newProfit,
+          finalImpact: newImpact,
+          passed: newImpact > 120,
+          title: newImpact > 120 ? "Legendary Entrepreneur" : "Profit Monger"
+        });
       }
     }
   };

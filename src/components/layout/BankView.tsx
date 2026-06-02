@@ -10,6 +10,8 @@ import {
 import { MonolithCard, Typewriter, SovereignButton } from "./SovereignUI";
 import { generateCreditDecision, CreditDecision } from "@/services/aiOracle";
 
+declare var pendo: any;
+
 export function BankView() {
   const { 
     balance, 
@@ -73,9 +75,23 @@ export function BankView() {
     if (savingsAction === "deposit") {
       if (val > balance) return;
       depositSavings(val);
+      if (typeof pendo !== "undefined") {
+        pendo.track("savings_deposited", {
+          depositAmount: val,
+          totalSavingsAfter: (savingsDeposited ?? 0) + val,
+          balanceAfter: balance - val
+        });
+      }
     } else {
       if (val > (savingsDeposited ?? 0)) return;
       withdrawSavings(val);
+      if (typeof pendo !== "undefined") {
+        pendo.track("savings_withdrawn", {
+          withdrawalAmount: val,
+          totalSavingsAfter: (savingsDeposited ?? 0) - val,
+          balanceAfter: balance + val
+        });
+      }
     }
     setSavingsInput("");
   };
@@ -108,6 +124,16 @@ export function BankView() {
     try {
       const res = await generateCreditDecision(loanAmount, loanTerm, finalPurpose, totalEquity);
       setDecision(res);
+      if (typeof pendo !== "undefined") {
+        pendo.track("credit_decision_generated", {
+          loanAmount,
+          loanTerm,
+          purpose: finalPurpose,
+          approved: res.approved,
+          apr: res.apr,
+          totalEquity
+        });
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -120,6 +146,17 @@ export function BankView() {
     if (!decision || !decision.approved) return;
     const finalPurpose = loanPurpose === "custom" ? customPurpose : loanPurpose;
     applyForLoan(loanAmount, loanTerm, decision.apr, decision.verdict, finalPurpose);
+    if (typeof pendo !== "undefined") {
+      pendo.track("loan_applied", {
+        loanAmount,
+        loanTerm,
+        apr: decision.apr,
+        verdict: decision.verdict,
+        purpose: finalPurpose,
+        totalDue: loanAmount * (1 + decision.apr / 100),
+        totalEquity
+      });
+    }
     setDecision(null);
     setLoanPurpose("");
     setCustomPurpose("");
@@ -516,7 +553,7 @@ export function BankView() {
                 </div>
 
                 <button 
-                  onClick={() => repayLoan()}
+                  onClick={() => { if (typeof pendo !== "undefined") { pendo.track("loan_repaid", { totalDue: safeLoan?.totalDue, principal: safeLoan?.principal, interestRate: safeLoan?.interestRate }); } repayLoan(); }}
                   disabled={balance < safeLoan.totalDue}
                   className={`w-full py-4 text-center text-[10px] font-black uppercase tracking-[0.25em] transition-all cursor-pointer rounded-xl mt-8 flex items-center justify-center gap-2 font-mono ${
                     balance >= safeLoan.totalDue 

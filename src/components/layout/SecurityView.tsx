@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { MonolithCard, SovereignButton } from "./SovereignUI";
 
+declare var pendo: any;
+
 export function SecurityView() {
   const { 
     balance, 
@@ -53,6 +55,14 @@ export function SecurityView() {
   const handleProtocolClick = (id: "quantumLedger" | "neuralFirewall" | "biometricMfa" | "multisigAuth", cost: number) => {
     playBeep(securityProtocols[id] ? 500 : 1000, "triangle", 0.12);
     toggleSecurityProtocol(id, cost);
+    if (typeof pendo !== "undefined") {
+      pendo.track("security_protocol_toggled", {
+        protocolId: id,
+        enabled: !securityProtocols[id],
+        cost: securityProtocols[id] ? 0 : cost,
+        newSecurityScore: securityScore
+      });
+    }
   };
 
   const handleAuditRequest = async () => {
@@ -61,6 +71,13 @@ export function SecurityView() {
     // Simulate high-fidelity network lookup
     setTimeout(async () => {
       await requestSecurityAudit();
+      if (typeof pendo !== "undefined") {
+        pendo.track("security_audit_requested", {
+          securityScore,
+          activeProtocolCount: Object.values(securityProtocols).filter(Boolean).length,
+          portfolioSize: useVantageStore.getState().portfolio.length
+        });
+      }
       setIsAuditing(false);
       playBeep(880, "sine", 0.25);
     }, 2000);
@@ -69,6 +86,11 @@ export function SecurityView() {
   const handleMitigateClick = (logId: string) => {
     playBeep(980, "sawtooth", 0.15);
     mitigateThreat(logId);
+    if (typeof pendo !== "undefined") {
+      pendo.track("threat_mitigated", {
+        logId
+      });
+    }
   };
 
   const startDefenseGridSimulation = () => {
@@ -108,6 +130,14 @@ export function SecurityView() {
                 cashDelta: 15000,
                 logMessage: "📟 Defense simulation completed successfully: External attacks blocked. Bounty: +$15,000"
               });
+              if (typeof pendo !== "undefined") {
+                pendo.track("defense_simulation_completed", {
+                  success: true,
+                  scoreDelta: 8,
+                  xpDelta: 45,
+                  cashDelta: 15000
+                });
+              }
             } else {
               playBeep(180, "sawtooth", 0.5);
               runSecuritySimulation({
@@ -117,6 +147,14 @@ export function SecurityView() {
                 cashDelta: -8000,
                 logMessage: "🚨 Security breach in simulation: Containment Grid breached, inflicting a severe financial loss of $8,000!"
               });
+              if (typeof pendo !== "undefined") {
+                pendo.track("defense_simulation_completed", {
+                  success: false,
+                  scoreDelta: -10,
+                  xpDelta: 10,
+                  cashDelta: -8000
+                });
+              }
             }
           }, 1000);
         }

@@ -7,6 +7,8 @@ import { Lesson } from "@/types/academy";
 import { useRouter } from "next/navigation";
 import { useAcademyProgress } from "@/hooks/useAcademyProgress";
 
+declare var pendo: any;
+
 // --- GENTLE AUDIOPHILE SYNTH FOR ACADEMY ---
 const playSubtleTick = () => {};
 const playSubtleClick = () => {};
@@ -111,6 +113,11 @@ export function AcademyLessonCard({ lesson, status }: { lesson: Lesson, status: 
     playSubtleClick();
     if (status === "completed") {
       resetLessonProgress(lesson.slug);
+      if (typeof pendo !== "undefined") {
+        pendo.track("lesson_replayed", {
+          lessonSlug: lesson.slug
+        });
+      }
     }
     router.push(`/academy/${lesson.slug}`);
   };

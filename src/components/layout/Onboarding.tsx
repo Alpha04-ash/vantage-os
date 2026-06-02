@@ -6,6 +6,8 @@ import { ChevronRight, Play } from "lucide-react";
 import { Asset3D } from "../terminal/Asset3D";
 import { Globe3D } from "./Globe3D";
 
+declare var pendo: any;
+
 export function Onboarding({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState(1);
 
@@ -127,14 +129,33 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
         {/* Navigation */}
         <div className="flex items-center justify-between mt-8 pt-6 border-t border-[#2B2F36] relative z-20">
           <button
-            onClick={onClose}
+            onClick={() => {
+              if (typeof pendo !== "undefined") {
+                pendo.track("onboarding_skipped", {
+                  currentStep: step
+                });
+              }
+              onClose();
+            }}
             className="text-[#848E9C] hover:text-[#EAECEF] transition-colors text-xs font-semibold uppercase tracking-widest py-2"
           >
             Skip →
           </button>
           
           <button 
-            onClick={() => step < 6 ? setStep(step + 1) : onClose()}
+            onClick={() => {
+              if (step < 6) {
+                setStep(step + 1);
+              } else {
+                if (typeof pendo !== "undefined") {
+                  pendo.track("onboarding_completed", {
+                    stepsCompleted: 6,
+                    completionMethod: "sequential"
+                  });
+                }
+                onClose();
+              }
+            }}
             className="w-12 h-12 sm:w-14 sm:h-14 bg-[#F0B90B] text-black rounded-xl flex items-center justify-center hover:bg-[#F8D33A] active:scale-95 transition-all shadow-[0_0_20px_rgba(240,185,11,0.2)] group"
           >
             {step < 6

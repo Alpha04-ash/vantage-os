@@ -52,17 +52,26 @@ export const CinematicAuth = () => {
     setTimeout(() => {
       if (mode === "LOGIN") {
         let success = login(operatorId, accessKey);
-        
+        let wasAutoRegistered = false;
+
         // Auto-registration fail-safe: If the operator doesn't exist, seamlessly create it!
         if (!success) {
           const registered = register(operatorId, accessKey, "operator@vantage.os");
           if (registered) {
             success = login(operatorId, accessKey);
+            wasAutoRegistered = true;
           }
         }
 
         if (success) {
           identifyPendoVisitor();
+          if (typeof pendo !== "undefined") {
+            pendo.track("user_logged_in", {
+              operatorId,
+              loginMode: "LOGIN",
+              wasAutoRegistered
+            });
+          }
           router.push("/dashboard");
         } else {
           setError("AUTH_ERROR: Access key is incorrect for this operator.");
@@ -70,11 +79,17 @@ export const CinematicAuth = () => {
         }
       } else {
         let success = register(operatorId, accessKey, clearance || "operator@vantage.os");
-        
-        // Auto-login fail-safe: If operator already exists, log them in!
-        if (!success) {
+        let autoRegistered = false;
+        const registrationMode = "REGISTER";
+        const hasCustomEmail = !!(clearance && clearance !== "operator@vantage.os");
+
+        if (success) {
+          autoRegistered = false;
+        } else {
+          // Auto-login fail-safe: If operator already exists, log them in!
           success = login(operatorId, accessKey);
-          
+          autoRegistered = true;
+
           if (!success) {
             // Password mismatch? Force reset password for developer convenience
             const state = useVantageStore.getState();
@@ -93,6 +108,22 @@ export const CinematicAuth = () => {
 
         if (success) {
           identifyPendoVisitor();
+          if (typeof pendo !== "undefined") {
+            if (!autoRegistered) {
+              pendo.track("user_registered", {
+                operatorId,
+                registrationMode,
+                hasCustomEmail,
+                autoRegistered: false
+              });
+            } else {
+              pendo.track("user_logged_in", {
+                operatorId,
+                loginMode: "REGISTER_FALLBACK",
+                wasAutoRegistered: true
+              });
+            }
+          }
           router.push("/dashboard");
         } else {
           setError("REGISTRATION_ERROR: Failed to establish sovereign credentials.");

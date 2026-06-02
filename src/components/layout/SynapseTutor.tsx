@@ -6,6 +6,8 @@ import { Brain, X, Send, Sparkles, AlertCircle, RefreshCw, CornerDownLeft } from
 import { useVantageStore } from "@/store/useVantageStore";
 import { generateSynapseResponse } from "@/services/aiOracle";
 
+declare var pendo: any;
+
 interface Message {
   sender: "user" | "synapse";
   text: string;
@@ -53,6 +55,14 @@ export function SynapseTutor() {
 
     try {
       const responseText = await generateSynapseResponse(textToSend, learningXP);
+      if (typeof pendo !== "undefined") {
+        pendo.track("ai_advisor_queried", {
+          queryText: textToSend.substring(0, 100),
+          isPresetQuery: presets.some(p => p.query === textToSend),
+          learningXP,
+          responseLength: responseText.length
+        });
+      }
       
       setMessages(prev => [...prev, {
         sender: "synapse",
