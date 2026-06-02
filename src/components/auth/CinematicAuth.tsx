@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 
 import { useVantageStore } from "@/store/useVantageStore";
 
+declare var pendo: any;
+
 export const CinematicAuth = () => {
   const [mode, setMode] = useState<"LOGIN" | "REGISTER">("LOGIN");
   const [loading, setLoading] = useState(false);
@@ -18,6 +20,28 @@ export const CinematicAuth = () => {
   
   const router = useRouter();
   const { login, register } = useVantageStore();
+
+  const identifyPendoVisitor = () => {
+    const state = useVantageStore.getState();
+    const user = state.currentUser;
+    if (user && typeof pendo !== "undefined") {
+      pendo.identify({
+        visitor: {
+          id: user.operatorId,
+          email: user.clearance,
+          balance: user.balance,
+          learningXP: user.learningXP,
+          impactPoints: user.impactPoints,
+          savingsDeposited: user.savingsDeposited,
+          fiscalDays: user.fiscalDays,
+          lastSavedTimestamp: user.lastSavedTimestamp,
+          timeSpeed: user.timeSpeed,
+          securityScore: user.securityScore,
+          threatLevel: user.threatLevel,
+        },
+      });
+    }
+  };
 
   const handleAuthenticate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +62,7 @@ export const CinematicAuth = () => {
         }
 
         if (success) {
+          identifyPendoVisitor();
           router.push("/dashboard");
         } else {
           setError("AUTH_ERROR: Access key is incorrect for this operator.");
@@ -67,6 +92,7 @@ export const CinematicAuth = () => {
         }
 
         if (success) {
+          identifyPendoVisitor();
           router.push("/dashboard");
         } else {
           setError("REGISTRATION_ERROR: Failed to establish sovereign credentials.");

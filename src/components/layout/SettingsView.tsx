@@ -27,6 +27,9 @@ export function SettingsView() {
 
   const triggerLogout = () => {
     setShowLogoutConfirm(false);
+    if (typeof pendo !== "undefined") {
+      pendo.clearSession();
+    }
     logout();
     router.push("/");
   };
