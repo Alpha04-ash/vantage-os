@@ -18,7 +18,7 @@ export function SynapseTutor() {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: "synapse",
-      text: "ДАСТУРИ СИСТЕМАИ VANTAGE: Интеллекти сунъии Synapse фаъол карда шуд. Ҳамоҳангсозии ҳолати система тасдиқ гардид. Саволи худро дар бораи молия, амалиёт ва бонкдорӣ дар зер ворид кунед.",
+      text: "VANTAGE SYSTEM DIRECTIVE: Synapse Artificial Intelligence initialized. System status calibration confirmed. Submit your inquiries regarding sovereign finance, system operations, and reserve banking below.",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -27,9 +27,9 @@ export function SynapseTutor() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const presets = [
-    { label: "Қоидаҳои ARR/CAC", query: "Механизми оптималии барқарорсозии ARR ва CAC-ро таҳти маҳдудиятҳои протоколи VANTAGE фаҳмонед." },
-    { label: "Ливерҷи Бонк", query: "Беҳтарин усули стратегӣ барои истифодаи хатти кредитии Бонки Марказӣ ва хазинаи амонатӣ кадом аст?" },
-    { label: "Стратегияи Пардохтпазирӣ", query: "Оё беҳтар аст сармояи худро дар пули нақд нигоҳ дорам, тиҷоратҳои воқеӣ ё криптои тағйирёбанда?" }
+    { label: "ARR/CAC Rules", query: "Explain the optimal ARR recovery and CAC optimization mechanisms under VANTAGE protocol constraints." },
+    { label: "Bank Leverage", query: "What is the optimal strategic framework for utilizing Central Bank credit lines and high-yield savings reserves?" },
+    { label: "Liquidity Strategy", query: "Should I focus my capital allocation on cash reserves, real estate, cash-flow businesses, or volatile crypto assets?" }
   ];
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export function SynapseTutor() {
     } catch (error) {
       setMessages(prev => [...prev, {
         sender: "synapse",
-        text: "ХАТОИ_НЕЙРОНӢ: Пайвастшавӣ қатъ шуд. Ҳамоҳангсозӣ бо махзани маҳаллӣ бомуваффақият анҷом ёфт.\n• Кӯшиши дубораи пайвастшавӣ...",
+        text: "NEURAL_ERROR: Connection interrupted. Syncing with local database was successful.\n• Retrying connection...",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }]);
     } finally {
@@ -109,8 +109,8 @@ export function SynapseTutor() {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-[#F0B90B] animate-pulse shadow-[0_0_8px_rgba(240,185,11,0.8)]" />
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#EAECEF]">SYNAPSE // ЁРДАМЧИИ_НЕЙРОНИИ_AI</div>
-                  <div className="text-[8px] font-mono text-[#F0B90B]/80 uppercase tracking-widest mt-0.5">НАШРИ_МУСТАҚИМИ_GEMINI_ФАЪОЛ</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#EAECEF]">SYNAPSE // AI NEURAL ASSISTANT</div>
+                  <div className="text-[8px] font-mono text-[#F0B90B]/80 uppercase tracking-widest mt-0.5">DIRECT GEMINI SYSTEM INTERFACE ACTIVE</div>
                 </div>
               </div>
               <button
@@ -132,7 +132,7 @@ export function SynapseTutor() {
                   className={`flex flex-col space-y-1.5 ${msg.sender === "user" ? "items-end" : "items-start"}`}
                 >
                   <span className="text-[8px] font-bold uppercase text-[#848E9C]/40 tracking-widest">
-                    {msg.sender === "user" ? "ОПЕРАТОР" : "SYNAPSE_AI"} _ {msg.timestamp}
+                    {msg.sender === "user" ? "OPERATOR" : "SYNAPSE_AI"} _ {msg.timestamp}
                   </span>
                   <div
                     className={`max-w-[85%] p-3 rounded-xl border whitespace-pre-line leading-relaxed ${
@@ -149,12 +149,12 @@ export function SynapseTutor() {
               {loading && (
                 <div className="flex flex-col space-y-1.5 items-start">
                   <span className="text-[8px] font-bold uppercase text-[#848E9C]/40 tracking-widest">
-                    SYNAPSE_AI _ ДАР ҲОЛИ ИҶРО...
+                    SYNAPSE_AI _ PROCESSING...
                   </span>
                   <div className="bg-[#F0B90B]/5 border border-[#F0B90B]/15 p-3 rounded-xl flex items-center gap-3">
                     <RefreshCw className="w-3.5 h-3.5 text-[#F0B90B] animate-spin" />
                     <span className="text-[10px] text-[#F0B90B]/80 uppercase tracking-widest animate-pulse font-mono">
-                      Рамзкушоии дороиҳои нейронӣ...
+                      Decrypting neural insights...
                     </span>
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export function SynapseTutor() {
             <div className="p-4 border-t border-[#2B2F36] bg-[#1E2026] space-y-4">
               {messages.length === 1 && (
                 <div className="space-y-2">
-                  <div className="text-[8px] font-bold text-[#848E9C]/60 uppercase tracking-widest">Дастурҳои Тавсиявии Мавҷуда</div>
+                  <div className="text-[8px] font-bold text-[#848E9C]/60 uppercase tracking-widest">Suggested Inquiries</div>
                   <div className="flex flex-wrap gap-2">
                     {presets.map((p, idx) => (
                       <button
@@ -192,7 +192,7 @@ export function SynapseTutor() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Аз Synapse AI дилхоҳ саволро пурсед..."
+                  placeholder="Ask Synapse AI anything..."
                   className="flex-1 bg-transparent border-none outline-none text-sm sm:text-xs font-mono text-[#EAECEF] placeholder-[#848E9C]/45 px-2"
                 />
                 <button

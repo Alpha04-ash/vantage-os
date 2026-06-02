@@ -13,12 +13,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lesson = FINANCE_LESSONS.find((l) => l.slug === slug);
   if (!lesson) {
     return {
-      title: "МОДУЛИ КОГНИТИВӢ ЁФТ НАШУД | VANTAGE ACADEMY",
+      title: "COGNITIVE MODULE NOT FOUND | VANTAGE ACADEMY",
     };
   }
   return {
-    title: `${lesson.title} — Модули ${lesson.number} | АКАДЕМИЯИ VANTAGE`,
-    description: `${lesson.shortDescription} Мафҳумҳои молиявиро бо ИИ-и Gemini ва VANTAGE омӯзед.`,
+    title: `${lesson.title} — Module ${lesson.number} | VANTAGE ACADEMY`,
+    description: `${lesson.shortDescription} Master financial concepts with Gemini AI and VANTAGE.`,
   };
 }
 

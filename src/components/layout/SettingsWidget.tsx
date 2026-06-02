@@ -37,7 +37,7 @@ export function SettingsWidget() {
         </motion.div>
         
         <span className="text-[10px] font-bold uppercase tracking-wider font-mono leading-none">
-          {isSettingsActive ? "Дидбон // Dashboard" : "Танзимот // Settings"}
+          {isSettingsActive ? "Dashboard" : "Settings"}
         </span>
       </button>
     </div>

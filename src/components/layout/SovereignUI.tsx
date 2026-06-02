@@ -149,8 +149,8 @@ export function ConfirmModal({ isOpen, title, description, onConfirm, onCancel }
              <h3 className="text-lg font-bold text-[#EAECEF] uppercase tracking-wider mb-3">{title}</h3>
              <p className="text-[#848E9C] text-sm mb-8 leading-relaxed">{description}</p>
              <div className="flex gap-3">
-                <button onClick={onConfirm} className="flex-1 py-3 bg-[#F0B90B] text-black text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-[#F8D33A] transition-colors">Иҷозат додан</button>
-                <button onClick={onCancel} className="flex-1 py-3 bg-[#2B2F36] border border-[#474D57] text-[#EAECEF] text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-[#363C45] transition-colors">Қатъ кардан</button>
+                <button onClick={onConfirm} className="flex-1 py-3 bg-[#F0B90B] text-black text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-[#F8D33A] transition-colors">Confirm</button>
+                <button onClick={onCancel} className="flex-1 py-3 bg-[#2B2F36] border border-[#474D57] text-[#EAECEF] text-sm font-bold uppercase tracking-wider rounded-lg hover:bg-[#363C45] transition-colors">Cancel</button>
              </div>
           </motion.div>
         </div>

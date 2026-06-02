@@ -62,15 +62,15 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
             <Wallet className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-[#EAECEF] uppercase tracking-tight">Ҷустуҷӯи Пардохтпазирӣ</h3>
-            <p className="text-[10px] text-[#848E9C] uppercase tracking-widest font-semibold mt-0.5">Вазифа: Наҷоти Клуби Мактабӣ</p>
+            <h3 className="text-xl font-bold text-[#EAECEF] uppercase tracking-tight">Liquidity Quest</h3>
+            <p className="text-[10px] text-[#848E9C] uppercase tracking-widest font-semibold mt-0.5">Mission: Save the School Club</p>
           </div>
         </div>
 
         {/* Budget indicator */}
         <div className="mb-6 p-4 rounded-xl bg-[#2B2F36] border border-[#474D57]">
           <div className="flex justify-between items-center mb-3">
-            <span className="text-xs text-[#848E9C] uppercase font-semibold tracking-wider">Ҷараёни Пули Нақд</span>
+            <span className="text-xs text-[#848E9C] uppercase font-semibold tracking-wider">Cash Flow</span>
             <span className={`text-lg font-mono font-bold ${isLow ? "text-[#F6465D]" : "text-[#F0B90B]"}`}>
               ${budget}
             </span>
@@ -88,16 +88,16 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
           {step === 1 && (
             <motion.div key="step1" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} className="space-y-4">
               <p className="text-sm text-[#848E9C] leading-relaxed border-l-2 border-[#F0B90B]/30 pl-4">
-                Сенария: Клуби соҳибкории мактаби шумо бояд як чорабинӣ баргузор кунад. Шумо $1,000 доред. Чӣ кор мекунед?
+                Scenario: Your school entrepreneurship club needs to host a showcase event. You have $1,000 in liquid capital. What is your first move?
               </p>
               <div className="grid gap-2.5">
                 <button onClick={() => handleChoice(800)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F6465D]/50 hover:bg-[#F6465D]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Иҷораи меҳмонхонаи боҳашамат ($800)</div>
-                  <div className="text-xs text-[#848E9C]">Престижи баланд, аммо хавфи калон.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Rent a luxury hotel ballroom ($800)</div>
+                  <div className="text-xs text-[#848E9C]">High prestige but high risk of illiquidity.</div>
                 </button>
                 <button onClick={() => handleChoice(200)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F0B90B]/50 hover:bg-[#F0B90B]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Истифодаи толори варзишии мактаб ($200)</div>
-                  <div className="text-xs text-[#848E9C]">Амалӣ ва пардохтпазириро нигоҳ медорад.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Use the school gym ($200)</div>
+                  <div className="text-xs text-[#848E9C]">Practical, preserves capital reserves.</div>
                 </button>
               </div>
             </motion.div>
@@ -106,16 +106,16 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
           {step === 2 && (
             <motion.div key="step2" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} className="space-y-4">
               <p className="text-sm text-[#848E9C] leading-relaxed border-l-2 border-[#F0B90B]/30 pl-4">
-                Таъминкунандаи хӯрок пасандози пешакӣ талаб мекунад. Чӣ кор мекунед?
+                The catering service requests an upfront payment. What do you do?
               </p>
               <div className="grid gap-2.5">
                 <button onClick={() => handleChoice(500)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F6465D]/50 hover:bg-[#F6465D]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Пардохти пурра барои гирифтани тахфиф ($500)</div>
-                  <div className="text-xs text-[#848E9C]">Пули ояндаро сарфа мекунад, аммо пули нақдро кам мекунад.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Pay in full to secure a discount ($500)</div>
+                  <div className="text-xs text-[#848E9C]">Saves money in the long run, but reduces short-term liquidity.</div>
                 </button>
                 <button onClick={() => handleChoice(300)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F0B90B]/50 hover:bg-[#F0B90B]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Пардохти 30% пасандоз ($300)</div>
-                  <div className="text-xs text-[#848E9C]">Хароҷоти умумии баландтар, пардохтпазирии беҳтар.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Pay a 30% deposit ($300)</div>
+                  <div className="text-xs text-[#848E9C]">Higher total cost, but preserves cash buffers.</div>
                 </button>
               </div>
             </motion.div>
@@ -124,16 +124,16 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
           {step === 3 && (
             <motion.div key="step3" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} className="space-y-4">
               <p className="text-sm text-[#848E9C] leading-relaxed border-l-2 border-[#F0B90B]/30 pl-4">
-                Вазифаи ниҳоӣ: Маркетинг! Чӣ гуна ба шунавандагони худ мерасед?
+                Final Step: Marketing! How do you reach your target audience?
               </p>
               <div className="grid gap-2.5">
                 <button onClick={() => handleChoice(400)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F6465D]/50 hover:bg-[#F6465D]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Рекламаи пулакӣ ($400)</div>
-                  <div className="text-xs text-[#848E9C]">Кафолати дастрасӣ, аммо гарон.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F6465D] mb-1">Paid ad campaign ($400)</div>
+                  <div className="text-xs text-[#848E9C]">Guarantees reach, but drains cash.</div>
                 </button>
                 <button onClick={() => handleChoice(0)} className="w-full p-4 rounded-xl bg-[#2B2F36] border border-[#474D57] hover:border-[#F0B90B]/50 hover:bg-[#F0B90B]/5 transition-all text-left group">
-                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Кампанияи вирусии иҷтимоӣ ($0)</div>
-                  <div className="text-xs text-[#848E9C]">Ройгон, аммо эҷодкории бештарро талаб мекунад.</div>
+                  <div className="text-sm font-bold text-[#EAECEF] group-hover:text-[#F0B90B] mb-1">Organic social media campaign ($0)</div>
+                  <div className="text-xs text-[#848E9C]">Free, but requires more creative effort.</div>
                 </button>
               </div>
             </motion.div>
@@ -147,12 +147,12 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
                   <div>
-                    <h4 className="text-2xl font-extrabold text-[#EAECEF] uppercase tracking-tight mb-2">Муваффақияти Вазифа!</h4>
-                    <p className="text-sm text-[#848E9C]">Шумо пардохтпазирии клубро комилан идора кардед. Чорабинӣ бомуваффақият гузашт!</p>
+                    <h4 className="text-2xl font-extrabold text-[#EAECEF] uppercase tracking-tight mb-2">Mission Completed Successfully!</h4>
+                    <p className="text-sm text-[#848E9C]">You managed the club's liquidity perfectly. The showcase was a massive success!</p>
                   </div>
                   <div className="flex gap-3 justify-center">
                     <div className="px-4 py-2 rounded-lg bg-[#F0B90B]/10 border border-[#F0B90B]/20 text-[#F0B90B] text-xs font-bold">+100 XP</div>
-                    <div className="px-4 py-2 rounded-lg bg-[#F0B90B]/10 border border-[#F0B90B]/20 text-[#F0B90B] text-xs font-bold">+50 Таъсир</div>
+                    <div className="px-4 py-2 rounded-lg bg-[#F0B90B]/10 border border-[#F0B90B]/20 text-[#F0B90B] text-xs font-bold">+50 Influence</div>
                   </div>
                 </>
               ) : (
@@ -161,13 +161,13 @@ export function LiquidityQuest({ onClose }: MissionModalProps) {
                     <AlertTriangle className="w-10 h-10" />
                   </div>
                   <div>
-                    <h4 className="text-2xl font-extrabold text-[#EAECEF] uppercase tracking-tight mb-2">Муфлисшавӣ!</h4>
-                    <p className="text-sm text-[#848E9C]">Клуби шумо пеш аз чорабинӣ бе пул монд. Дафъаи оянда пардохтпазирии худро беҳтар идора кунед.</p>
+                    <h4 className="text-2xl font-extrabold text-[#EAECEF] uppercase tracking-tight mb-2">Bankruptcy!</h4>
+                    <p className="text-sm text-[#848E9C]">Your club ran out of cash before the event could start. Monitor your liquidity threshold next time!</p>
                   </div>
                 </>
               )}
               <button onClick={onClose} className="w-full py-3.5 rounded-xl bg-[#F0B90B] text-black font-bold uppercase tracking-wider hover:bg-[#F8D33A] transition-colors">
-                Бозгашт ба Терминал
+                Return to Terminal
               </button>
             </motion.div>
           )}

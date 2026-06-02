@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useVantageStore, VantageTab } from "@/store/useVantageStore";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, BarChart2, GraduationCap, Wallet, Network, Landmark, LogOut, Home, Dices } from "lucide-react";
+import { LayoutDashboard, BarChart2, GraduationCap, Wallet, Network, Landmark, Home, Dices, Shield } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 
 export const getFiscalDateString = (days: number) => {
@@ -12,14 +12,24 @@ export const getFiscalDateString = (days: number) => {
   const dayOfYear = (safeDays - 1) % 360;
   const month = Math.floor(dayOfYear / 30) + 1;
   const day = (dayOfYear % 30) + 1;
-  return `СОЛИ ${year} / МОҲИ ${month} / РӮЗИ ${day}`;
+  return `YEAR ${year} / MONTH ${month} / DAY ${day}`;
+};
+
+export const getSpeedIcon = (speed: number) => {
+  if (speed <= 0.1)  return "🐌";
+  if (speed <= 0.2)  return "🐢";
+  if (speed <= 0.5)  return "🚶";
+  if (speed <= 1)    return "🚗";
+  if (speed <= 1.5)  return "⚡";
+  return "🚀";
 };
 
 export function Navbar() {
-  const { activeTab, setActiveTab, logout, activeLoan, fiscalDays } = useVantageStore();
+  const { activeTab, setActiveTab, activeLoan, fiscalDays, timeSpeed, setTimeSpeed } = useVantageStore();
+  const [showSpeedDropdown, setShowSpeedDropdown] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const [latency, setLatency] = useState<number | null>(null);
   const [netStatus, setNetStatus] = useState<"stable" | "slow" | "offline">("stable");
 
@@ -52,14 +62,14 @@ export function Navbar() {
   }, []);
 
   const tabs: { id: VantageTab | "academy-route"; label: string; sub: string; icon: any; route?: string }[] = [
-    { id: "dashboard",      label: "ДИДБОН",    sub: "Панел",    icon: LayoutDashboard },
-    { id: "portfolio",      label: "ДОРОИҲО",   sub: "Портфел",  icon: Wallet },
-    { id: "market",         label: "МАТРИТСА",  sub: "Савдо",    icon: BarChart2 },
-    { id: "empire",         label: "ИМПЕРИЯ",   sub: "Тиҷорат",  icon: Network },
-    { id: "realestate",     label: "ТАРЗИ ҲАЁТ",sub: "Амлок",   icon: Home },
-    { id: "bank",           label: "БОНК",      sub: "Бонкдорӣ", icon: Landmark },
-    { id: "casino",         label: "КАЗИНО",    sub: "Таҳлил",   icon: Dices },
-    { id: "academy-route",  label: "АКАДЕМИЯ",  sub: "Когнитивӣ",icon: GraduationCap, route: "/academy" },
+    { id: "dashboard",      label: "OVERVIEW",      sub: "Net Worth", icon: LayoutDashboard },
+    { id: "portfolio",      label: "TREASURY",      sub: "Assets",    icon: Wallet },
+    { id: "market",         label: "TRADE",         sub: "Terminal",  icon: BarChart2 },
+    { id: "empire",         label: "BUSINESS",      sub: "Investments",icon: Network },
+    { id: "realestate",     label: "PROPERTIES",    sub: "Real Estate",icon: Home },
+    { id: "bank",           label: "RESERVES",      sub: "Loans & Savings",icon: Landmark },
+    { id: "casino",         label: "ANALYTICS",     sub: "Risk & Ruin",icon: Dices },
+    { id: "academy-route",  label: "ACADEMY",       sub: "AI Advisor", icon: GraduationCap, route: "/academy" },
   ];
 
   const handleTabClick = (tab: any) => {
@@ -92,7 +102,7 @@ export function Navbar() {
             <span className="text-[15px] font-extrabold text-[#EAECEF] tracking-tight group-hover:text-[#F0B90B] transition-colors">
               VANTAGE
             </span>
-            <span className="text-[8px] font-semibold text-[#848E9C] uppercase tracking-[0.15em]">Sovereign OS</span>
+            <span className="text-[8px] font-semibold text-[#848E9C] uppercase tracking-[0.15em]">Financial Simulator</span>
           </div>
           <span className="hidden sm:inline text-[8px] font-bold font-mono px-1.5 py-0.5 bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 rounded">
             v3.1
@@ -137,11 +147,68 @@ export function Navbar() {
 
         {/* RIGHT — Fiscal Date + Logout */}
         <div className="flex items-center gap-3 shrink-0">
+          
+          {/* Live speed control selector */}
+          <div className="relative font-mono" id="nav-speed-control">
+             <button
+               onClick={() => setShowSpeedDropdown(!showSpeedDropdown)}
+               className="flex flex-col items-end leading-none cursor-pointer group text-right focus:outline-none"
+             >
+                <span className="text-[8px] font-semibold text-[#848E9C] uppercase tracking-widest mb-0.5 flex items-center gap-1 group-hover:text-white transition-colors">
+                   TIME SPEED
+                </span>
+                <span className="text-[11px] font-bold text-[#F0B90B] tracking-wider whitespace-nowrap flex items-center gap-1 select-none">
+                   {getSpeedIcon(timeSpeed)} {timeSpeed}x
+                </span>
+             </button>
+             {showSpeedDropdown && (
+                <>
+                  <div className="fixed inset-0 z-[1000] cursor-default" onClick={() => setShowSpeedDropdown(false)} />
+                  <motion.div 
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    className="absolute top-10 right-0 z-[1001] w-48 bg-[#1E2026] border border-[#2B2F36] rounded-xl p-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+                  >
+                     <div className="text-[8px] font-black text-[#848E9C] px-2.5 pb-2 border-b border-white/5 uppercase tracking-widest font-mono">CLOCK CALIBRATION</div>
+                     <div className="space-y-0.5 mt-1.5 max-h-[250px] overflow-y-auto no-scrollbar">
+                        {[
+                          { val: 0.1,  label: "0.1x — Slow",     desc: "1 month = 10 hrs (🐌)" },
+                          { val: 0.2,  label: "0.2x — Sluggish", desc: "1 month = 5 hrs (🐢)" },
+                          { val: 0.5,  label: "0.5x — Moderate", desc: "1 month = 2 hrs (🚶)" },
+                          { val: 1,    label: "1x — Standard",   desc: "1 month = 1 hr (🚗)" },
+                          { val: 1.5,  label: "1.5x — Fast",     desc: "1 month = 40 mins (⚡)" },
+                          { val: 2,    label: "2x — MAXIMUM",    desc: "1 month = 30 mins (🚀)" },
+                        ].map(s => (
+                          <button
+                             key={s.val}
+                             onClick={() => {
+                               setTimeSpeed(s.val);
+                               setShowSpeedDropdown(false);
+                             }}
+                             className={`w-full text-left px-2.5 py-2 rounded-lg transition-colors flex flex-col cursor-pointer border ${
+                               timeSpeed === s.val 
+                                 ? "bg-[#F0B90B]/10 border-[#F0B90B]/20 text-[#F0B90B]" 
+                                 : "hover:bg-white/5 text-[#EAECEF] border-transparent"
+                             }`}
+                          >
+                             <span className="text-[10px] font-black">{s.label}</span>
+                             <span className="text-[7.5px] font-medium text-[#848E9C] tracking-wide mt-0.5">{s.desc}</span>
+                          </button>
+                        ))}
+                     </div>
+                  </motion.div>
+                </>
+             )}
+          </div>
+
+          <div className="w-px h-6 bg-[#2B2F36] hidden xl:block" />
+
           {/* Live fiscal date */}
           <div className="hidden xl:flex flex-col items-end leading-none font-mono">
             <span className="text-[8px] font-semibold text-[#848E9C] uppercase tracking-widest mb-0.5 flex items-center gap-1.5">
               <span className="status-live inline-block w-1.5 h-1.5 rounded-full bg-[#F0B90B] animate-pulse" />
-              Санаи Молиявӣ
+              Fiscal Date
             </span>
             <span className="text-[11px] font-bold text-[#F0B90B] tracking-wider whitespace-nowrap">
               {getFiscalDateString(fiscalDays)}
@@ -159,7 +226,7 @@ export function Navbar() {
               "text-[#F6465D]"
             }`}>
               {netStatus === "stable" ? `${latency ?? 12}ms` :
-               netStatus === "slow" ? "ХАРОБ" :
+               netStatus === "slow" ? "SLOW" :
                "OFFLINE"}
             </span>
             <span className="relative flex h-1.5 w-1.5">
@@ -176,21 +243,6 @@ export function Navbar() {
             </span>
           </div>
 
-          <div className="w-px h-6 bg-[#2B2F36] hidden xl:block" />
-
-          {/* Logout */}
-          <button 
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setShowLogoutModal(true);
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#F6465D]/20 text-[#F6465D]/60 hover:text-[#F6465D] hover:border-[#F6465D]/50 hover:bg-[#F6465D]/5 text-[9px] font-bold uppercase tracking-widest transition-all cursor-pointer"
-          >
-            <span className="hidden sm:inline">ҚАТЪИ ПАЙВАСТ</span>
-            <LogOut className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         {/* Mobile tab bar — icons only, shown below md */}
@@ -212,43 +264,6 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* LOGOUT MODAL */}
-      <AnimatePresence>
-        {showLogoutModal && (
-          <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0B0E11]/80 backdrop-blur-sm pointer-events-auto">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.96, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 8 }}
-              className="bg-[#1E2026] border border-[#474D57] rounded-xl p-8 max-w-sm w-full mx-4 relative"
-            >
-               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F6465D]/60 to-transparent rounded-t-xl" />
-               
-               <h3 className="text-base font-bold text-[#EAECEF] uppercase tracking-wider mb-2">Қатъи Пайвасти Система</h3>
-               <p className="text-[11px] text-[#848E9C] font-mono mb-8 leading-relaxed">Оё боварӣ доред, ки мехоҳед сессияи бехатарро қатъ кунед?</p>
-               
-               <div className="flex gap-3">
-                 <button 
-                   onClick={() => setShowLogoutModal(false)}
-                   className="flex-1 py-2.5 rounded-lg border border-[#474D57] bg-[#2B2F36] hover:bg-[#363C45] text-[#EAECEF] font-bold text-xs tracking-widest uppercase transition-all"
-                 >
-                   Рад кардан
-                 </button>
-                 <button 
-                   onClick={() => {
-                     setShowLogoutModal(false);
-                     logout();
-                     router.push("/");
-                   }}
-                   className="flex-1 py-2.5 rounded-lg bg-[#F6465D]/10 border border-[#F6465D]/40 hover:bg-[#F6465D] text-[#F6465D] hover:text-white font-bold text-xs tracking-widest uppercase transition-all"
-                 >
-                   Қатъ кардан
-                 </button>
-               </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -131,9 +131,9 @@ export default function LessonScenePlayer({ lesson }: { lesson: Lesson }) {
         animate={{ opacity: 0.2, y: 0 }}
         className="fixed bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
-        <div className="text-[8px] font-black uppercase tracking-[0.8em]">СИСТЕМА_ОМОДА_АСТ</div>
+        <div className="text-[8px] font-black uppercase tracking-[0.8em]">SYSTEM_READY</div>
         <div className="w-4 h-0.5 bg-white/20" />
-        <div className="text-[7px] font-mono text-white/40 uppercase tracking-widest hidden md:block">Барои гузаштан ба марҳилаи навбатии дарс тугмаи [Enter]-ро пахш кунед</div>
+        <div className="text-[7px] font-mono text-white/40 uppercase tracking-widest hidden md:block">Press [Enter] to proceed to the next stage</div>
       </motion.div>
       <SynapseTutor />
     </main>

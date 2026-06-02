@@ -23,11 +23,11 @@ export function SceneUI({ lesson, currentSceneIndex, onBack, onExit }: {
               onClick={onExit}
               className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-white/30 hover:text-white transition-colors"
             >
-               <X size={14} className="group-hover:rotate-90 transition-transform" /> БАРОМАД_АЗ_ҲАМЗАМОНСОЗӢ
+               <X size={14} className="group-hover:rotate-90 transition-transform" /> EXIT_SYNCHRONIZATION
             </button>
             <div className="h-4 w-[1px] bg-white/10 hidden md:block" />
             <div className="hidden md:flex flex-col">
-               <div className="text-[10px] font-black uppercase tracking-widest text-white/10 italic">МОДУЛИ_ФАЪОЛ</div>
+               <div className="text-[10px] font-black uppercase tracking-widest text-white/10 italic">ACTIVE_MODULE</div>
                <div className="text-sm font-black italic uppercase tracking-tighter text-white/80">{lesson.title}</div>
             </div>
          </div>
@@ -52,7 +52,7 @@ export function SceneUI({ lesson, currentSceneIndex, onBack, onExit }: {
            className="h-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.5)]"
          />
          <div className="fixed bottom-4 right-10 text-[9px] font-black uppercase tracking-[0.6em] text-white/10">
-            ҲАМЗАМОНСОЗИИ_МАРҲИЛАҲО: {currentSceneIndex + 1}/{lesson.scenes.length}
+            STAGE_SYNCHRONIZATION: {currentSceneIndex + 1}/{lesson.scenes.length}
          </div>
       </div>
 

@@ -1,128 +1,142 @@
-# ✺ VANTAGE // Консоли Идораи Сарвати Соҳибихтиёр
+# ✺ Vantage OS // AI Financial Simulator
 
-> **Зеҳни Соҳибихтиёр. Симулятсияи Саноатӣ. Шаффофияти Радикалӣ.**  
-> Барои West Hacks 2026 таҳия шудааст. Тарҳрезӣ шудааст барои ғалаба.
+Start with $100K. Reach $1M without going bankrupt.  
+Learn real money decisions by actually making them.
 
----
-
-VANTAGE як консоли амалиётии дараҷаи саноатӣ, дақиқии баланд (high-fidelity) ва моделиронии мураккаби тиҷорат ва молияи муосир аст. Он корбаронро аз истеъмолкунандагони ғайрифаъоли молиявӣ ба **фаъолони соҳибихтиёри бозор** табдил медиҳад. Лоиҳа дорои унсурҳои мукаммали WebGL, терминали мустақими амиқи асъор (order depth book), низоми таҷдиди сохтории корхонаҳо, моделҳои тақсимоти дороиҳои амлок ва низоми андеррайтинги бонкии динамикӣ мебошад, ки ҳамаи онҳо бо **Оракули Gemini 2.5 Flash** идора мешаванд.
-
-Тамоми интерфейси корбар дар асоси низоми тарроҳии **"Кибер-Саноатии Минималистӣ"** (Cyber-Industrial Minimalist) сохта шудааст: визуалсозии зичи маълумотҳо, шабакаҳои заррачаҳои 3D (particle lattices), тарҳҳои ҳуруфи моносписи ретро ва палитраи рангҳои торик, ки арзиши олӣ ва мукаммалро нишон медиҳанд. Лоиҳа инчунин бо **муҳаррики нави синтезатори садои Web Audio API** муҷаҳҳаз гардонида шудааст.
+Built for West Hacks 2026.
 
 ---
 
-## ⌬ Меъмории Систематикӣ ва Сутунҳои Асосӣ
+Vantage OS is an interactive AI-powered financial simulator designed to help users learn real-world money decisions by running their own economy.
 
-VANTAGE панҷ вектори асосии амалиётиро дар бар мегирад, ки ҳар кадоми онҳо барои самаранокии баланд ва мураккабии техникӣ калибровка шудаанд:
+Start with $100,000 in seed capital and grow your wealth to $1,000,000 through three core pillars:
+
+📈 **Invest** — Trade crypto and acquire cash-generating businesses  
+🏠 **Own** — Buy real estate and earn rental income  
+🏦 **Leverage** — Use AI-underwritten loans and high-yield savings  
+
+Every decision is analyzed in real time by AI, acting as your financial advisor.  
+Make the wrong decisions — and you go bankrupt.
+
+No spreadsheets. No theory. Just decisions.
+
+You are not watching finance.  
+You are operating it.
+
+---
+
+## ⌬ How It Works
+
+Vantage OS is structured around three actionable pathways to wealth accumulation, monitored by a central dashboard and supported by an interactive advisor:
 
 ```
-                   ┌──────────────────────────────────────────┐
-                   │           КОНСОЛИ МАРКАЗИИ VANTAGE       │
-                   └────────────────────┬─────────────────────┘
-                                         │
+                          ┌──────────────────────────┐
+                          │    NET WORTH DASHBOARD   │
+                          └────────────┬─────────────┘
+                                       │
          ┌─────────────────────────────┼─────────────────────────────┐
          ▼                             ▼                             ▼
   ┌───────────────┐             ┌───────────────┐             ┌───────────────┐
-  │   INTEL OS    │             │ MATRIX MARKET │             │ EMPIRE ENGINE │
+  │   1. INVEST   │             │    2. OWN     │             │  3. LEVERAGE  │
   ├───────────────┤             ├───────────────┤             ├───────────────┤
-  │ Пайгирии P&L  │             │ Фрагментҳои   │             │ Таҷдиди сохтор│
-  │ Нейро-Аудит   │             │ Китоби фармоиш│             │ 8 Гиреҳи ARR  │
-  └───────┬───────┘             └───────────────┘             └───────┬───────┘
-          │                                                           │
-          ├─────────────────────────────┼─────────────────────────────┤
-          ▼                             ▼                             ▼
-  ┌───────────────┐             ┌───────────────┐             ┌───────────────┐
-  │ FEDERAL BANK  │             │ ASSET COCKPIT │             │ SYNAPSE ACAD  │
-  ├───────────────┤             ├───────────────┤             ├───────────────┤
-  │ Андеррайтинг  │             │ 16 Амвол      │             │ WebGL Слайдҳо │
-  │ Депозит 5.5%  │             │ Лизинги фаъол │             │ Муаллими ИИ   │
+  │ Crypto Assets │             │ Real Estate   │             │ Loan Facility │
+  │ SaaS Holdings │             │ Rent & Yields │             │ 5.5% Yield    │
   └───────────────┘             └───────────────┘             └───────────────┘
+                                       │
+                        ┌──────────────┴──────────────┐
+                        ▼                             ▼
+                ┌───────────────┐             ┌───────────────┐
+                │   DASHBOARD   │             │  AI ADVISOR   │
+                ├───────────────┤             ├───────────────┤
+                │ Net Worth     │             │ Real-time     │
+                │ Goal Progress │             │ Directives    │
+                └───────────────┘             └───────────────┘
 ```
 
-### 1. 🖥️ Маркази Идораи Intel OS ва Нейро-Аудит (Neural Verdict)
-* **Индексатсияи Сарвати Умумӣ дар Вақти Воқеӣ**: Ҷамъоварии мустақими сармояи нақд, дороиҳои токенӣ, ӯҳдадориҳои қарзӣ ва саҳмияҳои корхонаҳои фаъол.
-* **Аудити Нейронии Gemini**: Пайвасти мустақим ба Оракули Gemini, ки таҳлили сохтории портфели сармоягузор, осебпазирии хавфҳо ва фишанги молиявиро анҷом дода, тавсияҳои тактикӣ медиҳад.
+### 1. 🖥️ Dashboard & Net Worth Tracker
+* **Real-time Net Worth Goal Tracker**: Consolidates liquid capital, tokenized holdings, outstanding liabilities, and property equity. Displays real-time progress toward the $1,000,000 target.
+* **Gemini Neural Audit**: Direct integration with the Gemini Oracle to perform deep structural audits of portfolio asset allocation, risk exposure ratios, and leverage thresholds, generating tactical recommendations.
 
-### 2. 📈 Терминали Савдои Матритса (Matrix Trading Terminal)
-* **Бозорҳои Арбитражӣ**: Панелҳои самараноки савдо барои пайгирии нархҳои мустақими Bitcoin (`BTC`), Ethereum (`ETH`) ва Solana (`SOL`) бо истифода аз маълумоти воқеӣ аз WebSocket-и Binance.
-* **Дафтари Таърихи Фармоишҳо**: Пайгирии амиқи транзаксияҳо бо тегҳои фаъоли савдо, ҳолати иҷро ва тавозуни дақиқи пули нақд.
+### 2. 📈 Crypto Trading Terminal
+* **Arbitrage Spot Markets**: Real-time order desks tracking `BTC`, `ETH`, and `SOL` feed streams connected directly to the Binance Spot WebSocket API.
+* **Order Depth Book & Whale Radar**: Live order book visualizations featuring cumulative depth scales and an AI-driven Whale Alert scanner that logs high-value block trades (>$75k) and simulated liquidations.
 
-### 3. 🏢 Муҳаррики Таҷдиди Корпоративӣ (Empire Restructure Engine)
-* **Миқёси Дороиҳои Саноатӣ**: Харидани гиреҳҳои DeFi, корпоратсияҳои SaaS, ширкатҳои PropTech ва занҷирҳои таъминоти AGI. Дорои **8 портфели технологияҳои гуногуни тиҷоратӣ**.
-* **Панели Филтрҳои Минималистӣ**: Ҷустуҷӯи динамикии матн, филтри намудҳои тиҷорат (Fintech, SaaS, Biotech) ва навъҳои гуногуни батартиб даровардан (сортировка) аз рӯи нарх, ҳаҷми даромад (ARR) ва миқдор.
-* **Таҷдиди Сохтори Корхона бо Gemini**: Пешниҳоди профилҳои ширкат мустақиман ба Оракули Gemini. ИИ аудити сохтории корпоративиро анҷом медиҳад, хароҷотро танзим намуда, **даромади солона (ARR) ва арзиши фурӯши корхонаро ба таври доимӣ зиёд мекунад!**
-* **Саҳифабандии Модулӣ**: Намоиши тозаи 4-ададӣ дар як саҳифа бо нишондиҳандаҳои фаъоли киберпанк барои содда ва премиум мондани тарҳ.
+### 3. 🏢 Business Investments Restructuring
+* **Industrial Asset Scale**: Acquire SaaS conglomerates, DeFi nodes, PropTech infrastructure, and AI clusters. Features **8 distinct enterprise portfolio nodes**.
+* **Dynamic Search & Query Filtering**: Complex filtering capabilities allowing text search, categorization (Fintech, SaaS, Biotech), and sorting by price, Annual Recurring revenue (ARR), and holdings count.
+* **Gemini Corporate Restructuring**: Submit corporate configurations directly to the Gemini Oracle. The AI performs structural cost audits, cuts operational bloat, and **permanently increases ARR and Enterprise Valuation multipliers**.
+* **Modular Pagination**: Renders enterprise nodes in clean, paginated layouts to maintain high readability.
 
-### 4. 🏠 Идораи Амвол ва Нақлиёти Люкс (The Property Tycoon)
-* **Реестри 16 Дороии Премиум**: 8 амволи ғайриманқул (Co-Living Capsule, Geothermal Mega-Node, Alpine Smart-Chalet) ва 8 нақлиёти боҳашамат (Гиперкарҳо, Ҷетҳои суръати садо, Яхтаҳо) дар кишварҳои Швейтсария, Монако, Тсюрих ва Манҳеттен.
-* **Матритсаи Лизинги Баландсифат**: Тақсими амволи соҳибихтиёр байни даромади нақд (иҷора) ва мултипликаторҳои нуфуз (+15% барои амволи истиқоматӣ ва +25% барои нақлиёт).
-* **Қоидаҳои Истиқомати Асосӣ**: Санҷиши дарунсохт, ки талаб мекунад, ки **аввалин хонаи истиқоматии харидашуда ҳамчун манзили асосии шахсӣ ҳифз карда шавад**. Шумо метавонед танҳо воҳидҳои минбаъдаро ба иҷора диҳед!
-* **Эълонҳо ва Қулфҳои Телеметрӣ**: Намоиши огоҳиҳои зебо (`Residency Protocol: Your first house is reserved as your personal home...`) ва қулфи динамикии тугмаҳо.
-* **Муҳаррики Таварруми Вақти Воқеӣ**: Ҳисобкунии динамикии индекси бозор, ки ба нархи амвол ва иҷора ҳар 8 сония таъсир мерасонад, ҳамроҳ бо сатри ҳаракаткунандаи сабз (marquee).
+### 4. 🏠 Properties & Asset Leasing
+* **16 Premium Assets**: 8 high-yield real estate properties (Co-Living Capsule, Geothermal Mega-Node, Alpine Smart-Chalet) and 8 luxury lifestyle assets (Hypercars, Supersonic Jets, Megayachts) across Switzerland, Monaco, Zurich, and Manhattan.
+* **Appreciation & Leasing System**: Rent out real estate to earn passive income, while lifestyle assets generate a dynamic influence multiplier (+15% for residential properties, +25% for transports).
+* **Primary Residency Protocol**: Enforces realistic residency restrictions requiring the operator's first acquired residential asset to be locked as their personal home, leaving subsequent units open for active leasing.
+* **Real-time Market Inflation Engine**: Simulates dynamic market conditions, fluctuating property acquisition prices and lease yields every 8 seconds, visualised with active marquee feeds.
 
-### 5. 🏦 Бонки Захиравии Федералии Соҳибихтиёр
-* **Андеррайтери Динамикии Gemini**: Дархостҳои қарзиро бо таҳлили амиқи сохтори молиявии худ пешниҳод кунед. ИИ-и андеррайтинг холҳои кредитии шуморо ҳисоб карда, қарзро тасдиқ ё рад менамояд.
-* **Хазинаи Амонатҳои 5.5% APY**: Хазинаи фоизи мураккаб, ки сармояро дар ҳар як **Дақиқаи Молиявӣ** (1 сонияи воқеӣ) зиёд мекунад. Нишондиҳандаи суръати афзоиш (Accrual Velocity) фаъол аст.
-* **Давраи Пардохти Қарз**: Таймерҳои махсус барои пайгирии давраи қарздорӣ ва ҷаримаҳо ҳангоми дер кардани пардохт.
+### 5. 🏦 Reserve Savings & Loan Bank
+* **Gemini Underwriter**: Submit commercial loan applications with structured financials. The AI underwriting model calculates credit ratings based on debt-to-income and asset backing, approving or declining credit limits.
+* **5.5% Compound Interest Reserve**: A high-yield savings engine that compounds interest directly on every **Fiscal Minute** (1 actual second), monitored via an active Accrual Velocity speedometer.
+* **Maturity Periods & Debt Management**: Track loan amortization timers, remaining payments, and default thresholds.
 
-### 6. 🎓 Академияи Когнитивии Синапс (Cognitive Synapse Academy)
-* **Слайдҳои Интерактивии WebGL**: Саҳифаҳои таълимии пурра ва бой бо гузаришҳои динамикӣ, ки асосҳои молияи муосирро (қарздорӣ, левериҷ, миқёси корпоративӣ) меомӯзонанд.
-* **Муаллими ИИ-и Синапс**: Ёвари доимии шинокунанда, ки дар тамоми саҳифаҳо мавҷуд буда, ба саволҳои корбар дар асоси контекст ва вазъияти молиявии кунунии ӯ посухҳои амиқ медиҳад.
-
----
-
-## 💾 Синккунии Дутарафаи Маълумот бо Махзани JSON (`db.json`)
-
-VANTAGE бо низоми махсуси синккунии маълумот байни муштарӣ ва сервер муҷаҳҳаз шудааст, то ҳифзи комили сессияро таъмин кунад:
-
-* **Эндпоинти API-и Next.js**: Хизматрасонии сервери алоҳида дар `/api/vantage-sync`, ки мустақиман файлҳои махзани `db.json`-ро дар решаи лоиҳа мехонад ва менависад.
-* **Гидратсияи Ибтидоӣ (Central Hydration)**: Ҳангоми боркунии аввалини барнома, `useVantageStore` маълумотро аз сервер хонда, ҳолати муштариро навсозӣ мекунад (сармоя, токенҳо, тиҷорат ва амволҳо).
-* **Автосав дарзамон (Background Autosave)**: Ҳама гуна тағйирот дар муштарӣ (хариди амвол, ба даст овардани XP, савдои токенҳо) фавран тавассути шунавандаи Zustand `subscribe` сабт шуда, ба сервер ба `db.json` синк карда мешавад.
-* **Ҳифзи доимии маълумот**: Тоза кардани кукиҳои браузер ё аз нав оғоз кардани сервер маълумоти шуморо ҳеҷ гоҳ нест намекунад!
+### 6. 🧠 AI Financial Advisor
+* **Interactive Financial Scenarios**: Dynamic modules analyzing real-world business concepts (capital leverage, CAC/ARR, financial psychology) using smooth hardware-accelerated visuals.
+* **Gemini AI Advisor**: A floating, context-aware advisor present across all views that inspects the operator's real-time financial stats to answer questions with customized, state-specific financial advice.
 
 ---
 
-## 🎬 Синтезатори Садои Web Audio API
+## 💾 Bidirectional Server Synchronization (`db.json`)
 
-Барои эҷоди таҷрибаи киберпанк ва пешгирии таъхири боркунии файлҳои аудиоӣ, лоиҳа дорои синтезатори садои воқеӣ мебошад:
+VANTAGE OS utilizes an automated server synchronization mechanism to guarantee persistent state preservation:
 
-* **Садои амиқи кайҳонӣ (Spaceship Hum)**: Синтез кардани садои пасти `55Hz Sawtooth LFO` бо филтри LPF, ки заминаи садоии амиқи саноатиро месозад.
-* **Садои ҳаракат (Hover Chirps)**: Ҳаракати муш дар рӯи тугмаҳо ё менюҳо садоҳои динамикии зудӣ (`900Hz to 1450Hz over 80ms`) тавлид мекунанд.
-* **Садои амалиёт (Action SFX)**: Клики тугмаҳо ва тағйири раутҳо садои баланди `440Hz -> 100Hz` ва `75Hz -> 35Hz`-ро тавлид мекунад.
+* **Next.js API Synchronization Endpoint**: A dedicated background service at `/api/vantage-sync` reads and updates a local database file (`db.json`) in the project root.
+* **Central Hydration**: On application initialization, the Zustand client store reads state from the local JSON database to populate cash balances, assets, loans, and XP.
+* **Autosave Loops**: State modifications (asset acquisitions, security events, trade executions) trigger reactive store updates that sync automatically in the background to `db.json`.
 
 ---
 
-## ⚙ Насб ва Иҷрои Систематикии Лоиҳа
+## 🎬 Web Audio API Sound Synthesizer
 
-Архиви лоиҳаро дар компютери худ сабт ва иҷро намоед:
+VANTAGE OS is equipped with a custom synthesized sound engine to prevent asset loading latency and create a fully cohesive cyber-industrial soundscape:
+
+* **Spaceship Hum (Ambient hum)**: Generates a low-frequency `55Hz Sawtooth LFO` filtered through a low-pass filter (LPF) to produce an immersive industrial background drone.
+* **Hover Chirps**: Cursor movements over interactive UI elements trigger high-frequency frequency sweeps (`900Hz to 1450Hz over 80ms`).
+* **Action Clicks**: Button clicks and tab switches generate sharp, satisfying tone drops (`440Hz -> 100Hz`).
+
+---
+
+## ⚙️ Installation & Deployment
+
+Set up and run VANTAGE OS locally:
 
 ```bash
-# 1. Нусхабардории Архиви Лоиҳа
+# 1. Clone the repository
 git clone https://github.com/your-username/vantage-sovereign.git
 
-# 2. Ворид шудан ба папкаи асосӣ
+# 2. Navigate to the project root
 cd vantage-sovereign
 
-# 3. Насб кардани Китобхонаҳо ва Вобастагиҳо
+# 3. Install dependencies
 npm install
 
-# 4. Танзими Калидҳои ИИ-и Gemini
-# Файли .env-ро дар решаи лоиҳа сохта, калиди Gemini-ро илова кунед:
+# 4. Configure Environment Variables
+# Create a .env file in the root directory and add your Gemini API Key:
 NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
 
-# 5. Иҷрои Барнома дар Муҳити Таҳиягарӣ
+# 5. Start the Development Server
 npm run dev
 ```
 
 ---
 
-## ⌬ Меъмории Код ва SEO-и Комил (Next.js 15/16)
+## ⌬ File & Codebase Structure
 
-Ин лоиҳа тибқи стандартҳои **Next.js Clean Architecture** тарҳрезӣ шудааст:
-* **Саҳифаҳои серверӣ (Server Components)**: Ҳамаи файлҳои раутҳо дар `src/app` ҳамчун Сервер-компонентҳо сохта шудаанд. Ин ба онҳо имкон медиҳад, ки метадатаҳои беҳамто ва калимаҳои калидии тоҷикиро барои системаҳои ҷустуҷӯӣ (SEO) пешниҳод кунанд.
-* **Файлҳои муштарӣ (Client Views)**: Тамоми логикаи мураккаби амалиётӣ ва WebGL ба файлҳои муштарии ҷудогона (дар `src/components`) гузаронида шудааст.
-* **Идоракунии Ҳолат (Zustand)**: Идоракунии комили тавозун ва синккунии дутарафа бо сервер.
+The project follows a modular Next.js structure:
+* `src/app/` — Main page routing and server configurations.
+* `src/components/` — Client-side interface modules (Views, Charts, Trade Desk, Quests, 3D Canvas).
+* `src/data/` — Static catalogs for properties and lessons.
+* `src/services/` — Core simulation services (Market, AI Oracle prompts, WebSocket connections).
+* `src/store/` — Zustand store for state management and local database synchronization.
 
 ---
-**Таҳия шудааст бо ифтихор барои West Hacks 2026**  
-*Fintech-и Соҳибихтиёр. Самаранокии олии техникӣ.*
+**Developed for West Hacks 2026**  
+*Sovereign Fintech. High Technical Performance.*

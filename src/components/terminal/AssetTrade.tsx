@@ -49,9 +49,9 @@ export function AssetTrade({ asset, onClose }: { asset: CryptoPrice, onClose: ()
            <div className="space-y-3">
               <div className="flex items-center gap-3 text-white/20">
                  <Box className="w-4 h-4" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.5em]">ИНТЕРФЕЙСИ_ХАРИДОРӢ_v4.2</span>
+                 <span className="text-[10px] font-black uppercase tracking-[0.5em]">ORDER_INTERFACE_v4.2</span>
               </div>
-              <h2 className="text-5xl font-black uppercase tracking-tighter italic leading-none text-white/90">МАРКАЗИ_МУОМИЛОТ</h2>
+              <h2 className="text-5xl font-black uppercase tracking-tighter italic leading-none text-white/90">TRANSACTION_CENTER</h2>
            </div>
            <button onClick={onClose} className="w-12 h-12 border border-white/10 flex items-center justify-center hover:border-white transition-all">
               <X className="w-6 h-6 text-white/40" />
@@ -63,21 +63,21 @@ export function AssetTrade({ asset, onClose }: { asset: CryptoPrice, onClose: ()
              onClick={() => setType("buy")}
              className={`py-5 border text-[11px] font-black uppercase tracking-[0.4em] transition-all ${type === "buy" ? "bg-white text-black border-white" : "border-white/10 text-white/20 hover:border-white/40"}`}
            >
-              Ҷойгиркунии_Сармоя
+              Capital_Allocation
            </button>
            <button 
              onClick={() => setType("sell")}
              className={`py-5 border text-[11px] font-black uppercase tracking-[0.4em] transition-all ${type === "sell" ? "bg-white text-black border-white" : "border-white/10 text-white/20 hover:border-white/40"}`}
            >
-              Истихроҷи_Даромад
+              Capital_Harvest
            </button>
         </div>
 
         <div className="space-y-8 mb-12">
            <div className="p-8 border border-white/5 bg-white/[0.01]">
               <div className="flex justify-between items-center mb-4">
-                 <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Миқдори_Истихроҷ</span>
-                 <span className="text-[10px] font-black font-mono text-white/40">Дар даст: {currentHolding?.amount || 0} {asset.symbol.toUpperCase()}</span>
+                 <span className="text-[10px] font-black uppercase tracking-widest text-white/20">Quantity_Limit</span>
+                 <span className="text-[10px] font-black font-mono text-white/40">Available: {currentHolding?.amount || 0} {asset.symbol.toUpperCase()}</span>
               </div>
               <div className="relative">
                  <input 
@@ -93,11 +93,11 @@ export function AssetTrade({ asset, onClose }: { asset: CryptoPrice, onClose: ()
 
            <div className="grid grid-cols-2 gap-6 px-4">
               <div>
-                 <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Арзиши_Воҳиди_Истихроҷ</div>
+                 <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Unit_Acquisition_Price</div>
                  <div className="text-xl font-black font-mono text-white/60">${(asset.current_price || 0).toLocaleString()}</div>
               </div>
               <div className="text-right">
-                 <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Таъсири_Умумии_Соф</div>
+                 <div className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-2">Total_Estimated_Cost</div>
                  <div className="text-xl font-black font-mono text-white">${totalCost.toLocaleString()}</div>
               </div>
            </div>
@@ -105,14 +105,14 @@ export function AssetTrade({ asset, onClose }: { asset: CryptoPrice, onClose: ()
 
         <div className="flex items-center gap-6 pt-10 border-t border-white/5">
            <div className="flex-1">
-              <div className="text-[9px] font-black uppercase tracking-widest text-white/10 mb-1">Маблағи_Иҷозатдодашуда</div>
+              <div className="text-[9px] font-black uppercase tracking-widest text-white/10 mb-1">Liquid_Sovereign_Balance</div>
               <div className="text-2xl font-black font-mono text-white/40">${balance.toLocaleString()}</div>
            </div>
            <button 
              onClick={handleExecute}
              className="px-12 py-6 bg-white text-black text-[12px] font-black uppercase tracking-[0.5em] hover:bg-white/90 active:scale-95 transition-all shadow-2xl"
            >
-              {type === "buy" ? "ТАСДИҚИ_ҶОЙГИРКУНӢ" : "ТАСДИҚИ_ИСТИХРОҶ"}
+              {type === "buy" ? "CONFIRM_ALLOCATION" : "CONFIRM_HARVEST"}
            </button>
         </div>
       </motion.div>

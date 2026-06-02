@@ -54,7 +54,12 @@ export async function POST(request: Request) {
         activeLoan: body.activeLoan !== undefined ? body.activeLoan : mergedUsers[opId]?.activeLoan,
         properties: body.properties !== undefined ? body.properties : mergedUsers[opId]?.properties,
         fiscalDays: body.fiscalDays !== undefined ? body.fiscalDays : mergedUsers[opId]?.fiscalDays,
-        achievements: body.achievements !== undefined ? body.achievements : mergedUsers[opId]?.achievements
+        achievements: body.achievements !== undefined ? body.achievements : mergedUsers[opId]?.achievements,
+        securityScore: body.securityScore !== undefined ? body.securityScore : mergedUsers[opId]?.securityScore,
+        securityProtocols: body.securityProtocols !== undefined ? body.securityProtocols : mergedUsers[opId]?.securityProtocols,
+        threatLevel: body.threatLevel !== undefined ? body.threatLevel : mergedUsers[opId]?.threatLevel,
+        securityAuditText: body.securityAuditText !== undefined ? body.securityAuditText : mergedUsers[opId]?.securityAuditText,
+        threatLogs: body.threatLogs !== undefined ? body.threatLogs : mergedUsers[opId]?.threatLogs
       };
     }
 
@@ -76,7 +81,12 @@ export async function POST(request: Request) {
       activeLoan: body.activeLoan !== undefined ? body.activeLoan : existingData.activeLoan,
       properties: body.properties !== undefined ? body.properties : existingData.properties,
       fiscalDays: body.fiscalDays !== undefined ? body.fiscalDays : existingData.fiscalDays,
-      achievements: body.achievements !== undefined ? body.achievements : existingData.achievements
+      achievements: body.achievements !== undefined ? body.achievements : existingData.achievements,
+      securityScore: body.securityScore !== undefined ? body.securityScore : existingData.securityScore,
+      securityProtocols: body.securityProtocols !== undefined ? body.securityProtocols : existingData.securityProtocols,
+      threatLevel: body.threatLevel !== undefined ? body.threatLevel : existingData.threatLevel,
+      securityAuditText: body.securityAuditText !== undefined ? body.securityAuditText : existingData.securityAuditText,
+      threatLogs: body.threatLogs !== undefined ? body.threatLogs : existingData.threatLogs
     };
 
     fs.writeFileSync(DB_PATH, JSON.stringify(updatedData, null, 2), "utf-8");

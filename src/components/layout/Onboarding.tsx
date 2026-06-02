@@ -12,28 +12,33 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
   const slides = [
     {
       id: 1,
-      title: "Панели Дидбон",
-      desc: "Маркази фармондиҳии шумо. Назорати сармояи умумӣ, маблағҳои озоди нақд ва таҳлили нейронии портфел тавассути AI Google Gemini, ки дар вақти воқеӣ навсозӣ мешавад.",
+      title: "Mission: $1,000,000 Net Worth",
+      desc: "Start with $100,000 in seed capital. Your goal is to grow your net worth to $1,000,000 through crypto trading, real estate, and business investments. Risk Alert: Avoid bankruptcy ($0 net worth) at all costs. Run your own financial empire and learn real-world money decisions with AI.",
     },
     {
       id: 2,
-      title: "Савдои КРИПТО",
-      desc: "Харид ва фурӯши Bitcoin, Ethereum, Solana ва ғайра дар дохили терминали савдо. Нархҳо дар вақти воқеӣ навсозӣ мешаванд. Портфели худро созед ва афзоиши сармояатонро мушоҳида кунед.",
+      title: "Overview Dashboard",
+      desc: "Your central command center. Monitor total capital, free cash flow, and real-time neural portfolio audits powered by Google Gemini AI.",
     },
     {
       id: 3,
-      title: "Сохтани Империя",
-      desc: "Харидани тиҷоратҳои маҷозӣ — стартапҳои SaaS, гиреҳҳои DeFi, ширкатҳои PropTech ва кластерҳои AI. Ҳар яки онҳо даромади ғайрифаъол меоранд. Барои оптимизатсияи даромад аз мушовири Gemini AI истифода баред.",
+      title: "Crypto Trading Terminal",
+      desc: "Buy and sell Bitcoin, Ethereum, Solana, and more within the trading terminal. Build your portfolio and monitor capital growth in real-time.",
     },
     {
       id: 4,
-      title: "Бонки Захиравӣ",
-      desc: "Гирифтани қарз тавассути таҳлили боэътимоди AI. Сарфаҷӯиро дар хазина бо фоидаи 5.5% барои як моҳ захира кунед. Ҳар як қарор дар вақти воқеӣ аз ҷониби муҳаррики Gemini арзёбӣ мешавад.",
+      title: "Business Investments",
+      desc: "Acquire digital businesses: SaaS startups, DeFi nodes, PropTech projects, and AI clusters. Each generates passive income. Consult Gemini AI to optimize your cash flow.",
     },
     {
       id: 5,
-      title: "Академияи AI",
-      desc: "Молияи воқеиро тавассути дарсҳои интерактивӣ — крипто, бонкдорӣ ва стратегияи корпоративӣ омӯзед. Муаллими инфиродии Gemini AI дар паҳлӯи шумо буда, ба саволҳо вобаста ба контекст ҷавоб медиҳад.",
+      title: "Reserve Banking & Savings",
+      desc: "Access credit backed by secure AI risk evaluation. Store your savings in the treasury earning 5.5% monthly yield. Every decision is audited in real-time by the Gemini engine.",
+    },
+    {
+      id: 6,
+      title: "AI Financial Advisor",
+      desc: "Learn real-world finance through interactive lessons: crypto, banking, and corporate strategy. Your personal Gemini AI advisor sits by your side, answering context-aware questions.",
     }
   ];
 
@@ -56,7 +61,7 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
           <motion.div
             className="h-full bg-[#F0B90B]"
             initial={{ width: "0%" }}
-            animate={{ width: `${(step / 5) * 100}%` }}
+            animate={{ width: `${(step / 6) * 100}%` }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           />
         </div>
@@ -73,7 +78,7 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
               >
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 uppercase tracking-wider">
-                    МОДУЛИ {step} АЗ 5
+                    MODULE {step} OF 6
                   </span>
                 </div>
                 <h3 className="text-2xl sm:text-5xl font-extrabold text-[#EAECEF] leading-tight tracking-tight">{current.title}</h3>
@@ -85,7 +90,7 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
 
             {/* Step dots */}
             <div className="flex gap-2">
-              {[1, 2, 3, 4, 5].map((s) => (
+              {[1, 2, 3, 4, 5, 6].map((s) => (
                 <div
                   key={s}
                   className={`h-1 rounded-full transition-all duration-400 ${
@@ -108,10 +113,11 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
                    className="w-full h-full"
                  >
                    {step === 1 && <Globe3D />}
-                   {step === 2 && <Asset3D asset={{ image: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png" }} />}
-                   {step === 3 && <Globe3D />}
+                   {step === 2 && <Globe3D />}
+                   {step === 3 && <Asset3D asset={{ image: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png" }} />}
                    {step === 4 && <Globe3D />}
                    {step === 5 && <Globe3D />}
+                   {step === 6 && <Globe3D />}
                  </motion.div>
                </AnimatePresence>
             </div>
@@ -124,14 +130,14 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
             onClick={onClose}
             className="text-[#848E9C] hover:text-[#EAECEF] transition-colors text-xs font-semibold uppercase tracking-widest py-2"
           >
-            Гузаштан →
+            Skip →
           </button>
           
           <button 
-            onClick={() => step < 5 ? setStep(step + 1) : onClose()}
+            onClick={() => step < 6 ? setStep(step + 1) : onClose()}
             className="w-12 h-12 sm:w-14 sm:h-14 bg-[#F0B90B] text-black rounded-xl flex items-center justify-center hover:bg-[#F8D33A] active:scale-95 transition-all shadow-[0_0_20px_rgba(240,185,11,0.2)] group"
           >
-            {step < 5
+            {step < 6
               ? <ChevronRight className="w-5 sm:w-6 h-5 sm:h-6 group-hover:translate-x-0.5 transition-transform" />
               : <Play className="w-5 sm:w-6 h-5 sm:h-6 fill-current" />
             }

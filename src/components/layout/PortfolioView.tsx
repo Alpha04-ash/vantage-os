@@ -19,20 +19,20 @@ function AssetNode({ asset }: { asset: any }) {
   let accentColor = "text-sky-400";
   let pulseColor = "bg-sky-400";
   let bgGradient = "";
-  let badgeText = "АКТИВИ КРИПТО // CRYPTO_NODE";
+  let badgeText = "CRYPTO ASSET // CRYPTO_NODE";
 
   if (isCorporate) {
     cardStyle = "border-[#F0B90B]/20 hover:border-[#F0B90B]/50 hover:shadow-[0_0_25px_rgba(240,185,11,0.06)]";
     accentColor = "text-[#F0B90B]";
     pulseColor = "bg-[#F0B90B]";
     bgGradient = "bg-gradient-to-br from-[#1E2026] via-[#1E2026] to-[#F0B90B]/[0.02]";
-    badgeText = "ГИРЕҲИ КОРПОРАТИВӢ // EMPIRE_NODE";
+    badgeText = "EMPIRE NODE // EMPIRE_NODE";
   } else if (isProperty) {
     cardStyle = "border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.06)]";
     accentColor = "text-emerald-400";
     pulseColor = "bg-emerald-400";
     bgGradient = "bg-gradient-to-br from-[#1E2026] via-[#1E2026] to-emerald-500/[0.02]";
-    badgeText = "АКТИВИ АМЛОК // REAL_ESTATE";
+    badgeText = "REAL ESTATE ASSET // REAL_ESTATE";
   }
 
   return (
@@ -70,10 +70,10 @@ function AssetNode({ asset }: { asset: any }) {
           
           <div className="space-y-0.5">
              <h4 className={`text-sm font-black uppercase tracking-wider ${accentColor}`}>
-                 {(asset?.symbol || "").toString()}
+                  {(asset?.symbol || "").toString()}
               </h4>
               <div className="text-[8px] font-bold uppercase tracking-[0.15em] text-[#848E9C] font-mono whitespace-nowrap">
-                 {badgeText}
+                  {badgeText}
               </div>
           </div>
        </div>
@@ -81,24 +81,24 @@ function AssetNode({ asset }: { asset: any }) {
        <div className="space-y-4 mb-6 relative z-10">
           <div>
              <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1 font-mono">
-                {isCorporate ? "Миқдори корхонаҳо" : isProperty ? "Маҷмӯи амволи соҳибӣ" : "Миқдори гиреҳҳои фаъол"}
+                {isCorporate ? "Enterprises Owned" : isProperty ? "Property Units Owned" : "Active Nodes Owned"}
              </div>
              <div className="text-xl font-black font-mono text-[#EAECEF]">
-               {amount.toLocaleString()} <span className="text-[10px] text-[#474D57] font-normal uppercase tracking-widest ml-1">{isCorporate ? "корхона" : isProperty ? "амвол" : "воҳид"}</span>
+               {amount.toLocaleString()} <span className="text-[10px] text-[#474D57] font-normal uppercase tracking-widest ml-1">{isCorporate ? "units" : isProperty ? "props" : "nodes"}</span>
              </div>
           </div>
           <div>
              <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1 font-mono">
-                {isCorporate ? "Арзиши ҷории бозор" : isProperty ? "Арзиши бозории умумӣ" : "Арзиши сармоя"}
+                {isCorporate ? "Current Market Valuation" : isProperty ? "Total Portfolio Valuation" : "Capital Valuation"}
              </div>
              <div className="text-xl font-black font-mono text-[#EAECEF] flex items-baseline gap-1">
-                ${(amount * avgPrice).toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                {isProperty && asset.rentedCount > 0 && (
-                  <span className="text-[9px] font-bold text-emerald-400 font-mono ml-2 lowercase tracking-wider bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
-                    лизинг фаъол
-                  </span>
-                )}
-             </div>
+                 ${(amount * avgPrice).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                 {isProperty && asset.rentedCount > 0 && (
+                   <span className="text-[9px] font-bold text-emerald-400 font-mono ml-2 lowercase tracking-wider bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
+                     leasing active
+                   </span>
+                 )}
+              </div>
           </div>
        </div>
 
@@ -116,10 +116,10 @@ function AssetNode({ asset }: { asset: any }) {
        </div>
 
        <div className="mt-5 pt-4 border-t border-[#2B2F36] flex justify-between items-center text-[9px] font-semibold uppercase tracking-widest relative z-10 font-mono">
-          <span className="text-[#848E9C]">Телеметрияи гиреҳ</span>
+          <span className="text-[#848E9C]">Node Telemetry</span>
           <span className={`${accentColor} flex items-center gap-1.5 font-bold`}>
              <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${pulseColor}`} />
-             {isCorporate ? "ROI_ИҚТИСОДӢ_МУСОИД" : isProperty ? "ЛИЗИНГИ_ФАЪОЛ" : "САВДОИ_МУСТАҚИМ"}
+             {isCorporate ? "OPTIMAL_ECONOMIC_ROI" : isProperty ? "LEASING_ACTIVE" : "LIVE_MARKET_TRADE"}
           </span>
        </div>
     </motion.div>
@@ -193,14 +193,14 @@ export function PortfolioView() {
         <div>
           <div className="flex items-center gap-2 mb-1">
              <Box className="w-3.5 h-3.5 text-[#F0B90B]" />
-             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">СИСТЕМАИ_ХАЗИНАИ_ДОРОИҲО</span>
+             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">ASSET_TREASURY_SYSTEM</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#EAECEF] tracking-tight">МАТРИТСАИ_ХАЗИНА</h2>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#EAECEF] tracking-tight">TREASURY_MATRIX</h2>
         </div>
 
         <div className="flex items-center gap-4">
            <div className="text-right">
-              <div className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C] mb-0.5">Пардохтпазирии_Умумӣ</div>
+              <div className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C] mb-0.5">Liquid_Sovereign_Cash</div>
               <div className="text-xl sm:text-2xl font-bold font-mono text-[#EAECEF]">${safeBalance.toLocaleString()}</div>
            </div>
            <button onClick={() => requestPortfolioAudit()} className="w-10 h-10 bg-[#2B2F36] border border-[#474D57] rounded-lg flex items-center justify-center hover:border-[#F0B90B]/40 transition-all group">
@@ -215,18 +215,18 @@ export function PortfolioView() {
             <MonolithCard className="p-5 sm:p-8">
                <div className="flex items-center gap-3 mb-5">
                   <Brain className="w-4 h-4 text-[#F0B90B]" />
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-[#EAECEF]">АУДИТИ_ХАЗИНА</h3>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-[#EAECEF]">TREASURY_AUDIT</h3>
                </div>
                <p className="text-sm leading-relaxed text-[#848E9C] mb-5 border-l-2 border-[#F0B90B]/30 pl-4 py-1 min-h-[80px]">
-                  <Typewriter text={portfolioAudit || "Сканкунии бахшҳои хазина барои осебпазирии система..."} />
+                  <Typewriter text={portfolioAudit || "Scanning vault sectors for systemic vulnerabilities..."} />
                </p>
                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#2B2F36]">
                   <div className="bg-[#2B2F36] rounded-lg p-3">
-                     <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1">Сармояи_Умумӣ</div>
-                     <div className="text-base font-bold font-mono text-[#EAECEF]">${totalMarketValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+                      <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1">Capital_Valuation</div>
+                      <div className="text-base font-bold font-mono text-[#EAECEF]">${totalMarketValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
                   </div>
                   <div className="bg-[#2B2F36] rounded-lg p-3">
-                     <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1">Индекси_Хавф</div>
+                     <div className="text-[9px] font-semibold uppercase tracking-widest text-[#848E9C] mb-1">Systemic_Risk_Index</div>
                      <div className="text-base font-bold font-mono text-[#F0B90B]">0.24</div>
                   </div>
                </div>
@@ -234,14 +234,14 @@ export function PortfolioView() {
 
             <MonolithCard className="p-5 sm:p-8 space-y-5">
                <div className="flex items-center gap-2">
-                 <Gauge className="w-4 h-4 text-[#F0B90B]" />
-                 <h4 className="text-xs font-bold uppercase tracking-widest text-[#EAECEF]">ДИАГНОСТИКАИ_ФАЪОЛИЯТ</h4>
+                  <Gauge className="w-4 h-4 text-[#F0B90B]" />
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#EAECEF]">PERFORMANCE_DIAGNOSTICS</h4>
                </div>
                <div className="space-y-4">
                  {[
-                   { label: "Суръати_Истихроҷ", val: 94 },
-                   { label: "Бехатарии_Хазина", val: 98 },
-                   { label: "Самаранокии_Система", val: 82 }
+                   { label: "Extraction_Speed", val: 94 },
+                   { label: "Treasury_Security", val: 98 },
+                   { label: "System_Efficiency", val: 82 }
                  ].map(s => (
                    <div key={s.label} className="space-y-1.5">
                       <div className="flex justify-between text-[10px] font-semibold uppercase tracking-widest">
@@ -264,26 +264,26 @@ export function PortfolioView() {
 
          {/* ASSET NODE GRID */}
          <div className="lg:col-span-8 space-y-8">
-             <div className="flex items-center justify-between">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">ГИРЕҲҲОИ_ФАЪОЛИ_ДОРОИҲО</span>
-                <div className="text-[10px] font-mono text-[#F0B90B] flex items-center gap-2">
-                   <div className="status-live" />
-                   НАШРИ_МУСТАҚИМ
-                </div>
-             </div>
-
-             {combinedAssets.length === 0 ? (
-                <MonolithCard className="p-8 sm:p-32 flex flex-col items-center justify-center gap-4 text-center">
-                   <Fingerprint className="w-16 h-16 text-[#2B2F36]" />
-                   <p className="text-xs font-semibold uppercase tracking-widest text-[#474D57]">Барои харитасозии гиреҳҳо сармоягузориро оғоз кунед</p>
-                </MonolithCard>
-             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                 {combinedAssets.map((asset) => (
-                   <AssetNode key={asset.id} asset={asset} />
-                 ))}
+              <div className="flex items-center justify-between">
+                 <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">ACTIVE_ASSET_NODES</span>
+                 <div className="text-[10px] font-mono text-[#F0B90B] flex items-center gap-2">
+                    <div className="status-live" />
+                    LIVE_TELEMETRY
+                 </div>
               </div>
-            )}
+
+              {combinedAssets.length === 0 ? (
+                 <MonolithCard className="p-8 sm:p-32 flex flex-col items-center justify-center gap-4 text-center">
+                    <Fingerprint className="w-16 h-16 text-[#2B2F36]" />
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#474D57]">Acquire digital or physical assets to map nodes</p>
+                 </MonolithCard>
+              ) : (
+               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {combinedAssets.map((asset) => (
+                    <AssetNode key={asset.id} asset={asset} />
+                  ))}
+               </div>
+             )}
          </div>
       </div>
     </div>

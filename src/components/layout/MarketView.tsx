@@ -45,9 +45,9 @@ export function MarketView({ onTrade, onDetails }: { onTrade?: (asset: CryptoPri
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Globe className="w-3.5 h-3.5 text-[#F0B90B]" />
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">НАШРИ_МУСТАҚИМИ_БОЗОР</span>
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">LIVE_MARKET_FEED</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#EAECEF] tracking-tight">ДНК_И_БОЗОР</h2>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#EAECEF] tracking-tight">MARKET_METRICS</h2>
         </div>
         
         {/* Binance-style search */}
@@ -55,7 +55,7 @@ export function MarketView({ onTrade, onDetails }: { onTrade?: (asset: CryptoPri
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#848E9C] group-focus-within:text-[#F0B90B] transition-colors" />
           <input 
             type="text" 
-            placeholder="Ҷустуҷӯи активҳо..."
+            placeholder="Search assets..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-[#2B2F36] border border-[#474D57] focus:border-[#F0B90B]/50 rounded-lg pl-10 pr-4 py-2.5 text-sm text-[#EAECEF] placeholder-[#848E9C] focus:outline-none transition-colors"
@@ -102,7 +102,7 @@ export function MarketView({ onTrade, onDetails }: { onTrade?: (asset: CryptoPri
                         onClick={() => handleRouteToTrade(asset.symbol)}
                         className="flex-1 py-2 rounded-lg bg-[#F0B90B] text-black text-[10px] font-bold uppercase tracking-wider hover:bg-[#F8D33A] transition-colors"
                       >
-                        МУОМИЛОТ
+                        TRADE
                       </button>
                       <button 
                         onClick={() => handleRouteToTrade(asset.symbol)}

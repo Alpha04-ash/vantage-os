@@ -99,19 +99,19 @@ function IntroScene({ scene, lesson, onNext }: any) {
                />
              ) : (
                <div className="w-full h-full border border-white/5 bg-white/[0.01] flex items-center justify-center rounded-full">
-                  <div className="text-[8px] font-black uppercase tracking-[1em] text-white/5 animate-pulse">ПАЙДАРПАИИ_ОҒОЗ</div>
+                  <div className="text-[8px] font-black uppercase tracking-[1em] text-white/5 animate-pulse">INITIALIZING_SEQUENCE</div>
                </div>
              )}
           </div>
        </VisualWrapper>
        <div className="space-y-6 max-w-2xl">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-4"
+             initial={{ opacity: 0, y: 10 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 0.2 }}
+             className="space-y-4"
           >
-             <div className="text-[9px] font-black text-white/10 uppercase tracking-[0.8em]">ОҒОЗЁБИИ_МОДУЛ</div>
+             <div className="text-[9px] font-black text-white/10 uppercase tracking-[0.8em]">MODULE_INITIATION</div>
              <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter italic leading-none text-white/90">
                 {scene.title}
              </h1>
@@ -126,7 +126,7 @@ function IntroScene({ scene, lesson, onNext }: any) {
          transition={{ delay: 0.6 }}
        >
           <SovereignButton onClick={onNext} className="px-12 py-5 text-xs">
-             ИҶРОИ_ҲАМЗАМОНСОЗӢ <ArrowRight size={14} />
+             EXECUTE_SYNCHRONIZATION <ArrowRight size={14} />
           </SovereignButton>
        </motion.div>
     </div>
@@ -208,7 +208,7 @@ function ConceptScene({ scene, lesson, onNext }: any) {
         </VisualWrapper>
       }
     >
-       <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">МАРҲИЛАИ_НАВБАТӢ <ArrowRight size={12} /></SovereignButton>
+       <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">NEXT_STAGE <ArrowRight size={12} /></SovereignButton>
     </SceneLayout>
   );
 }
@@ -244,7 +244,7 @@ function ExplanationScene({ scene, lesson, onNext }: any) {
        </div>
 
        <div className="pt-8">
-          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">ҲАМЗАМОНСОЗИИ_АМИҚ <ArrowRight size={12} /></SovereignButton>
+          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">DEEP_SYNCHRONIZATION <ArrowRight size={12} /></SovereignButton>
        </div>
     </div>
   );
@@ -255,7 +255,7 @@ function ExampleScene({ scene, lesson, onNext }: any) {
     <div className="w-full min-h-[60vh] flex flex-col items-center justify-center space-y-12">
        <div className="w-full max-w-4xl relative">
           <div className="absolute -left-4 top-0 bottom-0 w-[2px]" style={{ backgroundColor: `${lesson.theme}40` }} />
-          <h2 className="text-[10px] font-black uppercase tracking-[0.8em] mb-4" style={{ color: lesson.theme }}>ИСТИФОДАИ_АМАЛӢ</h2>
+          <h2 className="text-[10px] font-black uppercase tracking-[0.8em] mb-4" style={{ color: lesson.theme }}>PRACTICAL_APPLICATION</h2>
           <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter italic text-white/90 mb-6">{scene.title}</h3>
           <p className="text-xl text-white/50 italic leading-relaxed max-w-2xl">{scene.content}</p>
        </div>
@@ -271,21 +271,21 @@ function ExampleScene({ scene, lesson, onNext }: any) {
              
              <div className="flex flex-col md:flex-row gap-8 relative z-10">
                 <div className="flex-1 space-y-4">
-                   <div className="text-[8px] font-black uppercase tracking-[0.4em]" style={{ color: lesson.theme }}>ТАҲЛИЛИ_САНҶИДАШУДА</div>
+                   <div className="text-[8px] font-black uppercase tracking-[0.4em]" style={{ color: lesson.theme }}>VERIFIED_CASE_STUDY</div>
                    <p className="text-lg text-white/80 leading-relaxed font-mono">{scene.example}</p>
                 </div>
                 <div className="w-full md:w-64 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-6 flex flex-col justify-center space-y-4">
                    <div className="text-[7px] font-black uppercase tracking-widest text-white/30">REF_ID</div>
                    <div className="text-sm font-mono" style={{ color: lesson.theme }}>{Math.random().toString(36).substring(2, 10).toUpperCase()}</div>
-                   <div className="text-[7px] font-black uppercase tracking-widest text-white/30 pt-4">ҲОЛАТ</div>
-                   <div className="text-xs font-bold uppercase tracking-wide text-[#F0B90B]">ТАСДИҚШУДА</div>
+                   <div className="text-[7px] font-black uppercase tracking-widest text-white/30 pt-4">STATUS</div>
+                   <div className="text-xs font-bold uppercase tracking-wide text-[#F0B90B]">VERIFIED</div>
                 </div>
              </div>
           </MonolithCard>
        </motion.div>
 
        <div className="pt-6 w-full max-w-4xl flex justify-end">
-          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">ТАТБИҚИ_ҲАМЗАМОНӢ <ArrowRight size={12} /></SovereignButton>
+          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">APPLY_SYNCHRONIZATION <ArrowRight size={12} /></SovereignButton>
        </div>
     </div>
   );
@@ -295,7 +295,7 @@ function MistakeScene({ scene, lesson, onNext }: any) {
   return (
     <div className="w-full min-h-[60vh] flex flex-col items-center justify-center space-y-12 py-10">
        <div className="text-center space-y-4 max-w-2xl">
-          <div className="text-[10px] font-black uppercase tracking-[0.8em] text-red-500/50">ОСЕБПАЗИРИИ_СИСТЕМАВӢ</div>
+          <div className="text-[10px] font-black uppercase tracking-[0.8em] text-red-500/50">SYSTEMIC_VULNERABILITY</div>
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter italic text-white/90">
              {scene.title}
           </h2>
@@ -312,27 +312,27 @@ function MistakeScene({ scene, lesson, onNext }: any) {
           <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
              <MonolithCard className="p-10 border-red-500/20 bg-red-500/[0.02] h-full flex flex-col justify-between group">
                 <div className="mb-8 flex items-center justify-between">
-                   <div className="text-[9px] font-black uppercase tracking-widest text-red-500">ҲОЛАТИ_ХАТО</div>
+                   <div className="text-[9px] font-black uppercase tracking-widest text-red-500">ERROR_STATE</div>
                    <XCircle className="text-red-500/50" size={24} />
-                </div>
-                <p className="text-base text-red-100/60 italic leading-relaxed font-mono">{scene.mistake?.bad}</p>
-             </MonolithCard>
+                 </div>
+                 <p className="text-base text-red-100/60 italic leading-relaxed font-mono">{scene.mistake?.bad}</p>
+              </MonolithCard>
           </motion.div>
 
           <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
              <MonolithCard className="p-10 h-full flex flex-col justify-between group relative overflow-hidden" style={{ borderColor: `${lesson.theme}30`, backgroundColor: `${lesson.theme}05` }}>
                 <div className="absolute inset-0 bg-gradient-to-br to-transparent opacity-10 pointer-events-none" style={{ backgroundImage: `linear-gradient(to bottom right, ${lesson.theme}, transparent)` }} />
                 <div className="mb-8 flex items-center justify-between relative z-10">
-                   <div className="text-[9px] font-black uppercase tracking-widest" style={{ color: lesson.theme }}>ПРОТОКОЛИ_ОПТИМАЛӢ</div>
+                   <div className="text-[9px] font-black uppercase tracking-widest" style={{ color: lesson.theme }}>OPTIMIZED_PROTOCOL</div>
                    <CheckCircle2 size={24} style={{ color: lesson.theme }} />
                 </div>
-                <p className="text-base text-white/80 italic leading-relaxed font-mono relative z-10">{scene.mistake?.good}</p>
-             </MonolithCard>
+                 <p className="text-base text-white/80 italic leading-relaxed font-mono relative z-10">{scene.mistake?.good}</p>
+              </MonolithCard>
           </motion.div>
        </div>
 
        <div className="pt-8">
-          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">СУБЎТИ_МЕЪМОРӢ <ArrowRight size={12} /></SovereignButton>
+          <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px]">ARCHITECTURAL_PROOF <ArrowRight size={12} /></SovereignButton>
        </div>
     </div>
   );
@@ -354,7 +354,7 @@ function QuizScene({ scene, lesson, onNext, onAnswer }: any) {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-10 py-10">
        <div className="text-center space-y-3">
-          <div className="text-[9px] font-black uppercase tracking-[0.8em] italic" style={{ color: lesson.theme }}>ТАСДИҚИ_КОГНИТИВӢ</div>
+          <div className="text-[9px] font-black uppercase tracking-[0.8em] italic" style={{ color: lesson.theme }}>COGNITIVE_VERIFICATION</div>
           <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter italic text-white/90">{scene.quiz.question}</h2>
        </div>
 
@@ -398,10 +398,10 @@ function QuizScene({ scene, lesson, onNext, onAnswer }: any) {
           >
              <div className="flex items-center gap-3">
                 <HelpCircle size={14} className="text-white/20" />
-                <span className="text-[8px] font-black uppercase tracking-widest text-white/20">ТАҲЛИЛИ_МАНТИҚӢ</span>
+                <span className="text-[8px] font-black uppercase tracking-widest text-white/20">LOGICAL_ANALYSIS</span>
              </div>
              <p className="text-[12px] text-white/30 italic leading-relaxed font-mono">{scene.quiz.explanation}</p>
-             <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px] mt-4">ГУЗАШТАН_БА_ҲАМЗАМОНСОЗИИ_УМУМӢ <ArrowRight size={12} /></SovereignButton>
+             <SovereignButton onClick={onNext} className="px-10 py-4 text-[10px] mt-4">PROCEED_TO_GLOBAL_SYNC <ArrowRight size={12} /></SovereignButton>
           </motion.div>
        )}
 
@@ -412,7 +412,7 @@ function QuizScene({ scene, lesson, onNext, onAnswer }: any) {
                onClick={handleSubmit} 
                className="px-10 py-4 text-[10px]"
              >
-                САНҶИШИ_ҶАВОБ <ArrowRight size={14} />
+                VERIFY_ANSWER <ArrowRight size={14} />
              </SovereignButton>
           </div>
        )}
@@ -437,12 +437,12 @@ function CompletionScene({ scene, lesson, onNext }: any) {
        
        <div className="space-y-4">
           <motion.div
-            initial={{ opacity: 0, letterSpacing: "1em" }}
-            animate={{ opacity: 1, letterSpacing: "0.6em" }}
-            className="text-[9px] font-black uppercase italic"
-            style={{ color: lesson.theme }}
+             initial={{ opacity: 0, letterSpacing: "1em" }}
+             animate={{ opacity: 1, letterSpacing: "0.6em" }}
+             className="text-[9px] font-black uppercase italic"
+             style={{ color: lesson.theme }}
           >
-             ҲАМЗАМОНСОЗИИ_ПРОТОКОЛ_БА_АНҶОМ_РАСИД
+             PROTOCOL_SYNCHRONIZATION_COMPLETE
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter italic leading-none text-white/90 drop-shadow-xl">
              {scene.title}
@@ -460,13 +460,13 @@ function CompletionScene({ scene, lesson, onNext }: any) {
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.3 + (i * 0.1) }}
              >
-                <MonolithCard className="p-6 border-white/5 bg-white/[0.01] hover:border-white/10 transition-all h-full text-left group relative overflow-hidden">
-                   <div className="text-[8px] font-black mb-4 transition-colors tracking-[0.4em]" style={{ color: `${lesson.theme}80` }}>МУҲИМ_0{i+1}</div>
-                   <div className="text-[11px] font-mono text-white/40 italic leading-relaxed group-hover:text-white/70 transition-colors">{point}</div>
-                   <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full transition-all duration-700" style={{ backgroundColor: lesson.theme }} />
-                </MonolithCard>
-             </motion.div>
-          ))}
+                 <MonolithCard className="p-6 border-white/5 bg-white/[0.01] hover:border-white/10 transition-all h-full text-left group relative overflow-hidden">
+                    <div className="text-[8px] font-black mb-4 transition-colors tracking-[0.4em]" style={{ color: `${lesson.theme}80` }}>KEY_TAKEAWAY_0{i+1}</div>
+                    <div className="text-[11px] font-mono text-white/40 italic leading-relaxed group-hover:text-white/70 transition-colors">{point}</div>
+                    <div className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full transition-all duration-700" style={{ backgroundColor: lesson.theme }} />
+                 </MonolithCard>
+              </motion.div>
+           ))}
        </div>
 
         <motion.div
@@ -476,7 +476,7 @@ function CompletionScene({ scene, lesson, onNext }: any) {
           className="pt-8"
         >
             <SovereignButton onClick={onNext} className="px-12 py-5 text-xs bg-[#F0B90B] text-black hover:bg-[#F8D33A] transition-all border-none font-bold rounded-xl shadow-[0_0_24px_rgba(240,185,11,0.2)]">
-               ОҒОЗИ_МАРҲИЛАИ_НАВБАТӢ <ArrowRight size={14} />
+               INITIATE_NEXT_STAGE <ArrowRight size={14} />
             </SovereignButton>
         </motion.div>
      </div>

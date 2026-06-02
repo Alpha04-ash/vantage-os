@@ -125,3 +125,4 @@ export const AVAILABLE_NODES: EducationalBusiness[] = [
     strategyDocs: "Orbital asset extraction cycles. Upgrading thruster efficiency cuts extraction return times."
   }
 ];
+

@@ -67,9 +67,9 @@ function CoreProcessor({ color = "#ffffff", type = "DEFAULT" }: { color?: string
             <meshBasicMaterial color={color} transparent opacity={0.05} side={THREE.DoubleSide} />
             <Html transform distanceFactor={3} position={[0, 0, 0.01]}>
                <div className="text-[6px] font-mono text-white/40 tracking-tighter">
-                  ИД_ГИРЕҲ: {Math.random().toString(36).slice(2, 8).toUpperCase()}<br/>
-                  ҲОЛАТ: ҲАМЗАМОНӢ...<br/>
-                  БОРКУНӢ: {(Math.random() * 100).toFixed(2)}%
+                  NODE_ID: {Math.random().toString(36).slice(2, 8).toUpperCase()}<br/>
+                  STATUS: SYNCHRONIZING...<br/>
+                  LOAD: {(Math.random() * 100).toFixed(2)}%
                </div>
             </Html>
           </mesh>
@@ -121,18 +121,18 @@ export function DirectiveEngine({ color = "#ffffff", type = "DEFAULT" }: { color
       <div className="absolute inset-0 pointer-events-none p-12 flex flex-col justify-between z-20">
          <div className="flex justify-between items-start">
             <div className="space-y-1">
-               <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/40">МАРКАЗИ_ДАСТУРҲО_v5.1</div>
-               <div className="text-[12px] font-mono text-white/20">НАМУДИ_РАВАНД: {type}</div>
+               <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/40">DIRECTIVE_CENTER_v5.1</div>
+               <div className="text-[12px] font-mono text-white/20">PROCESS_TYPE: {type}</div>
             </div>
             <div className="text-right">
-               <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/40 mb-1">ТАЪХИР_ДАҚ</div>
+               <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/40 mb-1">LATENCY_MS</div>
                <div className="text-[12px] font-mono text-white/20">0.0004</div>
             </div>
          </div>
          
          <div className="flex justify-between items-center px-20">
             <div className="h-[1px] flex-1 bg-white/5" />
-            <div className="px-10 text-[8px] font-mono text-white/10 tracking-[1em] uppercase">Системаҳои Саноатии Vantage</div>
+            <div className="px-10 text-[8px] font-mono text-white/10 tracking-[1em] uppercase">Vantage Industrial Systems</div>
             <div className="h-[1px] flex-1 bg-white/5" />
          </div>
       </div>

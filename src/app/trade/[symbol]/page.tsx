@@ -9,8 +9,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { symbol } = await params;
   const normSymbol = (symbol || "BTC_USDT").toUpperCase().replace("_", "/");
   return {
-    title: `САВДОИ ${normSymbol} | ТЕРМИНАЛИ МАТРИТСА // VANTAGE OS`,
-    description: `Терминали савдои воқеии ${normSymbol} бо омори мустақим, китоби фармоишҳои фаъол ва таҳлили кити бозор дар вақти воқеӣ.`,
+    title: `TRADE ${normSymbol} | MATRIX TERMINAL // VANTAGE OS`,
+    description: `Real-time trading terminal for ${normSymbol} with live ticker data, active order book, and real-time order flow tracking.`,
   };
 }
 

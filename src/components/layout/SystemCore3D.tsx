@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PerspectiveCamera, Environment, PresentationControls } from "@react-three/drei";
+import { Float, MeshDistortMaterial, PerspectiveCamera, PresentationControls } from "@react-three/drei";
 import * as THREE from "three";
 
 function CoreGeometry() {
@@ -64,8 +64,6 @@ export function SystemCore3D() {
         >
           <CoreGeometry />
         </PresentationControls>
-        
-        <Environment preset="night" />
       </Canvas>
     </div>
   );

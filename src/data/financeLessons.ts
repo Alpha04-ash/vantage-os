@@ -5,9 +5,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "1",
     slug: "money-psychology",
     number: 1,
-    title: "Равоншиносии Пул",
-    subtitle: "Мафҳумҳои ноаёнеро, ки сарвати шуморо идора мекунанд, омӯзед.",
-    shortDescription: "Нейробиологияи хароҷот ва ҳалқаҳои эҳсосиеро, ки тақдири молиявии шуморо муайян мекунанд, бифаҳмед.",
+    title: "Money Psychology",
+    subtitle: "Understand the invisible forces that govern your wealth.",
+    shortDescription: "Learn the neurobiology of spending and the emotional feedback loops that dictate your financial destiny.",
     estimatedMinutes: 15,
     difficulty: "Beginner",
     theme: "#00FFA3",
@@ -16,68 +16,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "mp-1",
         type: "intro",
-        title: "Нақшаи Ноаён",
-        subtitle: "Пул 80% рафтор аст.",
-        content: "Аксари одамон фикр мекунанд, ки молияи шахсӣ ба математика — ҷадвалҳо ва фоизҳо вобаста аст. Дар асл, пул инъикоси одатҳои зеришуурӣ ва ангезаҳои эҳсосии шумост.",
+        title: "The Invisible Blueprint",
+        subtitle: "Money is 80% behavior.",
+        content: "Most people think personal finance is about math—spreadsheets and interest rates. In reality, money is a reflection of your subconscious habits and emotional triggers.",
         visualType: "image",
         visualData: { src: "academy_money_psychology_3d_1778787418811.png" }
       },
       {
         id: "mp-2",
         type: "concept",
-        title: "Ҳалқаи Дофамин",
-        subtitle: "Чаро мо он чизеро, ки надорем, сарф мекунем.",
-        content: "Истеъмолгарии муосир барои рабудани системаи мукофоти мағзи шумо тарҳрезӣ шудааст. Ҳар як харид дофамин хориҷ мекунад ва ҳалқаи вобастагиро ба вуҷуд меорад, ки лаззати кӯтоҳмуддатро аз озодии дарозмуддат боло мегузорад.",
+        title: "The Dopamine Loop",
+        subtitle: "Why we spend what we don't have.",
+        content: "Modern consumerism is engineered to hijack your brain's reward system. Every purchase releases dopamine, creating an addiction cycle that prioritizes short-term pleasure over long-term freedom.",
         visualType: "diagram",
         visualData: { type: "neural-cycle" }
       },
       {
         id: "mp-3",
         type: "explanation",
-        title: "Шахсият ва Тасдиқ",
-        content: "Мо аксар вақт чизҳоро на барои он ки ба онҳо ниёз дорем, балки барои тасдиқ кардани мақоми худ дар назди дигарон мехарем. Сарвати ҳақиқӣ тавассути ҷудо кардани арзиши худ аз ашё сохта мешавад.",
+        title: "Identity and Validation",
+        content: "We often buy things not because we need them, but to validate our status to others. True wealth is built by separating your self-worth from material possessions.",
         visualType: "card",
-        points: ["Дороиҳо мақоми иҷтимоиро муайян намекунанд", "Сарват он чизест, ки шумо намебинед", "Назорати ҳавас, ба даст овардани озодӣ"]
+        points: ["Assets do not define social status", "Wealth is what you do not see", "Controlling impulses buys freedom"]
       },
       {
         id: "mp-4",
         type: "example",
-        title: "Чолиши $100",
-        content: "Ду нафарро тасаввур кунед: Яке куртаи брендии $100-ро бо кредит мехарад. Дигаре $100-ро ба фонди индексӣ сармоягузорӣ мекунад. Пас аз 30 сол, он курта партов аст; аммо он сармоягузории $100 ба $1,000 табдил ёфтааст.",
+        title: "The $100 Challenge",
+        content: "Imagine two people: One buys a $100 designer shirt on credit. The other invests $100 in an index fund. After 30 years, the shirt is trash; but the $100 investment has compounded to $1,000.",
         visualType: "chart",
-        example: "Арзиши имконияти ҳар як доллари имрӯз сарфшуда озодии ояндаи шумост, ки метавонистед онро харед."
+        example: "The opportunity cost of every dollar spent today is the future freedom you could have bought."
       },
       {
         id: "mp-5",
         type: "mistake",
-        title: "Доми Муқоиса",
-        content: "Кӯшиши баробар шудан бо дигарон роҳи зудтарини камбағал мондан аст. Аксари одамоне, ки бой ба назар мерасанд, дар асл дар қарз ғарқ шудаанд.",
+        title: "The Comparison Trap",
+        content: "Trying to keep up with others is the fastest way to stay poor. Most people who look rich are actually drowning in debt.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Харидани мошини боҳашамат барои муваффақ намудор шудан, дар ҳоле ки пасандоз $0 аст.",
-          good: "Зиндагӣ кардан камтар аз даромади худ барои оромона сохтани империяи $10-миллионӣ."
+          bad: "Buying a luxury car to look successful while having $0 savings.",
+          good: "Living below your means to quietly build a $10M empire."
         }
       },
       {
         id: "mp-6",
         type: "quiz",
-        title: "Санҷиши Нейронӣ",
-        content: "Фаҳмиши когнитивии худро дар бораи рафтори молиявӣ таҳлил кунед.",
+        title: "Neural Audit",
+        content: "Test your cognitive understanding of financial behavior.",
         visualType: "icon",
         quiz: {
-          question: "Кадоме аз инҳо омили асосии хароҷоти эҳсосии ногаҳонӣ мебошад?",
-          options: ["Нақшаи мантиқӣ", "Аксуламали эҳсосии амигдала", "Ҳамоҳангсозии ҳадафҳои дарозмуддат", "Таҳлили меъёри фоизӣ"],
+          question: "Which of the following is the primary driver of impulsive emotional spending?",
+          options: ["Logical planning", "Amygdala emotional response", "Long-term goal alignment", "Interest rate analysis"],
           correctIndex: 1,
-          explanation: "Амигдала эҳсосотро ба монанди тарс ва хоҳиш коркард мекунад ва аксар вақт кортекси пеш аз пешонии мантиқиро ҳангоми харидҳои ногаҳонӣ зери назорат мегирад."
+          explanation: "The amygdala processes emotions like fear and desire, often bypassing the logical prefrontal cortex during impulse purchases."
         }
       },
       {
         id: "mp-7",
         type: "completion",
-        title: "Равоншиносии Ҳамоҳангшуда",
-        content: "Шумо модули аввалро ба итмом расондед. Шумо акнун медонед, ки зеҳни шумо қавитарин воситаи молиявиест, ки шумо доред.",
+        title: "Psychology Synchronized",
+        content: "You completed the first module. You now understand that your mind is the most powerful financial tool you possess.",
         visualType: "icon",
-        summaryPoints: ["Пул рафтор аст, на математика", "Ангезаҳои эҳсосии худро таҳлил кунед", "Ба таъхир андохтани лаззат маҳорати ниҳоӣ аст"]
+        summaryPoints: ["Money is behavior, not math", "Audit your emotional triggers", "Delayed gratification is the ultimate skill"]
       }
     ],
     nextLessonSlug: "how-money-works"
@@ -86,9 +86,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "2",
     slug: "how-money-works",
     number: 2,
-    title: "Пул Чӣ Гуна Кор Мекунад",
-    subtitle: "Системаи ҷаҳонии фиат ва бовариро рамзкушоӣ кунед.",
-    shortDescription: "Механикаи системаи молиявӣ, таваррум ва чаро 'пасандоз' шакли сусти хароҷот аст, омӯзед.",
+    title: "How Money Works",
+    subtitle: "Decode the global fiat and credit system.",
+    shortDescription: "Learn the mechanics of the financial system, inflation, and why 'saving' is a slow way to lose wealth.",
     estimatedMinutes: 20,
     difficulty: "Beginner",
     theme: "#00E0FF",
@@ -97,68 +97,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "hm-1",
         type: "intro",
-        title: "Афсонаи Бузург",
-        subtitle: "Пул дафтари эътимод аст.",
-        content: "Аксари одамон фикр мекунанд, ки пул бо чизи воқеӣ 'пуштибонӣ' мешавад. Дар асл, асъори муосир як системаи рақамии боварӣ ва қарз аст, ки барои интиқоли арзиш дар вақт ва фазо истифода мешавад.",
+        title: "The Grand Illusion",
+        subtitle: "Money is a ledger of trust.",
+        content: "Most people think money is 'backed' by something physical. In reality, modern currency is a digital system of trust and debt used to transfer value across time and space.",
         visualType: "image",
         visualData: { src: "academy_global_network_3d_1778788118714.png" }
       },
       {
         id: "hm-2",
         type: "concept",
-        title: "Фиат ва Таваррум",
-        subtitle: "Яхбандии гудохташаванда.",
-        content: "Дар системаи фиат, бонкҳои марказӣ метавонанд бо хоҳиши худ пул эҷод кунанд. Ин ҳаҷми умумиро зиёд мекунад, яъне ҳар як доллари шумо ба як пораи хурдтари пироги умумӣ табдил меёбад. Ин андози пинҳонии таваррум аст.",
+        title: "Fiat and Inflation",
+        subtitle: "The melting ice cube.",
+        content: "In a fiat system, central banks can create money at will. This expands the money supply, meaning each of your dollars becomes a smaller slice of the overall pie. This is the hidden tax of inflation.",
         visualType: "diagram",
         visualData: { type: "inflation-melt" }
       },
       {
         id: "hm-3",
         type: "explanation",
-        title: "Таъсири Кантилон",
-        content: "Шахсони ба манбаи пул наздиктарин (бонкҳо, ҳукуматҳо) асъори навро пеш аз боло рафтани нархҳо аввал мегиранд. То он даме ки он ба шумо мерасад, қобилияти харидории шумо аллакай коҳиш ёфтааст.",
+        title: "The Cantillon Effect",
+        content: "Those closest to the money source (banks, governments) receive new currency first before prices rise. By the time it reaches you, your purchasing power has already diminished.",
         visualType: "card",
-        points: ["Пул тавассути қарз сохта мешавад", "Таваррум қарздоронро мукофот медиҳад", "Таваррум пасандоздоронро ҷазо медиҳад"]
+        points: ["Money is created through debt", "Inflation rewards debtors", "Inflation penalizes savers"]
       },
       {
         id: "hm-4",
         type: "example",
-        title: "Нархи Шир",
-        content: "Дар соли 1970 як галлон шир $1.32 арзиш дошт. Имрӯз он беш аз $4.00 аст. Шир тағйир наёфтааст; арзиши асъоре, ки барои харидани он истифода мешуд, тавассути зиёд кардани ҳаҷми пул кам карда шуд.",
+        title: "The Cost of Milk",
+        content: "In 1970, a gallon of milk cost $1.32. Today, it is over $4.00. The milk didn't change; the value of the currency used to buy it was diluted by expanding the money supply.",
         visualType: "chart",
-        example: "Маоши шумо бояд назар ба ҳаҷми пул зудтар афзоиш ёбад, то сатҳи зиндагии кунунии худро нигоҳ доред."
+        example: "Your income must grow faster than the money supply to maintain your current standard of living."
       },
       {
         id: "hm-5",
         type: "mistake",
-        title: "Суратҳисоби Пасандози 'Бехатар'",
-        content: "Нигоҳ доштани 100% дороии худ дар суратҳисоби бонкӣ 'бехатар' нест — ин кафолати 2-5% талафоти қобилияти харидорӣ дар ҳар сол аст.",
+        title: "The 'Safe' Savings Account",
+        content: "Keeping 100% of your wealth in a bank account isn't 'safe'—it guarantees a 2-5% loss in purchasing power every year.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Ҷамъ кардани пули нақд дар суратҳисоби пасандози бо фоизи 0.01%.",
-          good: "Соҳиби дороиҳо шудан (саҳмияҳо, амволи ғайриманқул, BTC), ки назар ба ҳаҷми пул зудтар афзоиш меёбанд."
+          bad: "Hoarding cash in a savings account yielding 0.01% interest.",
+          good: "Owning assets (stocks, real estate, BTC) that grow faster than the money supply."
         }
       },
       {
         id: "hm-6",
         type: "quiz",
-        title: "Назорати Системавӣ",
-        content: "Фаҳмиши худро дар бораи механикаи пулӣ санҷед.",
+        title: "System Check",
+        content: "Test your understanding of monetary mechanics.",
         visualType: "icon",
         quiz: {
-          question: "Ҳангоми васеъ шудани ҳаҷми умумии пул арзиши ҳар як доллар чӣ мешавад?",
-          options: ["Он афзоиш меёбад", "Ҳамон хел мемонад", "Он коҳиш меёбад", "Он устувортар мешавад"],
+          question: "What happens to the value of each dollar when the overall money supply expands?",
+          options: ["It increases", "It remains the same", "It decreases", "It becomes more stable"],
           correctIndex: 2,
-          explanation: "Асъори бештаре, ки ҳамон миқдори молро таъқиб мекунад, боиси коҳиш ёфтани қобилияти харидории ҳар як воҳиди алоҳида мегардад."
+          explanation: "More currency chasing the same amount of goods causes the purchasing power of each individual unit to fall."
         }
       },
       {
         id: "hm-7",
         type: "completion",
-        title: "Механикаи Азхудшуда",
-        content: "Шумо акнун матритсаро мебинед. Шумо мефаҳмед, ки система барои мукофотонидани соҳибони дороиҳо ва ҷазо додани дорандагони пул тарҳрезӣ шудааст.",
+        title: "Mechanics Mastered",
+        content: "You now see the matrix. You understand that the system is engineered to reward asset owners and penalize cash holders.",
         visualType: "icon",
-        summaryPoints: ["Пул ба қарз асос ёфтааст", "Таваррум андози пинҳонӣ аст", "Барои пешсаф будан дороиҳо дошта бошед"]
+        summaryPoints: ["Money is based on debt", "Inflation is a hidden tax", "Own assets to stay ahead"]
       }
     ],
     nextLessonSlug: "budgeting-saving"
@@ -167,9 +167,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "3",
     slug: "budgeting-saving",
     number: 3,
-    title: "Буҷетсозӣ ва Пасандоз",
-    subtitle: "Муҳаррики империяи молиявии худро созед.",
-    shortDescription: "Нақшаи тақсимоти систематикиро созед, ки интизоми шуморо автоматӣ мекунад ва сармояи ҷангии худро месозад.",
+    title: "Budgeting & Saving",
+    subtitle: "Build your financial empire's engine.",
+    shortDescription: "Construct a systematic allocation blueprint that automates discipline and builds your war chest.",
     estimatedMinutes: 12,
     difficulty: "Beginner",
     theme: "#FFB800",
@@ -178,68 +178,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "bs-1",
         type: "intro",
-        title: "Стекҳои Системавӣ",
-        subtitle: "Буҷетсозӣ дар бораи афзалият аст, на маҳдудият.",
-        content: "Буҷет қафас нест — он харитаи роҳ аст. Ин амали ба пули худ гуфтани он аст, ки ба куҷо равад, ба ҷои он ки ҳайрон шавед, ки он ба куҷо рафтааст. Бе система, сарвати шумо ба вартаи хароҷоти ногаҳонӣ мерезад.",
+        title: "Systemic Stacks",
+        subtitle: "Budgeting is about priority, not restriction.",
+        content: "A budget is not a cage—it is a roadmap. It is the act of telling your money where to go instead of wondering where it went. Without a system, your wealth leaks into impulse spending.",
         visualType: "image",
         visualData: { src: "academy_budgeting_blocks_3d_1778788132704.png" }
       },
       {
         id: "bs-2",
         type: "concept",
-        title: "Чорчӯбаи 50/30/20",
-        subtitle: "Тақсимоти оддӣ барои назорати комил.",
-        content: "50% барои Ниёзҳо, 30% барои Хоҳишҳо ва 20% барои Оянда. Ин таносуби оддӣ кафолат медиҳад, ки империяи шумо афзоиш меёбад ва ҳаёти кунунии шумо бароҳат мемонад.",
+        title: "The 50/30/20 Framework",
+        subtitle: "Simple allocation for absolute control.",
+        content: "50% for Needs, 30% for Wants, and 20% for the Future. This simple ratio ensures your empire grows while keeping your current lifestyle comfortable.",
         visualType: "diagram",
         visualData: { type: "allocation-pie" }
       },
       {
         id: "bs-3",
         type: "explanation",
-        title: "Аввал ба Худ Пардохт Кунед",
-        content: "Аксари одамон векселҳои худро месупоранд, қаҳва мегиранд ва он чизеро, ки 'боқӣ мондааст' пасандоз мекунанд. Одамони муваффақ дар лаҳзаи гирифтани маош пулро ба сармоягузориҳои худ мегузоранд ва сипас бо пули боқимонда зиндагӣ мекунанд.",
+        title: "Pay Yourself First",
+        content: "Most people pay their bills, buy coffee, and save whatever is 'left over.' Successful operators route money to their investments the moment they are paid, then live on the rest.",
         visualType: "card",
-        points: ["Автоматизатсия > Қувваи ирода", "Пасандозро ҳамчун пардохти ҳатмӣ ҳисоб кунед", "Фонди оромии рӯҳӣ"]
+        points: ["Automation > Willpower", "Treat savings as an invoice", "Peace of mind fund"]
       },
       {
         id: "bs-4",
         type: "example",
-        title: "Хандақи Наҷотдиҳанда",
-        content: "Нигоҳ доштани хароҷоти 6-моҳа дар суратҳисоби фоидаи баланд 'хандақи' шумост. Ин ба шумо имкон медиҳад, ки таваккал кунед ва қарорҳои дарозмуддат қабул кунед, зеро шумо дар ҳолати зинда мондан зиндагӣ намекунед.",
+        title: "The Defense Moat",
+        content: "Holding 6 months of expenses in a high-yield account is your 'moat.' It allows you to take calculated risks and make long-term decisions because you aren't living in survival mode.",
         visualType: "chart",
-        example: "Фонди фавқулодаи $20,000 фарқияти байни нокомии хурд ва фалокати молиявӣ мебошад."
+        example: "A $20,000 emergency fund is the difference between a minor setback and financial ruin."
       },
       {
         id: "bs-5",
         type: "mistake",
-        title: "Назоратчии Дастӣ",
-        content: "Кӯшиши дастӣ пайгирӣ кардани ҳар як тин бо коғазу қалам роҳи нокомӣ аст. Шумо хаста мешавед ва даст мекашед.",
+        title: "The Manual Tracker",
+        content: "Trying to manually track every penny with pen and paper is a recipe for failure. You will burn out and quit.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Сарфи соатҳо дар рӯзҳои истироҳат барои сабти квитансияҳо.",
-          good: "Автоматикунонии интиқолҳои худ, то буҷети шумо ҳангоми хоб худаш кор кунад."
+          bad: "Spending hours on weekends logging receipts manually.",
+          good: "Automating your transfers so your budget runs on autopilot while you sleep."
         }
       },
       {
         id: "bs-6",
         type: "quiz",
-        title: "Аудити Тақсимот",
-        content: "Қобилияти худро барои афзалият додани стеки молиявии худ санҷед.",
+        title: "Allocation Audit",
+        content: "Test your ability to prioritize your financial stack.",
         visualType: "icon",
         quiz: {
-          question: "Принсипи асосии 'Аввал ба худ пардохт кунед' чист?",
-          options: ["Харидани туҳфа пас аз ҳафтаи корӣ", "Гузаронидани пул ба пасандоз/сармоягузорӣ пеш аз пардохти хароҷоти дигар", "Зиёд кардани маош", "Ҳар рӯз санҷидани тавозуни бонкӣ"],
+          question: "What is the core principle of 'Pay yourself first'?",
+          options: ["Buying a reward after a long week", "Transferring money to savings/investments before paying other expenses", "Demanding a salary increase", "Checking your bank balance daily"],
           correctIndex: 1,
-          explanation: "Бо афзалият додани ояндаи худ, шумо кафолат медиҳед, ки бунёди сарват мунтазам ва боэътимод аст."
+          explanation: "By prioritizing your future first, you guarantee that wealth building is consistent and non-negotiable."
         }
       },
       {
         id: "bs-7",
         type: "completion",
-        title: "Оптимизатсия Ба Итмом Расид",
-        content: "Муҳаррики шумо ҳоло танзим шудааст. Шумо аз хароҷоти бесарусомон ба тақсимоти систематикии сарват гузаштед.",
+        title: "Optimization Complete",
+        content: "Your engine is now tuned. You have transitioned from chaotic spending to systematic wealth allocation.",
         visualType: "icon",
-        summaryPoints: ["Интизоми худро автоматӣ кунед", "Ояндаро афзалият диҳед", "Хандақи фавқулодаи худро созед"]
+        summaryPoints: ["Automate your discipline", "Prioritize the future", "Build your emergency moat"]
       }
     ],
     nextLessonSlug: "investing-compounding"
@@ -248,9 +248,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "4",
     slug: "investing-compounding",
     number: 4,
-    title: "Сармоягузорӣ ва Мураккабшавӣ",
-    subtitle: "Мӯъҷизаи ҳаштуми ҷаҳонро идора кунед.",
-    shortDescription: "Соҳиби як қисми маҳсулнокии ҷаҳон шуданро омӯзед ва бигзоред, ки вақт ба таври экспоненсиалӣ барои шумо кор кунад.",
+    title: "Investing & Compounding",
+    subtitle: "Harness the eighth wonder of the world.",
+    shortDescription: "Learn to own a piece of global productivity and let time work exponentially for you.",
     estimatedMinutes: 25,
     difficulty: "Intermediate",
     theme: "#A300FF",
@@ -259,68 +259,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "ic-1",
         type: "intro",
-        title: "Маҳорати Экспоненсиалӣ",
-        subtitle: "Вақт бузургтарин дороии шумост.",
-        content: "Сармоягузорӣ ин гузариш аз 'коргар' будан ба 'соҳибмулк' шудан аст. Вақте ки шумо дороиҳо доред, шумо аз кор ва заковати дигарон ҳангоми хоб фоида мебаред.",
+        title: "Exponential Leverage",
+        subtitle: "Time is your greatest asset.",
+        content: "Investing is the transition from being a 'laborer' to becoming an 'owner.' When you own assets, you benefit from the work and ingenuity of others while you sleep.",
         visualType: "image",
         visualData: { src: "academy_growth_curve_3d_1778788213083.png" }
       },
       {
         id: "ic-2",
         type: "concept",
-        title: "Фоизи Мураккаб",
-        subtitle: "Таркиши амудӣ.",
-        content: "Мураккабшавӣ дар аввал дилгиркунанда аст. Дар давоми 20 сол он ба хати ҳамвор монанд аст. Сипас, ногаҳон фоизҳо ба овардани фоизҳо оғоз мекунанд ва хат амудӣ мешавад. Ин аст, ки чӣ тавр одамони оддӣ мултимиллионер мешаванд.",
+        title: "Compound Interest",
+        subtitle: "The vertical inflection.",
+        content: "Compounding is boring at first. For 20 years, it looks like a flat line. Then, interest begins earning interest, and the curve goes vertical. This is how ordinary people become multi-millionaires.",
         visualType: "diagram",
         visualData: { type: "compounding-graph" }
       },
       {
         id: "ic-3",
         type: "explanation",
-        title: "Фондҳои Индексӣ ва ETF-ҳо",
-        content: "Кӯшиш накунед, ки 'Амазон'-и навбатиро пайдо кунед. Тамоми ҷаҳонро харед. Фондҳои индексӣ ба шумо имкон медиҳанд, ки қисми хурди ҳазорон ширкатҳои беҳтаринро соҳиб шавед ва кафолат медиҳанд, ки шумо бо пешрафти башарият ғолиб мешавед.",
+        title: "Index Funds and ETFs",
+        content: "Don't try to find the next Amazon. Buy the whole market. Index funds let you own a tiny slice of thousands of top companies, ensuring you win as humanity progresses.",
         visualType: "card",
-        points: ["Диверсификатсия сипари шумост", "Пардохти кам = даромади баландтар", "Садои бозорро нодида гиред"]
+        points: ["Diversification is your shield", "Low fees = higher net returns", "Ignore market noise"]
       },
       {
         id: "ic-4",
         type: "example",
-        title: "Арзиши Интизорӣ",
-        content: "Ҷавони 20-солае, ки дар як моҳ $200 сармоягузорӣ мекунад, дар синни 60-солагӣ назар ба як ҷавони 30-солае, ки дар як моҳ $500 сармоягузорӣ мекунад, пули бештар хоҳад дошт. Вақт кори вазнинро иҷро мекунад, на пул.",
+        title: "The Value of Time",
+        content: "A 20-year-old investing $200 a month will have more money at age 60 than a 30-year-old investing $500 a month. Time does the heavy lifting, not capital.",
         visualType: "chart",
-        example: "Беҳтарин вақт барои сармоягузорӣ 20 сол пеш буд. Вақти дуввуми беҳтарин имрӯз аст."
+        example: "The best time to invest was 20 years ago. The second best time is today."
       },
       {
         id: "ic-5",
         type: "mistake",
-        title: "Муайянкунандаи Вақти Бозор",
-        content: "Кӯшиши тахмин кардани он, ки бозор кай боло ё поён меравад, бозии бозанда аст. Ҳатто мутахассисон дар ин кор 90% маротиба ноком мешаванд.",
+        title: "Timing the Market",
+        content: "Trying to guess when the market will go up or down is a loser's game. Even professionals fail at this 90% of the time.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Интизори вақти 'комил' барои харид ҳангоми боло рафтани бозор.",
-          good: "Сармоягузории маблағи муайян дар ҳар моҳ новобаста аз хабарҳо (Миёнасозии Арзиши Доллар)."
+          bad: "Waiting for the 'perfect' dip while cash loses value to inflation.",
+          good: "Investing a fixed amount every month regardless of news (Dollar-Cost Averaging)."
         }
       },
       {
         id: "ic-6",
         type: "quiz",
-        title: "Тасдиқи Рушд",
-        content: "Фаҳмиши худро дар бораи сарвати экспоненсиалӣ таҳлил кунед.",
+        title: "Growth Verification",
+        content: "Test your understanding of exponential wealth.",
         visualType: "icon",
         quiz: {
-          question: "Кадом омил ба натиҷаи ниҳоии сармоягузории мураккаб таъсири бештар мерасонад?",
-          options: ["Маблағи сармоягузоришуда", "Меъёри фоизӣ", "Давомнокии вақт", "Брокери истифодашуда"],
+          question: "Which factor has the greatest mathematical impact on the final outcome of compound interest?",
+          options: ["The initial principal", "The interest rate", "The duration of time", "The broker used"],
           correctIndex: 2,
-          explanation: "Вақт омили экспоненсиалӣ дар муодилаи мураккабшавӣ мебошад. Чанде ки пул дар сармоягузорӣ боқӣ монад, ҳамон қадар таъсири он қавӣ мешавад."
+          explanation: "Time is the exponent in the compounding equation. The longer capital remains invested, the more powerful the compounding effect."
         }
       },
       {
         id: "ic-7",
         type: "completion",
-        title: "Ҳамоҳангсозии Уфуқҳо",
-        content: "Шумо акнун сармоягузор ҳастед. Шумо мефаҳмед, ки сабр маҳорати баландтарин дар ҷаҳони молиявӣ мебошад.",
+        title: "Horizons Aligned",
+        content: "You are now an investor. You understand that patience is the highest leverage skill in finance.",
         visualType: "icon",
-        summaryPoints: ["Соҳиби як қисми маҳсулнокии ҷаҳон шавед", "Сабр боиси рушди амудӣ мегардад", "Дарҳол оғоз кунед"]
+        summaryPoints: ["Own global productivity", "Patience yields vertical growth", "Start immediately"]
       }
     ],
     nextLessonSlug: "debt-credit-leverage"
@@ -329,9 +329,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "5",
     slug: "debt-credit-leverage",
     number: 5,
-    title: "Қарз, Кредит ва Левериҷ",
-    subtitle: "Шамшери дудамаи суръатбахшӣ.",
-    shortDescription: "Математикаи гирифтани қарзро аз худ кунед ва омӯзед, ки чӣ гуна пули дигаронро барои зиёд кардани даромади худ истифода баред.",
+    title: "Debt, Credit & Leverage",
+    subtitle: "The double-edged sword of acceleration.",
+    shortDescription: "Master the mathematics of borrowing and learn how to use other people's money to multiply your returns.",
     estimatedMinutes: 18,
     difficulty: "Intermediate",
     theme: "#FF005C",
@@ -340,68 +340,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "dl-1",
         type: "intro",
-        title: "Миқёси Левериҷ",
-        subtitle: "Қарз асбоб аст, ё дом.",
-        content: "Барои камбағалон қарз қафасест, ки меҳнати ояндаи онҳоро мехӯрад. Барои сарватмандон қарз нардбонест, ки барои ба даст овардани дороиҳои даромадбахш истифода мешавад. Маҳорати левериҷ калиди миқёси бузург аст.",
+        title: "The Leverage Scale",
+        subtitle: "Debt is either a tool or a trap.",
+        content: "For the untrained, debt is a cage that consumes future labor. For the wealthy, debt is a lever used to acquire income-producing assets. Mastering leverage is the key to massive scale.",
         visualType: "image",
         visualData: { src: "academy_leverage_scale_3d_1778788225328.png" }
       },
       {
         id: "dl-2",
         type: "concept",
-        title: "Қарзи Хуб ва Бад",
-        subtitle: "Истеъмолӣ ва Маҳсулнок.",
-        content: "Қарзи бад (кортҳои кредитӣ, қарзи мошин) фоизи баланд дорад ва барои чизҳое пардохт мекунад, ки арзишашон кам мешавад. Қарзи хуб (ипотека, қарзҳои тиҷоратӣ) фоизи паст дорад ва барои чизҳое пардохт мекунад, ки арзишашон афзоиш меёбад ё пули нақд тавлид мекунанд.",
+        title: "Good vs. Bad Debt",
+        subtitle: "Consumptive vs. Productive.",
+        content: "Bad debt (credit cards, car loans) carries high interest and pays for depreciating items. Good debt (mortgages, business loans) carries low interest and pays for appreciating or cash-flowing assets.",
         visualType: "diagram",
         visualData: { type: "debt-quadrant" }
       },
       {
         id: "dl-3",
         type: "explanation",
-        title: "Рейтинги Кредитии Шумо",
-        content: "Рейтинги кредитии шумо ченкунии он аст, ки бонк то чӣ андоза ба шумо боварӣ дорад. Рейтинги баланд ба шумо имкон медиҳад, ки сармояро бо арзиши камтар қарз гиред, ки ин маржаи фоидаи шуморо дар муомилоти левериҷ ба таври назаррас зиёд мекунад.",
+        title: "Your Credit Profile",
+        content: "Your credit score is a measure of trust. A high score allows you to borrow capital at a lower cost, directly increasing your profit margins in leveraged transactions.",
         visualType: "card",
-        points: ["Ҳамеша сари вақт пардохт кунед", "Истифодаи кредитро паст нигоҳ доред", "Кредит дороии дарозмуддат аст"]
+        points: ["Always pay on time", "Keep credit utilization low", "Credit is a long-term asset"]
       },
       {
         id: "dl-4",
         type: "example",
-        title: "Қудрати П.Д. (Пули Дигарон)",
-        content: "Пули Дигарон. Агар шумо амволи $1М-ро бо $200к пули худ ва $800к аз бонк харед ва амвол 10% афзоиш ёбад, шумо 10% фоида нагирифтед — шумо аз сармояи аввалияи худ 50% фоида ба даст овардед.",
+        title: "The Power of OPM",
+        content: "Other People's Money. If you buy a $1M property with $200k of your cash and $800k from a bank, and the property appreciates 10%, you didn't make a 10% return—you made a 50% return on your invested capital.",
         visualType: "chart",
-        example: "Левериҷ ҳам фоида ва ҳам зарарро зиёд мекунад. Бо дақиқии комил истифода баред."
+        example: "Leverage amplifies both gains and losses. Use with surgical precision."
       },
       {
         id: "dl-5",
         type: "mistake",
-        title: "Доми Истеъмолкунанда",
-        content: "Истифодаи кортҳои кредитӣ барои харидани чизҳои боҳашамате, ки ҳанӯз ба даст наовардаед, роҳи зудтарини ғуломи бонк шудан аст.",
+        title: "The Consumer Trap",
+        content: "Using credit cards to buy luxury goods you haven't earned is the fastest way to become a slave to the bank.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Пардохти фоизҳо дар корти кредитии 25% APR барои таътили тобистона.",
-          good: "Истифодаи қарзи 4% барои харидани дороие, ки ҳар сол 10% даромад меорад."
+          bad: "Paying 25% APR interest on a credit card for a summer vacation.",
+          good: "Borrowing at 4% to acquire an asset yielding 10% annually."
         }
       },
       {
         id: "dl-6",
         type: "quiz",
-        title: "Арзёбии Хавф",
-        content: "Қобилияти худро барои идора кардани фишори молиявӣ арзёбӣ кунед.",
+        title: "Risk Assessment",
+        content: "Evaluate your ability to manage financial leverage.",
         visualType: "icon",
         quiz: {
-          question: "Хавфи асосии истифодаи левериҷи баланд дар сармоягузорӣ чист?",
-          options: ["Андозҳои камтар", "Он зарарҳои эҳтимолиро ҳангоми пастравии бозор зиёд мекунад", "Рейтинги кредитии баландтар", "Ҳуҷҷатгузории камтар"],
+          question: "What is the primary risk of using high leverage when investing?",
+          options: ["Lower taxes", "It amplifies losses during market downturns", "Higher credit scores", "Less paperwork"],
           correctIndex: 1,
-          explanation: "Левериҷ ба ҳарду самт кор мекунад. Гарчанде ки он фоидаи эҳтимолиро зиёд мекунад, коҳиши хурди арзиши дороӣ метавонад тамоми сармоягузории аввалияи шуморо нест кунад."
+          explanation: "Leverage is a multiplier. While it increases potential gains, a small decline in asset value can wipe out your entire initial capital."
         }
       },
       {
         id: "dl-7",
         type: "completion",
-        title: "Левериҷ Иҷозат Дода Шуд",
-        content: "Шумо акнун шамшери дудамаро мефаҳмед. Шумо медонед, ки чӣ тавр аз қафас канорагирӣ кунед ва нардбонро созед.",
+        title: "Leverage Authorized",
+        content: "You understand the double-edged sword. You know how to avoid the cage and build the ladder.",
         visualType: "icon",
-        summaryPoints: ["Аз қарзи бади дорои фоизи баланд худдорӣ кунед", "Рейтинги кредитии худро созед", "Левериҷро танҳо барои дороиҳои даромадбахш истифода баред"]
+        summaryPoints: ["Avoid high-interest consumer debt", "Build a pristine credit profile", "Use leverage only for cash-flowing assets"]
       }
     ],
     nextLessonSlug: "business-cashflow"
@@ -410,9 +410,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "6",
     slug: "business-cashflow",
     number: 6,
-    title: "Тиҷорат ва Ҷараёни Пулӣ",
-    subtitle: "Мошини мустақилияти худро тарҳрезӣ кунед.",
-    shortDescription: "Аз иваз кардани вақт ба пул ба сохтани системаҳое, ки ҳангоми хоб фоида меоранд, гузаред.",
+    title: "Business & Cashflow",
+    subtitle: "Design your autonomous wealth machine.",
+    shortDescription: "Transition from trading time for money to building systems that produce profit while you sleep.",
     estimatedMinutes: 22,
     difficulty: "Advanced",
     theme: "#0075FF",
@@ -421,68 +421,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "bc-1",
         type: "intro",
-        title: "Муҳаррики Капитал",
-        subtitle: "Тиҷорат система аст, на кор.",
-        content: "Агар шумо бояд дар он ҷо бошед, то кор анҷом ёбад, шумо кор доред. Агар кор бе шумо анҷом ёбад, шумо тиҷорат доред. Ҳадаф сохтани муҳаррикест, ки 24/7 ҷараёни пули нақдро таъмин мекунад.",
+        title: "The Capital Engine",
+        subtitle: "Business is a system, not a job.",
+        content: "If you have to be there for work to get done, you have a job. If work gets done without you, you have a business. The goal is to build an engine that cash-flows 24/7.",
         visualType: "image",
         visualData: { src: "" }
       },
       {
         id: "bc-2",
         type: "concept",
-        title: "Иқтисоди Воҳид (Unit Economics)",
-        subtitle: "Математикаи як муштарии ягона.",
-        content: "Барои ҷалби як муштарӣ (CAC) чӣ қадар хароҷот мешавад ва онҳо дар тӯли вақт чӣ қадар фоида меоранд (LTV)? Агар LTV назар ба CAC 3 баробар зиёд бошад, шумо мошини тиҷоратии миқёспазир доред.",
+        title: "Unit Economics",
+        subtitle: "The math of a single customer.",
+        content: "How much does it cost to acquire one customer (CAC) and how much profit do they bring over time (LTV)? If LTV is at least 3x CAC, you have a scalable business machine.",
         visualType: "diagram",
         visualData: { type: "unit-math" }
       },
       {
         id: "bc-3",
         type: "explanation",
-        title: "Маржаи Фоида",
-        content: "Даромад ин шуҳрат аст. Фоида ин саломатии рӯҳӣ аст. Ҷараёни пулӣ воқеият аст. Тиҷоратҳои дорои маржаи баланд (ба монанди нармафзор ё мундариҷа) бартарӣ доранд, зеро онҳо барои рушд сармояи камтар талаб мекунанд.",
+        title: "Profit Margins",
+        content: "Revenue is vanity. Profit is sanity. Cash flow is reality. High-margin businesses (like software or media) are superior because they require less capital to grow.",
         visualType: "card",
-        points: ["Миқёс бо код ва мундариҷа", "Хароҷоти доимиро кам кунед", "Вақтро аз даромад ҷудо кунед"]
+        points: ["Scale with code and content", "Minimize fixed overhead", "Decouple time from income"]
       },
       {
         id: "bc-4",
         type: "example",
-        title: "Модели SaaS",
-        content: "Барномасоз як бор асбобро месозад. 10,000 нафар барои он дар як моҳ $20 месупоранд. Кори барномасоз ҳамон хел мемонад, новобаста аз он ки 1 муштарӣ дорад ё 10,000. Ин левериҷи беохир аст.",
+        title: "The SaaS Model",
+        content: "A developer builds a software tool once. 10,000 customers pay $20 a month for it. The developer's effort remains identical whether they have 1 customer or 10,000. That is infinite leverage.",
         visualType: "chart",
-        example: "Ҳадаф сохтани дороиҳое мебошад, ки арзиши марзии такрористеҳсолкунӣ надоранд."
+        example: "Focus on creating assets that have zero marginal cost of replication."
       },
       {
         id: "bc-5",
         type: "mistake",
-        title: "Директори 'Коргари оддӣ'",
-        content: "Сарфи тамоми вақти худ барои иҷрои вазифа ба ҷои сохтани раванд барои иҷрои вазифа. Шумо монеаи асосӣ ҳастед.",
+        title: "The Soloworker CEO",
+        content: "Spending all your time doing the task instead of building the process to delegate the task. You are the bottleneck.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Иҷрои тамоми зангҳои муштариён ва корҳои техникӣ аз ҷониби худи шумо.",
-          good: "Кироя кардан ва автоматӣ кунонидан, то шумо тавонед ба стратегияи сатҳи баланд ва рушд диққат диҳед."
+          bad: "Handling every single customer call and technical issue yourself.",
+          good: "Hiring and automating, freeing your time to focus on high-level strategy and growth."
         }
       },
       {
         id: "bc-6",
         type: "quiz",
-        title: "Таҳлили Иқтисодӣ",
-        content: "Механикаи тиҷорати миқёспазирро таҳлил кунед.",
+        title: "Economic Analysis",
+        content: "Test your understanding of scalable business mechanics.",
         visualType: "icon",
         quiz: {
-          question: "Кадом нишондиҳанда барои зинда мондани дарозмуддати тиҷорат муҳимтарин аст?",
-          options: ["Даромади умумӣ", "Обуначиёни шабакаҳои иҷтимоӣ", "Ҷараёни мусбати пулӣ (Positive Cashflow)", "Шумораи коргарон"],
+          question: "Which metric is most critical for the long-term survival of a business?",
+          options: ["Gross revenue", "Social media followers", "Positive cash flow", "Headcount"],
           correctIndex: 2,
-          explanation: "Ҷараёни пулӣ оксигени тиҷорат аст. Тиҷорати фоидаовар дар рӯи коғаз метавонад ноком шавад, агар пули нақд барои пардохти векселҳояш тамом шавад."
+          explanation: "Cash flow is the oxygen of business. A company can be profitable on paper but still fail if it runs out of cash to pay its bills."
         }
       },
       {
         id: "bc-7",
         type: "completion",
-        title: "Система Ҳамоҳанг Шуд",
-        content: "Шумо модули меъмории тиҷоратро ба итмом расондед. Шумо акнун на танҳо коргар, балки тарроҳи система ҳастед.",
+        title: "Systems Aligned",
+        content: "You completed the business architecture module. You are now a system designer, not just a worker.",
         visualType: "icon",
-        summaryPoints: ["Системаҳо созед, на корҳо", "Иқтисоди воҳиди худро аз худ кунед", "Бо арзиши марзии сифр васеъ кунед"]
+        summaryPoints: ["Build systems, not jobs", "Master your unit economics", "Scale with zero marginal cost"]
       }
     ],
     nextLessonSlug: "digital-economy-ai-income"
@@ -491,9 +491,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "7",
     slug: "digital-economy-ai-income",
     number: 7,
-    title: "Иқтисоди Рақамӣ ва Даромади ИИ",
-    subtitle: "Дар асри левериҷи интернетӣ муваффақ шавед.",
-    shortDescription: "Қудрати воситаҳои ИИ ва платформаҳои рақамиро барои сохтани сарвати беохир истифода баред.",
+    title: "Digital Economy & AI Income",
+    subtitle: "Thrive in the age of permissionless leverage.",
+    shortDescription: "Harness AI tools and digital platforms to build infinite leverage assets.",
     estimatedMinutes: 15,
     difficulty: "Advanced",
     theme: "#00FFA3",
@@ -502,68 +502,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "de-1",
         type: "intro",
-        title: "Асри Озодӣ",
-        subtitle: "Бе бонкҳо, бе роҳбарон, танҳо код.",
-        content: "Дар асри 21, интернет левериҷи ниҳоӣ аст. Шумо метавонед бо хароҷоти сифр ба миллиардҳо одамон дастрасӣ пайдо кунед. Асбобҳои ИИ ҳоло ба як нафар имкон медиҳанд, ки кори агентии 50-нафараро иҷро кунад.",
+        title: "The Age of Leverage",
+        subtitle: "No banks, no bosses, just code.",
+        content: "In the 21st century, the internet is the ultimate leverage. You can reach billions of people at zero cost. AI tools now allow a single person to execute the work of a 50-person agency.",
         visualType: "image",
         visualData: { src: "" }
       },
       {
         id: "de-2",
         type: "concept",
-        title: "Афзоиши ИИ",
-        subtitle: "Мантиқи инсон, суръати мошин.",
-        content: "Аз ИИ натарсед — онро истифода баред. ИИ ба шумо имкон медиҳад, ки эҷоди мундариҷа, рамзнависӣ, таҳлили маълумот ва хидматрасонии муштариёнро автоматӣ кунед. Ин афзоишдиҳандаи зеҳни шумост.",
+        title: "The AI Multiplier",
+        subtitle: "Human logic, machine speed.",
+        content: "Do not fear AI—leverage it. AI allows you to automate content creation, coding, data analysis, and customer service. It is a cognitive magnifier for your business.",
         visualType: "diagram",
         visualData: { type: "ai-multiplier" }
       },
       {
         id: "de-3",
         type: "explanation",
-        title: "Иқтисоди Эҷодкорон (Creator Economy)",
-        content: "Диққати одамон дороӣ аст. Бо сохтани шунавандагон дар атрофи таҷрибаи худ, шумо канали паҳнкуниро эҷод мекунед, ки то абад ба шумо тааллуқ дорад. Паҳнкунӣ қисми душвортарини ҳама гуна тиҷорат аст.",
+        title: "The Creator Economy",
+        content: "Attention is the new currency. By building an audience around your specific knowledge, you create a distribution channel that belongs to you forever.",
         visualType: "card",
-        points: ["Дониши мушаххас нусхабардорӣ намешавад", "Дар назди омма созед", "Шабакаи шумо дороии шумост"]
+        points: ["Specific knowledge cannot be automated", "Build in public to build trust", "Your network is your net worth"]
       },
       {
         id: "de-4",
         type: "example",
-        title: "Соҳибкори Танҳо (Solopreneur)",
-        content: "Шахс ChatGPT-ро барои навиштани код барои плагин, Midjourney-ро барои тарҳрезии UI ва X (Twitter)-ро барои ёфтани муштариён истифода мебарад. Онҳо тиҷорати $500к/солро бо 0 корманд пеш мебаранд.",
+        title: "The Solopreneur",
+        content: "A single operator uses ChatGPT to write code, Midjourney to design UI, and social platforms to source customers, running a $500k/year business with zero employees.",
         visualType: "chart",
-        example: "'Ширкати якнафара' фоидаовартарин модели тиҷорат дар таърих аст."
+        example: "The 'one-person company' is the most profitable business model in history."
       },
       {
         id: "de-5",
         type: "mistake",
-        title: "Доми Луддитҳо (Муқовимат ба Технология)",
-        content: "Нодида гирифтани технологияҳои нав, зеро онҳо 'тарсовар' ё 'ғайриахлоқӣ' мебошанд, дар ҳоле ки рақибони шумо онҳоро барои пешсаф шудан 100 ба 1 истифода мебаранд.",
+        title: "The Luddite Trap",
+        content: "Ignoring new technology because it feels 'scary' or 'complex,' while competitors use it to outperform you 100 to 1.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Рад кардани истифодаи ИИ ва сарфи 40 соат дар як ҳафта барои вазифаҳои оддӣ.",
-          good: "Истифодаи ИИ барои иҷрои он вазифаҳо дар 1 соат ва сарфи 39 соат барои рушди сатҳи баланд."
+          bad: "Rejecting AI tools and spending 40 hours a week on manual tasks.",
+          good: "Using AI to complete those tasks in 1 hour, spending 39 hours on high-value growth."
         }
       },
       {
         id: "de-6",
         type: "quiz",
-        title: "Санҷиши Рақамӣ",
-        content: "Омодагии худро ба иқтисоди рақамӣ санҷед.",
+        title: "Digital Verification",
+        content: "Test your readiness for the digital economy.",
         visualType: "icon",
         quiz: {
-          question: "Бартарии асосии иқтисоди рақамӣ аз иқтисоди саноатӣ чист?",
-          options: ["Андозҳои баландтар", "Идораҳои беҳтар", "Арзиши марзии сифр барои такрористеҳсолкунӣ ва паҳнкунӣ", "Корҳои устувортар"],
+          question: "What is the primary advantage of the digital economy over the industrial economy?",
+          options: ["Higher taxes", "Better offices", "Zero marginal cost of replication and distribution", "More stable jobs"],
           correctIndex: 2,
-          explanation: "Дар ҷаҳони рақамӣ, вақте ки шумо дороие эҷод мекунед (код, видео, китоб), фиристодани он ба 1,000,000 одамони дигар ҳеҷ арзише надорад."
+          explanation: "In the digital world, once you create an asset (code, content, media), serving it to 1,000,000 users costs virtually nothing."
         }
       },
       {
         id: "de-7",
         type: "completion",
-        title: "Протокол Ҳамоҳанг Шуд",
-        content: "Шумо ҳоло барои оянда омодаед. Шумо мефаҳмед, ки дар асри рақамӣ левериҷ беохир ва дастрас аст.",
+        title: "Protocol Aligned",
+        content: "You are ready for the future. You understand that in the digital age, leverage is infinite and permissionless.",
         visualType: "icon",
-        summaryPoints: ["ИИ-ро ҳамчун афзоишдиҳанда истифода баред", "Дороиҳои рақамӣ созед", "Паҳнкунии худро назорат кунед"]
+        summaryPoints: ["Use AI as an intelligence multiplier", "Build digital leverage assets", "Control your distribution"]
       }
     ],
     nextLessonSlug: "financial-freedom"
@@ -572,9 +572,9 @@ export const FINANCE_LESSONS: Lesson[] = [
     id: "8",
     slug: "financial-freedom",
     number: 8,
-    title: "Озодии Молиявӣ",
-    subtitle: "Ҳадафи ниҳоӣ: Харидани вақти худ.",
-    shortDescription: "Рақами 'Кифоя'-и худро муайян кунед ва ҳаётеро тарҳрезӣ кунед, ки бо ҳадаф пеш меравад, на барои зинда мондан.",
+    title: "Financial Freedom",
+    subtitle: "The ultimate goal: Buying back your time.",
+    shortDescription: "Define your 'Enough' number and design a life driven by purpose, not survival.",
     estimatedMinutes: 30,
     difficulty: "Advanced",
     theme: "#FFFFFF",
@@ -583,68 +583,68 @@ export const FINANCE_LESSONS: Lesson[] = [
       {
         id: "ff-1",
         type: "intro",
-        title: "Уфуқи Озодӣ",
-        subtitle: "Озодӣ қобилияти гуфтани 'Не' аст.",
-        content: "Пул танҳо восита аст. Ҳадафи ниҳоӣ тавозуни бонкӣ нест — ин қобилияти бедор шудан ва дақиқ муайян кардани тарзи сарфи рӯзи худ мебошад. Истиқлолияти молиявӣ вақтест, ки кор ихтиёрӣ мешавад.",
+        title: "Horizon of Freedom",
+        subtitle: "Freedom is the ability to say 'No'.",
+        content: "Money is just a tool. The ultimate goal is not a massive bank balance—it is the ability to wake up and decide exactly how to spend your day. Financial independence is when work becomes optional.",
         visualType: "image",
         visualData: { src: "" }
       },
       {
         id: "ff-2",
         type: "concept",
-        title: "Қоидаи 4%",
-        subtitle: "Математикаи бехатарӣ.",
-        content: "Агар шумо тавонед дар як сол бо 4%-и дороиҳои умумии сармоягузоришудаи худ зиндагӣ кунед, шумо аз ҷиҳати молиявӣ мустақил ҳастед. Пули шумо акнун муҳаррики доимист, ки ҳаёти шуморо то абад таъмин мекунад.",
+        title: "The 4% Rule",
+        subtitle: "The mathematics of safety.",
+        content: "If you can live on 4% of your total invested portfolio per year, you are financially independent. Your capital is now a self-sustaining engine that funds your life indefinitely.",
         visualType: "diagram",
         visualData: { type: "fi-number" }
       },
       {
         id: "ff-3",
         type: "explanation",
-        title: "Соҳибмулкӣ ва Истеъмол",
-        content: "Барои озод мондан, шумо бояд тафаккури соҳибмулкро нигоҳ доред. Нагузоред, ки таварруми тарзи зиндагӣ даромади ғайрифаъоли шуморо бихӯрад. Чанде ки бештар 'соҳиб' бошед, ҳамон қадар 'озодтар' ҳастед.",
+        title: "Ownership and Consumption",
+        content: "To remain free, maintain an owner's mindset. Do not let lifestyle inflation consume your passive yield. The more you own, the freer you are.",
         visualType: "card",
-        points: ["Рақами 'Кифоя'-и худро муайян кунед", "Ба таҷрибаҳо сармоягузорӣ кунед, на ба ашё", "Вақт ягона дороии барқарорнашаванда аст"]
+        points: ["Define your 'Enough' number", "Invest in experiences, not things", "Time is your only non-renewable resource"]
       },
       {
         id: "ff-4",
         type: "example",
-        title: "Мини-Нафақа",
-        content: "Ба ҷои интизори синни 65-солагӣ, ҷустуҷӯкунандагони озодӣ ҳар чанд сол 'мини-нафақа' мегиранд, то аз саломатӣ ва нерӯи худ ҳангоми доштани он баҳра баранд.",
+        title: "Mini-Retirements",
+        content: "Instead of waiting until age 65, freedom seekers take 'mini-retirements' every few years to enjoy health and vitality while they have them.",
         visualType: "chart",
-        example: "Ҳаёт саёҳат аст, на таъинот. Беҳтарин солҳои ҳаёти худро ба маош иваз накунед."
+        example: "Life is a journey, not a destination. Do not trade your best years solely for a paycheck."
       },
       {
         id: "ff-5",
         type: "mistake",
-        title: "Дастбандҳои Тиллоӣ",
-        content: "Гирифтани кори сердаромад, аммо зиёд кардани хароҷоти худ ба дараҷае, ки шумо мисли шахси дорои маоши ҳадди аққал ба дом афтодаед.",
+        title: "Golden Handcuffs",
+        content: "Earning a high income but inflating your lifestyle costs so much that you are just as trapped as someone earning minimum wage.",
         visualType: "mistake-compare",
         mistake: {
-          bad: "Навсозии хона ва мошини худ ҳар дафъае, ки шумо маоши баландтар мегиред.",
-          good: "Устувор нигоҳ доштани хароҷоти худ ҳангоми афзоиши даромад, суръатбахшии санаи озодии шумо."
+          bad: "Upgrading your home and car every time you receive a salary increase.",
+          good: "Keeping expenses stable as income grows, accelerating your freedom date."
         }
       },
       {
         id: "ff-6",
         type: "quiz",
-        title: "Иҷозати Озодӣ",
-        content: "Санҷиши ниҳоии тафаккури истиқлолияти молиявии шумо.",
+        title: "Freedom Clearance",
+        content: "The final check of your financial independence mindset.",
         visualType: "icon",
         quiz: {
-          question: "Таърифи 'Меъёри Бехатари Бозпасгирӣ' чист?",
-          options: ["Маблағе, ки шумо метавонед бе кор сарф кунед", "Маблағи ҳадди аксаре, ки шумо метавонед аз бонк қарз гиред", "Фоизи портфели шумо, ки шумо метавонед ҳар сол бе тамом шудани пул гиред", "Маоши солонаи шумо пас аз андозҳо"],
+          question: "What is the definition of the 'Safe Withdrawal Rate'?",
+          options: ["The amount you can spend without working", "The maximum amount you can borrow from a bank", "The percentage of your portfolio you can withdraw annually without running out of money", "Your annual salary after taxes"],
           correctIndex: 2,
-          explanation: "Меъёри бехатари бозпасгирӣ (одатан 4%) маблағе мебошад, ки шумо метавонед ҳар сол аз сармоягузориҳои худ гиред ва эҳтимоли зиёд дорад, ки он тавассути рушди бозор нигоҳ дошта шавад."
+          explanation: "The safe withdrawal rate (typically 4%) is the percentage you can withdraw from your investments each year with a high probability of portfolio survival."
         }
       },
       {
         id: "ff-7",
         type: "completion",
-        title: "Соҳибихтиёрӣ Ба Даст Омад",
-        content: "Шумо Академияро хатм кардед. Шумо акнун бо донишҳо муҷаҳҳаз ҳастед, то империяи молиявии худро созед, муҳофизат кунед ва аз он баҳра баред.",
+        title: "Sovereignty Achieved",
+        content: "You graduated from the Academy. You are now equipped with the knowledge to build, protect, and enjoy your financial empire.",
         visualType: "icon",
-        summaryPoints: ["Пул воситаи харидани вақт аст", "Ҳадафи худро берун аз зинда мондан муайян кунед", "Саёҳат нав оғоз ёфт"]
+        summaryPoints: ["Money is a tool to buy time", "Define your purpose beyond survival", "The journey has just begun"]
       }
     ]
   }

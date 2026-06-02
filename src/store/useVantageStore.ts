@@ -2,6 +2,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { AVAILABLE_NODES } from "@/data/empireNodes";
+import { AVAILABLE_ASSETS } from "@/data/properties";
 
 // --- TYPES ---
 export interface Asset {
@@ -31,7 +32,7 @@ export interface InfrastructureNode {
   customYieldMultiplier?: number;
 }
 
-export type VantageTab = "dashboard" | "portfolio" | "market" | "academy" | "settings" | "empire" | "bank" | "realestate" | "casino";
+export type VantageTab = "dashboard" | "portfolio" | "market" | "academy" | "settings" | "empire" | "bank" | "realestate" | "casino" | "security";
 
 export interface PropertyAsset {
   id: string;
@@ -72,6 +73,24 @@ export interface UserData {
   fiscalDays?: number;
   achievements?: Achievement[];
   lastSavedTimestamp?: number;
+  timeSpeed?: number;
+  securityScore?: number;
+  securityProtocols?: {
+    quantumLedger: boolean;
+    neuralFirewall: boolean;
+    biometricMfa: boolean;
+    multisigAuth: boolean;
+  };
+  threatLevel?: string;
+  securityAuditText?: string;
+  threatLogs?: {
+    id: string;
+    time: string;
+    ip: string;
+    event: string;
+    severity: string;
+    status: string;
+  }[];
 }
 
 interface VantageState {
@@ -109,6 +128,31 @@ interface VantageState {
   achievements: Achievement[];
   unlockAchievement: (id: string) => void;
   updateAchievementProgress: (id: string, current: number) => void;
+  timeSpeed: number;
+  setTimeSpeed: (speed: number) => void;
+
+  // Cybersecurity Panel State & Actions
+  securityScore: number;
+  securityProtocols: {
+    quantumLedger: boolean;
+    neuralFirewall: boolean;
+    biometricMfa: boolean;
+    multisigAuth: boolean;
+  };
+  threatLevel: string;
+  securityAuditText: string;
+  threatLogs: {
+    id: string;
+    time: string;
+    ip: string;
+    event: string;
+    severity: string;
+    status: string;
+  }[];
+  toggleSecurityProtocol: (protocolId: "quantumLedger" | "neuralFirewall" | "biometricMfa" | "multisigAuth", cost: number) => void;
+  requestSecurityAudit: () => Promise<void>;
+  mitigateThreat: (logId: string) => void;
+  runSecuritySimulation: (outcome: { success: boolean; scoreDelta: number; xpDelta: number; cashDelta: number; logMessage: string }) => void;
 
   // Real Estate / Lifestyle Actions
   buyProperty: (propDef: Omit<PropertyAsset, 'owned' | 'renovationLevel' | 'tenantQualityLevel' | 'appreciationMultiplier' | 'currentValue' | 'rentedCount'>) => void;
@@ -147,8 +191,8 @@ interface VantageState {
 export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   {
     id: "first_invest",
-    title: "Аввалин Сармоягузорӣ",
-    description: "Хуш омадед ба бозор! Ягон дороиро бомуваффақият харидорӣ намоед.",
+    title: "First Investment",
+    description: "Welcome to the market! Successfully purchase any asset.",
     xpReward: 100,
     progress: 0,
     target: 1,
@@ -157,8 +201,8 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "empire_owner",
-    title: "Императори Саноатӣ",
-    description: "Аввалин гиреҳи инфрасохтории худро дар Империя харидорӣ кунед.",
+    title: "Industrial Emperor",
+    description: "Purchase your first infrastructure node in the Empire.",
     xpReward: 200,
     progress: 0,
     target: 1,
@@ -167,8 +211,8 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "savings_master",
-    title: "Наҷотбахши Молиявӣ",
-    description: "Маблағи $50,000 ё бештарро дар суратҳисоби амонатӣ пасандоз кунед.",
+    title: "Financial Savior",
+    description: "Deposit $50,000 or more into the savings account.",
     xpReward: 150,
     progress: 0,
     target: 50000,
@@ -177,8 +221,8 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "scholar_lvl",
-    title: "Олими Иқтисод",
-    description: "Сатҳи дониши худро бо ба даст овардани 500 XP дар Академия баланд бардоред.",
+    title: "Economic Scholar",
+    description: "Elevate your knowledge level by earning 500 XP in the Academy.",
     xpReward: 300,
     progress: 0,
     target: 500,
@@ -187,8 +231,8 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "millionaire_dream",
-    title: "Миллиардери Оянда",
-    description: "Арзиши умумии сармояи худро (Net Worth) ба $1,000,000 расонед.",
+    title: "Future Billionaire",
+    description: "Increase your net worth to $1,000,000.",
     xpReward: 500,
     progress: 0,
     target: 1000000,
@@ -197,8 +241,8 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "neural_audit",
-    title: "Алоқаи Нейронӣ",
-    description: "Дархости таҳлили нейронии портфел ё дастури академияро пешниҳод кунед.",
+    title: "Neural Connection",
+    description: "Submit a request for a neural portfolio analysis or academy directive.",
     xpReward: 120,
     progress: 0,
     target: 1,
@@ -212,8 +256,8 @@ const DEFAULT_USER_DATA = {
   portfolio: [],
   learningXP: 0,
   impactPoints: 0,
-  portfolioAudit: "Таҳлили нейронӣ интизор аст. Сканкунии пардохтпазириро оғоз кунед.",
-  academyDirectives: "Интизори харитасозии когнитивӣ барои роҳҳои оптималии омӯзиш.",
+  portfolioAudit: "Neural analysis pending. Initialize liquidity scan.",
+  academyDirectives: "Awaiting cognitive mapping for optimal learning pathways.",
   infrastructure: [] as InfrastructureNode[],
   savingsDeposited: 0,
   activeLoan: null as {
@@ -226,7 +270,22 @@ const DEFAULT_USER_DATA = {
   properties: [] as PropertyAsset[],
   fiscalDays: 1,
   achievements: INITIAL_ACHIEVEMENTS,
-  lastSavedTimestamp: 0
+  lastSavedTimestamp: 0,
+  timeSpeed: 1,
+  securityScore: 78,
+  securityProtocols: {
+    quantumLedger: false,
+    neuralFirewall: true,
+    biometricMfa: false,
+    multisigAuth: false
+  },
+  threatLevel: "GUARDED",
+  securityAuditText: "System scan active. Initiate neural security analysis.",
+  threatLogs: [
+    { id: "log_1", time: "13:15:22", ip: "193.106.191.22", event: "Undetected port scan terminated", severity: "LOW", status: "BLOCKED" },
+    { id: "log_2", time: "12:44:09", ip: "82.102.23.4", event: "DDoS attack of 1.2 Gbps mitigated", severity: "MEDIUM", status: "BLOCKED" },
+    { id: "log_3", time: "10:11:54", ip: "45.143.203.11", event: "Unauthorized database entry attempt", severity: "HIGH", status: "BLOCKED" }
+  ]
 };
 
 export function playAchievementSynthesizer() {
@@ -259,7 +318,17 @@ export const useVantageStore = create<VantageState>()(
             properties: user.properties || [],
             fiscalDays: user.fiscalDays ?? 1,
             achievements: user.achievements || INITIAL_ACHIEVEMENTS,
-            lastSavedTimestamp: user.lastSavedTimestamp ?? 0
+            lastSavedTimestamp: user.lastSavedTimestamp ?? 0,
+            timeSpeed: user.timeSpeed ?? 1,
+            securityScore: user.securityScore ?? 78,
+            securityProtocols: user.securityProtocols ?? { quantumLedger: false, neuralFirewall: true, biometricMfa: false, multisigAuth: false },
+            threatLevel: user.threatLevel ?? "GUARDED",
+            securityAuditText: user.securityAuditText ?? "System scan active. Initiate neural security analysis.",
+            threatLogs: user.threatLogs ?? [
+              { id: "log_1", time: "13:15:22", ip: "193.106.191.22", event: "Undetected port scan terminated", severity: "LOW", status: "BLOCKED" },
+              { id: "log_2", time: "12:44:09", ip: "82.102.23.4", event: "DDoS attack of 1.2 Gbps mitigated", severity: "MEDIUM", status: "BLOCKED" },
+              { id: "log_3", time: "10:11:54", ip: "45.143.203.11", event: "Unauthorized database entry attempt", severity: "HIGH", status: "BLOCKED" }
+            ]
           });
           return true;
         }
@@ -591,8 +660,10 @@ export const useVantageStore = create<VantageState>()(
       },
 
       collectYield: () => {
-        const { balance, infrastructure, currentUser, users, savingsDeposited } = get();
+        const { balance, infrastructure, currentUser, users, savingsDeposited, timeSpeed } = get();
         if (!currentUser) return;
+
+        const speed = timeSpeed ?? 1;
 
         const baseYield = (infrastructure || []).reduce((sum, node) => {
           const mLevel = node.marketingLevel ?? 0;
@@ -603,7 +674,7 @@ export const useVantageStore = create<VantageState>()(
         }, 0);
 
         const savingsInterest = ((savingsDeposited ?? 0) * 0.055) / 60;
-        const totalYield = baseYield + savingsInterest;
+        const totalYield = (baseYield + savingsInterest) * speed;
         
         if (totalYield === 0) return;
 
@@ -618,8 +689,10 @@ export const useVantageStore = create<VantageState>()(
       },
 
       collectPropertyRent: () => {
-        const { balance, properties, currentUser, users } = get();
+        const { balance, properties, currentUser, users, timeSpeed } = get();
         if (!currentUser) return;
+
+        const speed = timeSpeed ?? 1;
 
         const rentYield = (properties || []).reduce((sum, prop) => {
           const rLevel = prop.renovationLevel ?? 0;
@@ -631,7 +704,8 @@ export const useVantageStore = create<VantageState>()(
 
         if (rentYield === 0) return;
 
-        const newBalance = balance + rentYield;
+        const totalRent = rentYield * speed;
+        const newBalance = balance + totalRent;
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = {
           ...newUsers[currentUser.operatorId],
@@ -786,7 +860,12 @@ export const useVantageStore = create<VantageState>()(
 
       requestPortfolioAudit: async () => {
         const { generatePortfolioAudit } = await import("@/services/aiOracle");
-        const audit = await generatePortfolioAudit(get().portfolio);
+        const audit = await generatePortfolioAudit(
+          get().portfolio,
+          get().balance,
+          get().properties,
+          get().activeLoan
+        );
         
         set((state) => {
           const newUsers = { ...state.users };
@@ -885,11 +964,12 @@ export const useVantageStore = create<VantageState>()(
       }),
 
       sanitizeState: () => {
-        const { balance, currentUser, users, savingsDeposited, activeLoan } = get();
+        const { balance, currentUser, users, savingsDeposited, activeLoan, timeSpeed } = get();
         let needsUpdate = false;
         let cleanBalance = balance;
         let cleanSavings = savingsDeposited ?? 0;
         let cleanLoan = activeLoan ?? null;
+        let cleanSpeed = timeSpeed ?? 1;
         const cleanUsers = { ...users };
 
         if (balance === null || balance === undefined || isNaN(balance) || balance < 0) {
@@ -899,6 +979,11 @@ export const useVantageStore = create<VantageState>()(
 
         if (savingsDeposited === undefined || savingsDeposited === null || isNaN(savingsDeposited)) {
           cleanSavings = 0;
+          needsUpdate = true;
+        }
+
+        if (timeSpeed === undefined || timeSpeed === null || isNaN(timeSpeed) || timeSpeed < 0.1) {
+          cleanSpeed = 1;
           needsUpdate = true;
         }
 
@@ -915,6 +1000,10 @@ export const useVantageStore = create<VantageState>()(
             }
             if (user.activeLoan === undefined) {
               user.activeLoan = null;
+              needsUpdate = true;
+            }
+            if (user.timeSpeed === undefined || user.timeSpeed === null || isNaN(user.timeSpeed) || user.timeSpeed < 0.1) {
+              user.timeSpeed = cleanSpeed;
               needsUpdate = true;
             }
             if (!user.infrastructure || !Array.isArray(user.infrastructure)) {
@@ -954,6 +1043,19 @@ export const useVantageStore = create<VantageState>()(
                 if (p.owned === undefined || isNaN(p.owned)) { p.owned = 0; needsUpdate = true; }
                 if (p.rentedCount === undefined || isNaN(p.rentedCount)) { p.rentedCount = p.owned; needsUpdate = true; }
                 if (p.category === undefined) { p.category = p.id.startsWith("prop_") ? "property" : "lifestyle"; needsUpdate = true; }
+
+                // Align rentPerSecond and name with official AVAILABLE_ASSETS definitions from properties.ts
+                const officialDef = AVAILABLE_ASSETS.find(o => o.id === p.id);
+                if (officialDef) {
+                  if (p.rentPerSecond !== officialDef.rentPerSecond) {
+                    p.rentPerSecond = officialDef.rentPerSecond;
+                    needsUpdate = true;
+                  }
+                  if (p.name !== officialDef.name) {
+                    p.name = officialDef.name;
+                    needsUpdate = true;
+                  }
+                }
               });
             }
             if (!user.achievements || !Array.isArray(user.achievements)) {
@@ -976,6 +1078,7 @@ export const useVantageStore = create<VantageState>()(
             balance: cleanBalance,
             savingsDeposited: cleanSavings,
             activeLoan: cleanLoan,
+            timeSpeed: cleanSpeed,
             infrastructure: cleanInfrastructure,
             achievements: cleanAchievements || INITIAL_ACHIEVEMENTS,
             users: cleanUsers,
@@ -1062,10 +1165,12 @@ export const useVantageStore = create<VantageState>()(
       },
 
       tickLoanTimer: () => {
-        const { activeLoan, balance, currentUser, users } = get();
+        const { activeLoan, balance, currentUser, users, timeSpeed } = get();
         if (!currentUser || !activeLoan) return;
 
-        if (activeLoan.timeLeft <= 1) {
+        const speed = timeSpeed ?? 1;
+
+        if (activeLoan.timeLeft <= speed) {
           // Solvency breach! Force liquidation penalty
           const penaltyFee = activeLoan.totalDue * 0.10; // 10% penalty
           const newBalance = balance - activeLoan.totalDue - penaltyFee;
@@ -1079,10 +1184,10 @@ export const useVantageStore = create<VantageState>()(
 
           set({ balance: newBalance, activeLoan: null, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
         } else {
-          // Tick timer down by 1 Fiscal Day
+          // Tick timer down by speed Fiscal Days
           const newLoan = {
             ...activeLoan,
-            timeLeft: activeLoan.timeLeft - 1
+            timeLeft: activeLoan.timeLeft - speed
           };
 
           const newUsers = { ...users };
@@ -1096,10 +1201,11 @@ export const useVantageStore = create<VantageState>()(
       },
 
       tickFiscalTime: () => {
-        const { fiscalDays, currentUser, users } = get();
+        const { fiscalDays, currentUser, users, timeSpeed } = get();
         if (!currentUser) return;
 
-        const nextDays = fiscalDays + (1 / 120);
+        const speed = timeSpeed ?? 1;
+        const nextDays = fiscalDays + (speed / 120);
 
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = {
@@ -1108,6 +1214,154 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ fiscalDays: nextDays, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+      },
+
+      setTimeSpeed: (speed) => {
+        const { currentUser, users } = get();
+        if (!currentUser) return;
+
+        const newUsers = { ...users };
+        newUsers[currentUser.operatorId] = {
+          ...newUsers[currentUser.operatorId],
+          timeSpeed: speed
+        };
+
+        set({ timeSpeed: speed, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+      },
+
+      toggleSecurityProtocol: (protocolId, cost) => {
+        const { balance, securityProtocols, currentUser, users } = get();
+        if (!currentUser) return;
+
+        const isEnabled = securityProtocols[protocolId];
+        if (!isEnabled && balance < cost) return;
+
+        const newBalance = isEnabled ? balance : balance - cost;
+        const newProtocols = {
+          ...securityProtocols,
+          [protocolId]: !isEnabled
+        };
+
+        let score = 30;
+        if (newProtocols.neuralFirewall) score += 20;
+        if (newProtocols.quantumLedger) score += 25;
+        if (newProtocols.biometricMfa) score += 15;
+        if (newProtocols.multisigAuth) score += 25;
+        if (score > 100) score = 100;
+
+        const newUsers = { ...users };
+        newUsers[currentUser.operatorId] = {
+          ...newUsers[currentUser.operatorId],
+          balance: newBalance,
+          securityProtocols: newProtocols,
+          securityScore: score
+        };
+
+        set({
+          balance: newBalance,
+          securityProtocols: newProtocols,
+          securityScore: score,
+          users: newUsers,
+          currentUser: newUsers[currentUser.operatorId]
+        });
+      },
+
+      requestSecurityAudit: async () => {
+        const { generateSecurityAudit } = await import("@/services/aiOracle");
+        const auditText = await generateSecurityAudit(
+          get().securityProtocols,
+          get().portfolio,
+          get().balance
+        );
+
+        const { currentUser, users } = get();
+        if (!currentUser) return;
+
+        const newUsers = { ...users };
+        newUsers[currentUser.operatorId] = {
+          ...newUsers[currentUser.operatorId],
+          securityAuditText: auditText
+        };
+
+        set({
+          securityAuditText: auditText,
+          users: newUsers,
+          currentUser: newUsers[currentUser.operatorId]
+        });
+
+        get().updateAchievementProgress("neural_audit", 1);
+      },
+
+      mitigateThreat: (logId) => {
+        const { threatLogs, currentUser, users, balance } = get();
+        if (!currentUser) return;
+
+        const logToResolve = threatLogs.find(log => log.id === logId);
+        if (!logToResolve || logToResolve.status === "RESOLVED") return;
+
+        const cost = logToResolve.severity === "HIGH" ? 15000 : logToResolve.severity === "MEDIUM" ? 7500 : 2500;
+        if (balance < cost) return;
+
+        const newBalance = balance - cost;
+        const newLogs = threatLogs.map(log => 
+          log.id === logId ? { ...log, status: "RESOLVED" } : log
+        );
+
+        const newScore = Math.min(100, get().securityScore + 5);
+
+        const newUsers = { ...users };
+        newUsers[currentUser.operatorId] = {
+          ...newUsers[currentUser.operatorId],
+          balance: newBalance,
+          threatLogs: newLogs,
+          securityScore: newScore
+        };
+
+        set({
+          balance: newBalance,
+          threatLogs: newLogs,
+          securityScore: newScore,
+          users: newUsers,
+          currentUser: newUsers[currentUser.operatorId]
+        });
+      },
+
+      runSecuritySimulation: (outcome) => {
+        const { currentUser, users, threatLogs, balance, learningXP, securityScore } = get();
+        if (!currentUser) return;
+
+        const newBalance = Math.max(0, balance + outcome.cashDelta);
+        const newXP = learningXP + outcome.xpDelta;
+        const newScore = Math.max(10, Math.min(100, securityScore + outcome.scoreDelta));
+        
+        const timestamp = new Date().toLocaleTimeString([], { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+        const newLog = {
+          id: `sim_log_${Date.now()}`,
+          time: timestamp,
+          ip: "10.0.8.22",
+          event: outcome.logMessage,
+          severity: outcome.success ? "LOW" : "HIGH",
+          status: outcome.success ? "BLOCKED" : "MITIGATED"
+        };
+        const newLogs = [newLog, ...threatLogs].slice(0, 15);
+
+        const newUsers = { ...users };
+        newUsers[currentUser.operatorId] = {
+          ...newUsers[currentUser.operatorId],
+          balance: newBalance,
+          learningXP: newXP,
+          securityScore: newScore,
+          threatLogs: newLogs
+        };
+
+        set({
+          balance: newBalance,
+          learningXP: newXP,
+          securityScore: newScore,
+          threatLogs: newLogs,
+          users: newUsers,
+          currentUser: newUsers[currentUser.operatorId]
+        });
       },
     }),
     { name: "vantage-v15-multiflow" }
@@ -1161,30 +1415,31 @@ if (typeof window !== "undefined") {
                   return sum + ((prop.rentPerSecond ?? 0) * activeRenters * mult);
                 }, 0);
 
-                const totalYieldPerSecond = baseYield + savingsInterest + rentYield;
+                const speed = dbUser.timeSpeed ?? 1;
+                const totalYieldPerSecond = (baseYield + savingsInterest + rentYield) * speed;
                 const totalOfflineEarnings = totalYieldPerSecond * elapsedSeconds;
 
                 // Update database user session data
                 if (totalOfflineEarnings > 0) {
                   dbUser.balance = (dbUser.balance ?? 0) + totalOfflineEarnings;
-                  const tgEarningsMsg = `💰 ДАРОМАДИ ҒАЙРИФАЪОЛ: Шумо пас аз ${elapsedSeconds} сония баргаштед ва ба маблағи $${Math.floor(totalOfflineEarnings).toLocaleString()} даромади ғайрифаъол ба даст овардед!`;
+                  const tgEarningsMsg = `💰 PASSIVE INCOME: You returned after ${elapsedSeconds} seconds and earned $${Math.floor(totalOfflineEarnings).toLocaleString()} in passive yields!`;
                   if (typeof window !== "undefined") {
                     localStorage.setItem("vantage_offline_earnings_msg", tgEarningsMsg);
                   }
                 }
 
                 // 4. Tick Fiscal Days elapsed
-                dbUser.fiscalDays = (dbUser.fiscalDays ?? 1) + (elapsedSeconds / 120);
+                dbUser.fiscalDays = (dbUser.fiscalDays ?? 1) + (elapsedSeconds * speed / 120);
 
                 // 5. Tick Active Loan Time limits
                 if (dbUser.activeLoan) {
-                  const remainingTime = dbUser.activeLoan.timeLeft - elapsedSeconds;
+                  const remainingTime = dbUser.activeLoan.timeLeft - (elapsedSeconds * speed);
                   if (remainingTime <= 0) {
                     const penaltyFee = dbUser.activeLoan.totalDue * 0.10;
                     dbUser.balance = Math.max(0, (dbUser.balance ?? 0) - dbUser.activeLoan.totalDue - penaltyFee);
                     dbUser.activeLoan = null;
                     if (typeof window !== "undefined") {
-                      localStorage.setItem("vantage_offline_loan_breach", "🚨 ОГОҲИИ ҚАРЗ: Мӯҳлати пардохти қарзи фаъоли шумо дар давраи набуданатон ба охир расид ва тавозунатон якҷоя бо 10% ҷаримаи иҷборӣ ситонида шуд!");
+                      localStorage.setItem("vantage_offline_loan_breach", "🚨 LOAN WARNING: Your active loan term expired during your absence. Your balance was debited along with an enforced 10% penalty!");
                     }
                   } else {
                     dbUser.activeLoan.timeLeft = remainingTime;
@@ -1208,7 +1463,13 @@ if (typeof window !== "undefined") {
               properties: Array.isArray(dbUser.properties) ? dbUser.properties : state.properties,
               fiscalDays: typeof dbUser.fiscalDays === 'number' ? dbUser.fiscalDays : state.fiscalDays,
               achievements: Array.isArray(dbUser.achievements) ? dbUser.achievements : state.achievements,
-              lastSavedTimestamp: dbUser.lastSavedTimestamp ?? 0
+              lastSavedTimestamp: dbUser.lastSavedTimestamp ?? 0,
+              timeSpeed: typeof dbUser.timeSpeed === 'number' ? dbUser.timeSpeed : state.timeSpeed,
+              securityScore: typeof dbUser.securityScore === 'number' ? dbUser.securityScore : state.securityScore,
+              securityProtocols: dbUser.securityProtocols !== undefined ? dbUser.securityProtocols : state.securityProtocols,
+              threatLevel: typeof dbUser.threatLevel === 'string' ? dbUser.threatLevel : state.threatLevel,
+              securityAuditText: typeof dbUser.securityAuditText === 'string' ? dbUser.securityAuditText : state.securityAuditText,
+              threatLogs: Array.isArray(dbUser.threatLogs) ? dbUser.threatLogs : state.threatLogs
             });
           } else {
             console.log("[VANTAGE DB] Active user not found in DB users dictionary. Hydrating merged users.");
@@ -1259,6 +1520,12 @@ if (typeof window !== "undefined") {
         properties: state.properties,
         fiscalDays: state.fiscalDays,
         achievements: state.achievements,
+        timeSpeed: state.timeSpeed,
+        securityScore: state.securityScore,
+        securityProtocols: state.securityProtocols,
+        threatLevel: state.threatLevel,
+        securityAuditText: state.securityAuditText,
+        threatLogs: state.threatLogs,
         lastSavedTimestamp: now
       })
     }).catch((err) => console.error("[VANTAGE DB] Autosave failed:", err));

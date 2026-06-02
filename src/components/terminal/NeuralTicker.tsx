@@ -6,7 +6,7 @@ import { Activity, Zap } from "lucide-react";
 import { marketSimulator } from "@/services/MarketSimulator";
 
 export function NeuralTicker() {
-  const [pulse, setPulse] = useState("Ҳамоҳангсозӣ бо Шабакаи Глобалии Нейронӣ...");
+  const [pulse, setPulse] = useState("Synchronizing with Global Neural Grid...");
   const [loading, setLoading] = useState(true);
 
   const fetchPulse = () => {
@@ -24,7 +24,7 @@ export function NeuralTicker() {
     <div className="fixed bottom-0 left-0 w-full z-[100] h-10 bg-[#1E2026] border-t border-[#2B2F36] flex items-center overflow-hidden">
       <div className="flex-shrink-0 h-full px-6 flex items-center gap-3 bg-[#F0B90B]/10 border-r border-[#2B2F36] z-10">
         <Activity className="w-4 h-4 text-[#F0B90B]" />
-        <span className="text-[10px] font-bold uppercase tracking-wider text-[#F0B90B]">ИМПУЛСИ НЕЙРОНИ</span>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-[#F0B90B]">NEURAL PULSE</span>
       </div>
       
       <div className="flex-1 overflow-hidden relative">

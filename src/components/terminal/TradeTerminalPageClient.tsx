@@ -116,7 +116,7 @@ export default function TradeTerminalPage() {
       const leverage = leverages[Math.floor(Math.random() * leverages.length)];
       const amount = Math.floor(25000 + Math.random() * 250000);
       
-      const msg = `🚨 ЛИКВИДАТСИЯИ ИҶБОРИИ ФИШАНГИ ${leverage}x: Шартномаи кӯтоҳмуддати ${side} дар ҷуфти ${sym} ба маблағи $${amount.toLocaleString()} барҳам дода шуд!`;
+      const msg = `🚨 FORCED LEVERAGE LIQUIDATION ${leverage}x: ${side} contract on ${sym} of $${amount.toLocaleString()} has been liquidated!`;
       addWhaleAlertRef.current?.("LIQUIDATION", msg);
     };
 
@@ -465,9 +465,9 @@ export default function TradeTerminalPage() {
           // Whale Trade Alert Interceptor (threshold >= $75,000)
           if (totalVal >= 75000) {
             const sym = symbolNormalized.split("_")[0];
-            const sideWord = side === "buy" ? "ХАРИДОРӢ" : "ФУРӮХТА";
+            const sideWord = side === "buy" ? "BOUGHT" : "SOLD";
             const sideColor = side === "buy" ? "🟢" : "🔴";
-            const msg = `🐳 ${sideColor} ҲУШДОРИ КИТИ БОЗОР: Маблағи калони $${Math.floor(totalVal).toLocaleString()} дар ҷуфти ${sym} ${sideWord} шуд (Нарх: $${tradePrice.toLocaleString()}).`;
+            const msg = `🐳 ${sideColor} WHALE TRANSACTION DETECTED: A volume of $${Math.floor(totalVal).toLocaleString()} on ${sym} was ${sideWord} (Price: $${tradePrice.toLocaleString()}).`;
             addWhaleAlertRef.current?.("WHALE", msg);
           }
         }
@@ -667,9 +667,9 @@ export default function TradeTerminalPage() {
 
         if (totalVal >= 75000) {
           const sym = symbolNormalized.split("_")[0];
-          const sideWord = side === "buy" ? "ХАРИДОРӢ" : "ФУРӮХТА";
+          const sideWord = side === "buy" ? "BOUGHT" : "SOLD";
           const sideColor = side === "buy" ? "🟢" : "🔴";
-          const msg = `🐳 ${sideColor} ҲУШДОРИ КИТИ БОЗОР: Маблағи калони $${Math.floor(totalVal).toLocaleString()} дар ҷуфти ${sym} ${sideWord} шуд (Нарх: $${newTrade.price.toLocaleString()}).`;
+          const msg = `🐳 ${sideColor} WHALE TRANSACTION DETECTED: A volume of $${Math.floor(totalVal).toLocaleString()} on ${sym} was ${sideWord} (Price: $${newTrade.price.toLocaleString()}).`;
           addWhaleAlertRef.current?.("WHALE", msg);
         }
         
@@ -771,25 +771,25 @@ export default function TradeTerminalPage() {
 
     if (tradeSide === "buy") {
       if (balance < transactionCost) {
-        setOrderNotification({ message: "САБТИ ХАТО: МАБЛАҒИ НОКИФОЯ", success: false });
+        setOrderNotification({ message: "ORDER FAILED: INSUFFICIENT LIQUID BALANCE", success: false });
         setTimeout(() => setOrderNotification(null), 3000);
         return;
       }
       invest(mockAsset, Number(amount), p);
       playTradeSound("success");
-      setOrderNotification({ message: `МУОМИЛОТ ИҶРО ШУД: ХАРИДИ ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} БО НАРХИ $${p.toFixed(2)}`, success: true });
+      setOrderNotification({ message: `ORDER EXECUTED: BOUGHT ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
     } else {
       const holding = portfolio.find(a => a.id === assetId);
       if (!holding || holding.amount < Number(amount)) {
-        setOrderNotification({ message: "САБТИ ХАТО: АКТИВИ НОКИФОЯ ДАР ПОРТФЕЛ", success: false });
+        setOrderNotification({ message: "ORDER FAILED: INSUFFICIENT PORTFOLIO HOLDINGS", success: false });
         setTimeout(() => setOrderNotification(null), 3000);
         return;
       }
       sell(assetId, Number(amount), p);
       playTradeSound("success");
-      setOrderNotification({ message: `МУОМИЛОТ ИҶРО ШУД: ФУРӮШИ ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} БО НАРХИ $${p.toFixed(2)}`, success: true });
+      setOrderNotification({ message: `ORDER EXECUTED: SOLD ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
     }
@@ -804,7 +804,7 @@ export default function TradeTerminalPage() {
     playTradeSound("click");
     sell(assetId, holding.amount, currentPrice);
     playTradeSound("success");
-    setOrderNotification({ message: `АУДИТИ СУРЪАТНОК: ЛИКВИДАТСИЯИ ПУРРАИ ${assetId.toUpperCase()} БО НАРХИ БОЗОР`, success: true });
+    setOrderNotification({ message: `FAST AUDIT: TOTAL LIQUIDATION OF ${assetId.toUpperCase()} AT MARKET PRICE`, success: true });
     setTimeout(() => setOrderNotification(null), 3000);
   };
 
@@ -902,7 +902,7 @@ export default function TradeTerminalPage() {
     };
 
     if (activeDrawTool === "text") {
-      const txt = window.prompt("Тавзеҳи матнӣ ворид кунед (Enter text annotation):", "Тавзеҳ");
+      const txt = window.prompt("Enter text annotation:", "Annotation");
       if (txt) {
         newDrawing.text = txt;
         setDrawings(prev => [...prev, newDrawing]);
@@ -1132,7 +1132,7 @@ export default function TradeTerminalPage() {
               fontWeight="bold"
               fontFamily="monospace"
             >
-              {drawing.text || "Матн"}
+              {drawing.text || "Text"}
             </text>
           </g>
         );
@@ -1218,14 +1218,14 @@ export default function TradeTerminalPage() {
         {/* Whale Alerts & Liquidations Ticker Banner */}
         {(() => {
           const scrollingAlerts = whaleAlerts.length === 0 ? [
-            { id: "fallback-1", type: "WHALE" as const, message: "📡 Интизори транзаксияҳои бузурги китҳо ва барҳамдиҳии фишангҳо дар бозори Binance Spot...", timestamp: "--:--:--" },
-            { id: "fallback-2", type: "WHALE" as const, message: "📡 Низоми нейронии Вантаҷ омода барои назорати амнияти пардохтпазирии соҳибихтиёр...", timestamp: "--:--:--" }
+            { id: "fallback-1", type: "WHALE" as const, message: "📡 Awaiting large whale transactions and spot leverage liquidations on Binance Spot...", timestamp: "--:--:--" },
+            { id: "fallback-2", type: "WHALE" as const, message: "📡 Vantage neural grid ready for sovereign liquidity surveillance...", timestamp: "--:--:--" }
           ] : whaleAlerts;
 
           return (
             <div className="bg-[#1E2026] border-b border-[#2B2F36] h-8 flex items-center overflow-hidden relative select-none z-35">
               <div className="bg-[#F0B90B] text-black text-[9px] font-extrabold uppercase px-3 h-full flex items-center z-10 shadow-[2px_0_5px_rgba(0,0,0,0.4)] whitespace-nowrap tracking-wider shrink-0">
-                🔥 Сигналҳои Воқеӣ
+                🔥 Live Signals
               </div>
               <div className="flex-1 overflow-hidden relative flex items-center h-full bg-[#181A20]">
                 <motion.div 
@@ -1279,7 +1279,7 @@ export default function TradeTerminalPage() {
           <div className="flex flex-wrap items-center gap-8">
             {/* Live Price Display */}
             <div>
-              <div className="text-[10px] text-[#848E9C] mb-0.5">Нархи Бозории Ҷорӣ (Binance)</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5">Current Market Price (Binance)</div>
               <div className={`text-base font-extrabold font-mono transition-all duration-150 ${
                 priceFlash === "up" 
                   ? "text-[#0ECB81] scale-105" 
@@ -1293,7 +1293,7 @@ export default function TradeTerminalPage() {
 
             {/* 24h Change */}
             <div>
-              <div className="text-[10px] text-[#848E9C] mb-0.5">Тағйироти 24с</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5">24h Change</div>
               <div className={`font-bold font-mono flex items-center gap-0.5 ${
                 tickerStats.price_change_percentage_24h >= 0 ? "text-[#0ECB81]" : "text-[#F6465D]"
               }`}>
@@ -1304,7 +1304,7 @@ export default function TradeTerminalPage() {
 
             {/* 24h High */}
             <div className="hidden sm:block">
-              <div className="text-[10px] text-[#848E9C] mb-0.5">Баландтарин 24с</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5">24h High</div>
               <div className="font-semibold text-[#EAECEF] font-mono">
                 ${tickerStats.high_24h ? tickerStats.high_24h.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "---"}
               </div>
@@ -1312,7 +1312,7 @@ export default function TradeTerminalPage() {
 
             {/* 24h Low */}
             <div className="hidden sm:block">
-              <div className="text-[10px] text-[#848E9C] mb-0.5">Пасттарин 24с</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5">24h Low</div>
               <div className="font-semibold text-[#EAECEF] font-mono">
                 ${tickerStats.low_24h ? tickerStats.low_24h.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "---"}
               </div>
@@ -1320,7 +1320,7 @@ export default function TradeTerminalPage() {
 
             {/* Volume in Asset */}
             <div className="hidden md:block">
-              <div className="text-[10px] text-[#848E9C] mb-0.5 font-bold uppercase">Ҳаҷми 24с ({assetId.toUpperCase()})</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5 font-bold uppercase">24h Volume ({assetId.toUpperCase()})</div>
               <div className="font-semibold text-[#EAECEF] font-mono">
                 {tickerStats.volume_asset ? tickerStats.volume_asset.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "---"}
               </div>
@@ -1328,7 +1328,7 @@ export default function TradeTerminalPage() {
 
             {/* Volume in USDT */}
             <div className="hidden md:block">
-              <div className="text-[10px] text-[#848E9C] mb-0.5 font-bold uppercase">Ҳаҷми 24с (USDT)</div>
+              <div className="text-[10px] text-[#848E9C] mb-0.5 font-bold uppercase">24h Volume (USDT)</div>
               <div className="font-semibold text-[#EAECEF] font-mono">
                 ${tickerStats.total_volume ? tickerStats.total_volume.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "---"}
               </div>
@@ -1349,7 +1349,7 @@ export default function TradeTerminalPage() {
             <div className="px-4 py-3 border-b border-[#2B2F36] flex items-center justify-between">
               <div className="flex items-center gap-1.5 text-[#848E9C] font-extrabold text-[10px]">
                 <BookOpen className="w-3.5 h-3.5 text-[#F0B90B]" />
-                <span className="uppercase tracking-wider">Дафтари Фармоишҳо</span>
+                <span className="uppercase tracking-wider">Order Book</span>
               </div>
               
               {/* Layout Mode controls & Decimal Dropdown in a single horizontal row */}
@@ -1417,9 +1417,9 @@ export default function TradeTerminalPage() {
 
             {/* Header Columns */}
             <div className="px-4 py-2 grid grid-cols-3 text-[#848E9C] text-[9px] border-b border-[#2B2F36]/30 font-semibold uppercase tracking-wider">
-              <span>Нарх(USDT)</span>
-              <span className="text-right">Миқдор({assetId.toUpperCase()})</span>
-              <span className="text-right">Ҳамагӣ</span>
+              <span>Price(USDT)</span>
+              <span className="text-right">Quantity({assetId.toUpperCase()})</span>
+              <span className="text-right">Total</span>
             </div>
 
             {/* ASKS (RED) - Sell Offers */}
@@ -1444,7 +1444,7 @@ export default function TradeTerminalPage() {
                       );
                     })
                   ) : (
-                    <div className="text-center py-8 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Интизори маълумоти амиқ...</div>
+                    <div className="text-center py-8 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Awaiting depth data...</div>
                   )}
                 </div>
               </div>
@@ -1464,8 +1464,8 @@ export default function TradeTerminalPage() {
                 </span>
               </div>
               <div className="flex justify-between text-[8px] text-[#848E9C] mt-1 font-bold tracking-wider font-mono">
-                <span>СПРЕД: ${(currentPrice * 0.00015).toFixed(decimalPrecision)}</span>
-                <span className="text-[#F0B90B]">100% МУСТАҚИМ</span>
+                <span>SPREAD: ${(currentPrice * 0.00015).toFixed(decimalPrecision)}</span>
+                <span className="text-[#F0B90B]">100% LIVE</span>
               </div>
             </div>
 
@@ -1491,7 +1491,7 @@ export default function TradeTerminalPage() {
                       );
                     })
                   ) : (
-                    <div className="text-center py-8 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Интизори маълумоти амиқ...</div>
+                    <div className="text-center py-8 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Awaiting depth data...</div>
                   )}
                 </div>
               </div>
@@ -1525,7 +1525,7 @@ export default function TradeTerminalPage() {
               <div className="flex items-center gap-4 text-[#848E9C] text-[9px] font-bold uppercase">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#0ECB81] animate-pulse" />
-                  <span className="text-white/60">Binance WS пайваст</span>
+                  <span className="text-white/60">Binance WS Connected</span>
                 </div>
                 <div className="hidden sm:block text-[#F0B90B] border border-[#F0B90B]/30 px-2 py-0.5 rounded font-mono">
                   WEBSOCKET GATEWAY // ACTIVE LIVE FEED
@@ -1623,19 +1623,19 @@ export default function TradeTerminalPage() {
                 <div className="absolute top-4 left-6 z-10 flex flex-wrap gap-4 text-[10px] font-mono select-none bg-[#1E2026]/85 p-2.5 border border-[#2B2F36] rounded backdrop-blur-md">
                   {hoverIndex !== null && visibleCandles[hoverIndex] ? (
                     <>
-                      <span className="text-[#848E9C]">ТИР: <span className="text-[#EAECEF] font-bold">{visibleCandles[hoverIndex].time}</span></span>
-                      <span className="text-[#848E9C]">ОҒОЗ: <span className="text-[#EAECEF] font-bold">${visibleCandles[hoverIndex].open.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
-                      <span className="text-[#848E9C]">БАЛАНД: <span className="text-[#0ECB81] font-bold">${visibleCandles[hoverIndex].high.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
-                      <span className="text-[#848E9C]">ПАСТ: <span className="text-[#F6465D] font-bold">${visibleCandles[hoverIndex].low.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
-                      <span className="text-[#848E9C]">БАСТА: <span className={`font-bold ${visibleCandles[hoverIndex].close >= visibleCandles[hoverIndex].open ? "text-[#0ECB81]" : "text-[#F6465D]"}`}>${visibleCandles[hoverIndex].close.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
-                      <span className="text-[#848E9C]">ҲАҶМ: <span className="text-[#F0B90B] font-bold">{visibleCandles[hoverIndex].volume.toFixed(2)}K</span></span>
+                      <span className="text-[#848E9C]">TIME: <span className="text-[#EAECEF] font-bold">{visibleCandles[hoverIndex].time}</span></span>
+                      <span className="text-[#848E9C]">OPEN: <span className="text-[#EAECEF] font-bold">${visibleCandles[hoverIndex].open.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+                      <span className="text-[#848E9C]">HIGH: <span className="text-[#0ECB81] font-bold">${visibleCandles[hoverIndex].high.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+                      <span className="text-[#848E9C]">LOW: <span className="text-[#F6465D] font-bold">${visibleCandles[hoverIndex].low.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+                      <span className="text-[#848E9C]">CLOSE: <span className={`font-bold ${visibleCandles[hoverIndex].close >= visibleCandles[hoverIndex].open ? "text-[#0ECB81]" : "text-[#F6465D]"}`}>${visibleCandles[hoverIndex].close.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+                      <span className="text-[#848E9C]">VOLUME: <span className="text-[#F0B90B] font-bold">{visibleCandles[hoverIndex].volume.toFixed(2)}K</span></span>
                     </>
                   ) : (
                     <>
-                      <span className="text-white/60 font-bold uppercase tracking-wider flex items-center gap-1.5"><BarChart2 className="w-3.5 h-3.5 text-[#F0B90B]" /> Таҳлили графикии {assetId.toUpperCase()}</span>
-                      <span className="text-[#848E9C]/60 italic font-medium font-mono">// Маълумоти ҷорӣ аз шабакаи Binance</span>
+                      <span className="text-white/60 font-bold uppercase tracking-wider flex items-center gap-1.5"><BarChart2 className="w-3.5 h-3.5 text-[#F0B90B]" /> Chart Analysis for {assetId.toUpperCase()}</span>
+                      <span className="text-[#848E9C]/60 italic font-medium font-mono">// Real-time feed from Binance Spot API</span>
                       {activeDrawTool !== "cursor" && (
-                        <span className="text-[#F0B90B] font-bold animate-pulse">// РЕҶАИ РАСМКАШӢ: {activeDrawTool.toUpperCase()} // CLICK & DRAG TO DRAW</span>
+                        <span className="text-[#F0B90B] font-bold animate-pulse">// DRAWING MODE: {activeDrawTool.toUpperCase()} // CLICK & DRAG TO DRAW</span>
                       )}
                     </>
                   )}
@@ -1886,7 +1886,7 @@ export default function TradeTerminalPage() {
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-[#848E9C] gap-3 font-bold select-none uppercase tracking-wider animate-pulse">
                     <RefreshCw className="w-6 h-6 animate-spin text-[#F0B90B]" />
-                    Интизори пайвастшавии шабака...
+                    Awaiting connection network...
                   </div>
                 )}
               </div>
@@ -1898,14 +1898,14 @@ export default function TradeTerminalPage() {
             <div className="p-6 bg-[#1E2026]/40 select-none">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[10px] font-black uppercase tracking-wider text-[#848E9C] flex items-center gap-1.5">
-                  <Wallet className="w-3.5 h-3.5" /> Сармоягузории Мавқеъ // PORTFOLIO POSITION
+                  <Wallet className="w-3.5 h-3.5" /> Portfolio Position // PORTFOLIO POSITION
                 </h3>
                 {position && (
                   <button 
                     onClick={handleLiquidateAll}
                     className="px-3 py-1 rounded bg-[#F6465D]/10 border border-[#F6465D]/30 hover:bg-[#F6465D] hover:text-white text-[#F6465D] text-[9px] font-bold transition-all uppercase"
                   >
-                    ЛИКВИДАТСИЯИ ФАВРӢ
+                    INSTANT LIQUIDATION
                   </button>
                 )}
               </div>
@@ -1915,53 +1915,53 @@ export default function TradeTerminalPage() {
                   
                   {/* Position volume */}
                   <div>
-                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Миқдори дороӣ</div>
+                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Asset Amount</div>
                     <div className="text-lg font-black text-[#EAECEF] font-mono leading-none">
                       {position.amount.toFixed(6)} <span className="text-[#848E9C] text-xs font-bold">{assetId.toUpperCase()}</span>
                     </div>
                     <div className="text-[8px] text-[#848E9C] font-medium font-mono mt-1">
-                      Арзиш: ${(position.amount * currentPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })} USDT
+                      Value: ${(position.amount * currentPrice).toLocaleString(undefined, { maximumFractionDigits: 2 })} USDT
                     </div>
                   </div>
 
                   {/* Avg buy price */}
                   <div>
-                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Арзиши миёнаи харид</div>
+                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Average Entry Price</div>
                     <div className="text-lg font-black text-[#EAECEF] font-mono leading-none">
                       ${position.avgPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <div className="text-[8px] text-[#848E9C] font-medium font-mono mt-1">
-                      Арзиши вуруди аввалия
+                      Initial acquisition cost basis
                     </div>
                   </div>
 
                   {/* PnL dollar */}
                   <div>
-                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Даромад / Зарра (PnL)</div>
+                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Profit & Loss (PnL)</div>
                     <div className={`text-lg font-black font-mono leading-none ${pnl.isPositive ? "text-[#0ECB81]" : "text-[#F6465D]"}`}>
                       {pnl.isPositive ? "+" : ""}${pnl.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <div className="text-[8px] text-[#848E9C] font-medium font-mono mt-1">
-                      Аз ҳисоби нархи зинда
+                      Calculated against real-time market value
                     </div>
                   </div>
 
                   {/* PnL percentage */}
                   <div>
-                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Фоизи бозгашт (ROI)</div>
+                    <div className="text-[9px] text-[#848E9C] uppercase mb-1">Return on Investment (ROI)</div>
                     <div className={`text-lg font-black font-mono leading-none ${pnl.isPositive ? "text-[#0ECB81]" : "text-[#F6465D]"}`}>
                       {pnl.isPositive ? "+" : ""}{pnl.pct.toFixed(2)}%
                     </div>
                     <div className="text-[8px] text-[#848E9C] font-medium font-mono mt-1">
-                      Нисбат ба арзиши воридшуда
+                      Relative to capital entry basis
                     </div>
                   </div>
 
                 </div>
               ) : (
                 <div className="border border-dashed border-[#2B2F36] py-8 text-center text-[#848E9C] rounded-xl font-mono text-[10px] leading-relaxed">
-                  Мавқеи кушода мавҷуд нест. <br />
-                  <span className="text-[#F0B90B] font-bold">// Барои кушодани мавқеъ аз панели фармоишҳо истифода баред.</span>
+                  No open positions active. <br />
+                  <span className="text-[#F0B90B] font-bold">// Allocate capital from the order entry desk to establish a position.</span>
                 </div>
               )}
             </div>
@@ -2001,7 +2001,7 @@ export default function TradeTerminalPage() {
                     : "text-[#848E9C] border-transparent hover:text-white"
                 }`}
               >
-                ХАРИДОРӢ
+                BUY
               </button>
               <button
                 onClick={() => { playTradeSound("click"); setTradeSide("sell"); }}
@@ -2011,7 +2011,7 @@ export default function TradeTerminalPage() {
                     : "text-[#848E9C] border-transparent hover:text-white"
                 }`}
               >
-                ФУРӮШ
+                SELL
               </button>
             </div>
 
@@ -2037,7 +2037,7 @@ export default function TradeTerminalPage() {
 
               {/* Wallet balances */}
               <div className="flex justify-between items-center text-[10px] font-semibold text-[#848E9C]">
-                <span className="flex items-center gap-1"><Wallet className="w-3 h-3 text-[#F0B90B]" /> Дастрас:</span>
+                <span className="flex items-center gap-1"><Wallet className="w-3.5 h-3.5 text-[#F0B90B]" /> Available:</span>
                 {tradeSide === "buy" ? (
                   <span className="text-[#EAECEF] font-bold font-mono">${balance.toLocaleString(undefined, { maximumFractionDigits: 2 })} USDT</span>
                 ) : (
@@ -2050,7 +2050,7 @@ export default function TradeTerminalPage() {
               {/* Limit input */}
               {orderType === "limit" ? (
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Нархи Лимитӣ (USDT)</label>
+                  <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Limit Price (USDT)</label>
                   <div className="relative flex items-center bg-[#2B2F36] border border-[#474D57] rounded-lg focus-within:border-[#F0B90B]/60 transition-all px-3 py-2">
                     <input 
                       type="number"
@@ -2064,9 +2064,9 @@ export default function TradeTerminalPage() {
                 </div>
               ) : (
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Нархи Бозорӣ</label>
+                  <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Market Price</label>
                   <div className="relative flex items-center bg-[#2B2F36]/50 border border-[#2B2F36] rounded-lg px-3 py-2 text-[#848E9C]/60 select-none font-bold">
-                    <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#F0B90B]">АКТИВИ ФАВРӢ // MARKET</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#F0B90B]">EXECUTE INSTANT // MARKET</span>
                     <span className="ml-auto">${currentPrice ? currentPrice.toFixed(2) : "---"} USDT</span>
                   </div>
                 </div>
@@ -2074,7 +2074,7 @@ export default function TradeTerminalPage() {
 
               {/* Amount input */}
               <div className="space-y-1">
-                <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Миқдори харид ({assetId.toUpperCase()})</label>
+                <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Order Quantity ({assetId.toUpperCase()})</label>
                 <div className="relative flex items-center bg-[#2B2F36] border border-[#474D57] rounded-lg focus-within:border-[#F0B90B]/60 transition-all px-3 py-2">
                   <input 
                     type="number"
@@ -2103,7 +2103,7 @@ export default function TradeTerminalPage() {
 
               {/* Total USDT */}
               <div className="space-y-1">
-                <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Ҳамагӣ бо арзиши (USDT)</label>
+                <label className="text-[9px] text-[#848E9C] font-semibold uppercase">Total Cost (USDT)</label>
                 <div className="relative flex items-center bg-[#2B2F36] border border-[#474D57] rounded-lg focus-within:border-[#F0B90B]/60 transition-all px-3 py-2">
                   <input 
                     type="number"
@@ -2126,7 +2126,7 @@ export default function TradeTerminalPage() {
                     : "bg-[#F6465D] hover:bg-[#ff5b73] text-white"
                 }`}
               >
-                {tradeSide === "buy" ? "Ҷойгиркунии Харид" : "Ҷойгиркунии Фурӯш"}
+                {tradeSide === "buy" ? "PLACE BUY ORDER" : "PLACE SELL ORDER"}
               </button>
 
             </div>
@@ -2137,14 +2137,14 @@ export default function TradeTerminalPage() {
             <div className="flex-1 flex flex-col min-h-0 select-none bg-[#1E2026]/10">
               
               <div className="px-4 py-3 border-b border-[#2B2F36] text-[10px] font-bold uppercase text-[#848E9C] tracking-wider flex items-center gap-1.5 select-none">
-                <Activity className="w-3.5 h-3.5 text-[#F0B90B]" /> Муомилоти Зинда (Binance)
+                <Activity className="w-3.5 h-3.5 text-[#F0B90B]" /> Recent Live Trades (Binance)
               </div>
 
               {/* Table Column headers */}
               <div className="px-4 py-2 grid grid-cols-3 text-[9px] font-semibold text-[#848E9C] border-b border-[#2B2F36]/20 uppercase">
-                <span>Нарх(USDT)</span>
-                <span className="text-right">Миқдор</span>
-                <span className="text-right">Вақт</span>
+                <span>Price(USDT)</span>
+                <span className="text-right">Amount</span>
+                <span className="text-right">Time</span>
               </div>
 
               {/* Scrolling levels */}
@@ -2160,7 +2160,7 @@ export default function TradeTerminalPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-10 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Интизори транзаксияҳои зинда...</div>
+                  <div className="text-center py-10 text-[#848E9C]/60 text-[9px] uppercase tracking-wider animate-pulse">Awaiting live transaction feed...</div>
                 )}
               </div>
 

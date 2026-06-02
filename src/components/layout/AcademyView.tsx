@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { GraduationCap, ArrowRight, BookOpen, Brain, Zap } from "lucide-react";
 
 const STATUS_LINES = [
-  "Омодасозии Академияи молиявии AI...",
-  "Боркунии муҳити дарсҳои интерактивӣ...",
-  "Пайваст кардани муаллими Gemini AI...",
-  "Лабораторияи симулятсия омода аст.",
+  "Initializing AI Finance Academy...",
+  "Loading interactive modules...",
+  "Connecting Gemini AI tutor...",
+  "Simulation sandbox ready.",
 ];
 
 export function AcademyView() {
@@ -23,9 +23,9 @@ export function AcademyView() {
   }, [statusIndex]);
 
   const features = [
-    { icon: BookOpen, label: "8 Дарси интерактивӣ" },
-    { icon: Brain, label: "Муаллими инфиродии Gemini AI" },
-    { icon: Zap, label: "Ба даст овардани XP ва сатҳи нав" },
+    { icon: BookOpen, label: "8 Interactive Lessons" },
+    { icon: Brain, label: "Personalized Gemini AI Tutor" },
+    { icon: Zap, label: "Earn XP & Level Up" },
   ];
 
   return (
@@ -49,11 +49,11 @@ export function AcademyView() {
         </motion.div>
 
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight uppercase mb-3 leading-none text-[#EAECEF]">
-          Академияи молиявии <span className="text-[#F0B90B]">AI</span>
+          AI Financial <span className="text-[#F0B90B]">Academy</span>
         </h1>
 
         <p className="text-[#848E9C] text-sm font-medium uppercase tracking-[0.2em] mb-6 leading-relaxed">
-          Молияи воқеиро тавассути дарсҳои интерактивӣ бо AI омӯзед
+          Learn real-world finance through interactive AI modules
         </p>
 
         {/* Typewriter status */}
@@ -81,7 +81,7 @@ export function AcademyView() {
           onClick={() => router.push('/academy')}
           className="group px-10 py-4 bg-[#F0B90B] text-black font-bold uppercase tracking-widest rounded-xl hover:bg-[#F8D33A] active:scale-95 transition-all shadow-[0_0_24px_rgba(240,185,11,0.2)] flex items-center gap-3 mx-auto"
         >
-          ВУРУД БА АКАДЕМИЯ
+          ENTER ACADEMY
           <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
         </button>
       </motion.div>

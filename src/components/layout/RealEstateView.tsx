@@ -12,267 +12,9 @@ import {
   ChevronLeft, ArrowUpDown
 } from "lucide-react";
 
-interface EducationalAsset {
-  id: string;
-  name: string;
-  type: "residential" | "commercial" | "industrial" | "luxury" | "hypercar" | "supercar" | "yacht" | "jet";
-  category: "property" | "lifestyle";
-  location: string;
-  purchasePrice: number;
-  rentPerSecond: number;
-  description: string;
-  equityRatio: string;
-  risk: "Low" | "Medium" | "High";
-  educationalTakeaway: string;
-  realWorldMetric: string;
-  strategyDocs: string;
-}
+import { AVAILABLE_ASSETS, SharedPropertyAsset } from "@/data/properties";
 
-const AVAILABLE_ASSETS: EducationalAsset[] = [
-  // PROPERTIES (Category: property) - 8 Diverse Options
-  {
-    id: "prop_res_1",
-    name: "Капсулаи Ҳамзистии Нео-Токио",
-    type: "residential",
-    category: "property",
-    location: "Бахши 7 - Ноҳияи Синдзюку",
-    purchasePrice: 65000,
-    rentPerSecond: 30,
-    description: "Капсулаҳои хурди автономӣ ба технологҳои суръатбахш ба иҷора дода мешаванд.",
-    equityRatio: "85/15 LTV",
-    risk: "Low",
-    educationalTakeaway: "Микро-квартираҳо бо ҳаҷми калон ва CapEx-и камтар кор мекунанд ва гардиши пулии ғайрифаъоли устувор меоранд.",
-    realWorldMetric: "Ҳадафи Даромад: 7.2%",
-    strategyDocs: "Нишондиҳандаҳои устувори истиқоматии ҳамзистӣ. Навсозӣ қобилияти иҷораро +12% дар як сатҳ зиёд мекунад."
-  },
-  {
-    id: "prop_res_2",
-    name: "Идораи Марказии Агентии Метаверс",
-    type: "commercial",
-    category: "property",
-    location: "Плазаи Марказии Десентраленд",
-    purchasePrice: 150000,
-    rentPerSecond: 85,
-    description: "Нуқтаҳои тиҷоратии голографӣ, ки ба агентиҳои маркетинги рақамӣ иҷора дода мешаванд.",
-    equityRatio: "Бе Ливерҷ",
-    risk: "High",
-    educationalTakeaway: "Амволи ғайриманқули маҷозӣ аз хароҷоти фарсудашавии ҷисмонӣ канорагирӣ мекунад, аммо ноустувории шадид ва вобастагии платформаро нишон медиҳад.",
-    realWorldMetric: "Даромади Трафик: 9.8%",
-    strategyDocs: "Ҷойҳои тиҷоратии маҷозӣ бо тамоюли шохиси корбарони фаъоли метаверс васеъ мешаванд."
-  },
-  {
-    id: "prop_res_3",
-    name: "Шалеи Ақли Алпии Сюрих",
-    type: "luxury",
-    category: "property",
-    location: "Қуллаи Истиқоматӣ - Қаторкӯҳҳои Алп",
-    purchasePrice: 240000,
-    rentPerSecond: 130,
-    description: "Шалеҳои муосири дорои гармидиҳии офтобӣ, насосҳои геотермалӣ ва истироҳатгоҳҳои алпӣ.",
-    equityRatio: "75/25 LTV",
-    risk: "Medium",
-    educationalTakeaway: "Амлокҳои алпӣ ҳамчун чархи дугонаи муҳофизат аз таваррум амал мекунанд. Ҷойҳои сайёҳии хушманзара боиси бандшавии баланди кӯтоҳмӯҳлат мегарданд.",
-    realWorldMetric: "Иловаи Сайёҳӣ: +15%",
-    strategyDocs: "Истиқоматии боҳашамати элитӣ. Интихоби дурусти иҷорагир арзиши асосии дороӣ ва суръати афзоиши онро зиёд мекунад."
-  },
-  {
-    id: "prop_com_1",
-    name: "Бурҷи Кремнии Веб3 Соҳибихтиёр",
-    type: "commercial",
-    category: "property",
-    location: "Блоки Кремнии Манҳеттен",
-    purchasePrice: 480000,
-    rentPerSecond: 320,
-    description: "Бурҷи баландошёнаи идоравии корпоративӣ, ки ба конгломератҳои FinTech иҷора дода мешавад.",
-    equityRatio: "70/30 LTV",
-    risk: "Medium",
-    educationalTakeaway: "Иҷораи тиҷоратии Triple-Net (NNN) андоз, суғурта ва хароҷоти нигоҳдории амволро пурра ба дӯши иҷорагир мегузорад.",
-    realWorldMetric: "Шохиси Бандшавӣ: 94%",
-    strategyDocs: "Таъмини иҷорагирони устувори институтсионалӣ гардиши пулиро мустақиман аз таназзулҳои минтақавӣ муҳофизат мекунад."
-  },
-  {
-    id: "prop_ind_2",
-    name: "Мега-Гиреҳи Геотермалии Сюрих",
-    type: "industrial",
-    category: "property",
-    location: "Ҳастаи Биотехнологии Сюрих",
-    purchasePrice: 950000,
-    rentPerSecond: 680,
-    description: "Маркази саноатии геотермалии чуқур, ки энергияро ба лабораторияҳои минтақавӣ интиқол медиҳад.",
-    equityRatio: "60/40 Utility",
-    risk: "Low",
-    educationalTakeaway: "Амволи ғайриманқули саноатии коммуналӣ аз сабаби шартномаҳои дарозмуддати давлатӣ эътимоднокии бениҳоят баланди иҷораро таъмин мекунад.",
-    realWorldMetric: "Даромади Энергетикӣ: 8.9%",
-    strategyDocs: "Гиреҳи муҳими инфрасохтори саноатӣ. Баланд бардоштани самаранокии турбина хароҷоти нигоҳдории амалиётиро кам мекунад."
-  },
-  {
-    id: "prop_lux_1",
-    name: "Кибер-Вилла 'Монолит'",
-    type: "luxury",
-    category: "property",
-    location: "Баландиҳои Элитии Монако",
-    purchasePrice: 1800000,
-    rentPerSecond: 1400,
-    description: "Қалъаи боҳашамати соҳили уқёнус бо услуби меъмории консервативии обсидиан ва шишаи титанӣ.",
-    equityRatio: "50/50 LTV",
-    risk: "High",
-    educationalTakeaway: "Амлокҳои супер-люкс ба тағйироти шадиди нарх дучор мешаванд, ки афзоиши босуръат ва аммо бозори маҳдуди фурӯшро нишон медиҳанд.",
-    realWorldMetric: "Арзёбии Солона: +16.8%",
-    strategyDocs: "Баландтарин синфи нуфуз. Истифодаи ин виллаи боҳашамат барои эҳтиёҷоти шахсӣ нишондиҳандаҳои нуфузро зуд афзоиш медиҳад."
-  },
-  {
-    id: "prop_lux_2",
-    name: "Пентҳауси Стратосфераи Аэтер",
-    type: "luxury",
-    category: "property",
-    location: "Орбитаи Баландии 350км",
-    purchasePrice: 3800000,
-    rentPerSecond: 3100,
-    description: "Амлоки олии кайҳонӣ бо сипарҳои зидди микро-метеоритҳо ва хобгоҳҳои аз ҷозиба изолятсияшуда.",
-    equityRatio: "40/60 Speculative",
-    risk: "High",
-    educationalTakeaway: "Дороиҳои шадиди спекулятивӣ ноустуворанд ва дар асоси дастрасии истисноӣ ва роҳҳои маҳдуди орбиталӣ сохта мешаванд.",
-    realWorldMetric: "Дастрасии Премиум: 100%",
-    strategyDocs: "Дороиҳои орбитавии технологӣ. Навсозиҳои пешрафта боиси ба даст овардани резидентҳои сатҳи баланди байналмилалӣ мешаванд."
-  },
-  {
-    id: "prop_ind_1",
-    name: "Гипер-Шабакаи Логистикии Сингулярият",
-    type: "industrial",
-    category: "property",
-    location: "Соҳили Автономии Уқёнуси Ором",
-    purchasePrice: 7500000,
-    rentPerSecond: 6800,
-    description: "Гипер-шабакаи саноатии логистикӣ бо хатҳои фуруд омадани дронҳои вазнини боркаш.",
-    equityRatio: "65/35 NNN",
-    risk: "Low",
-    educationalTakeaway: "Инфрасохтори логистикӣ таҳкурсии вазнини тиҷорати ҷисмонӣ буда, устувории бениҳоят баланди иҷорагиронро ба муддати дароз кафолат медиҳад.",
-    realWorldMetric: "Меъёри Кап: 9.1%",
-    strategyDocs: "Гардиши пулии устувор аз иҷораи саноатии вазнин. Танзими дурусти бандарҳои дронҳо давраи холигии амволро кам мекунад."
-  },
-
-  // GARAGE & VEHICLES (Category: lifestyle) - 8 Diverse Options
-  {
-    id: "car_bike_1",
-    name: "Супербайки Аэон V-2",
-    type: "supercar",
-    category: "lifestyle",
-    location: "Гаражи Шабакаи Синдзюку",
-    purchasePrice: 18000,
-    rentPerSecond: 10,
-    description: "Супербайки пойгавии барқӣ барои транзити босуръат дар кӯчаҳои метрополитен оптимизатсия шудааст.",
-    equityRatio: "Бо пули нақд",
-    risk: "Low",
-    educationalTakeaway: "Супербайкҳои камхарҷ дороиҳои сатҳи ибтидоии пардохтпазиранд, ки даромади фаврии иҷораи кӯтоҳмӯҳлатро таъмин мекунанд.",
-    realWorldMetric: "Меъёри Бандшавӣ: 92%",
-    strategyDocs: "Дороиҳои нақлиётии шабакавии чолок. Танзими ҳуҷайраҳои барқӣ меъёри фармоишро +12% баланд мебардорад."
-  },
-  {
-    id: "car_super_1",
-    name: "Кибер-Крузери Модели GT",
-    type: "supercar",
-    category: "lifestyle",
-    location: "Ангари Шахсии Обсидиан",
-    purchasePrice: 38000,
-    rentPerSecond: 20,
-    description: "Купеи варзишии аэродинамикӣ барои шабакаҳои муштараки ҳамсол ба ҳамсол (P2P) оптимизатсия шудааст.",
-    equityRatio: "Маблағгузорӣ шудааст",
-    risk: "Low",
-    educationalTakeaway: "Нақлиёти шахсӣ зуд фарсуда мешавад. Интиқоли суперкарҳо ба ҳалқаҳои иҷораи премиум ин ӯҳдадориро ба гардиши фаъоли пулӣ табдил медиҳад.",
-    realWorldMetric: "Истифодабарӣ: 88%",
-    strategyDocs: "Дороиҳои флоти иҷораи суперкарҳо. Муҳаррикҳои такмилёфта даромади иҷораро дар як сатҳ +12% зиёд мекунанд."
-  },
-  {
-    id: "car_super_2",
-    name: "Гипер-SUV-и Барқии Хронос",
-    type: "supercar",
-    category: "lifestyle",
-    location: "Маркази Транзити Женева",
-    purchasePrice: 72000,
-    rentPerSecond: 45,
-    description: "SUV-и боҳашамати зиреҳпӯш, ки бо матритсаҳои батареяи муосири сахт кор мекунад.",
-    equityRatio: "Хариди мустақим",
-    risk: "Low",
-    educationalTakeaway: "Нақлиёти дараҷаи премиум ҳамчун дороиҳои дорои самаранокии баланд амал карда, аз роҳбарони корпоративӣ дар рафти конфронсҳои ҷаҳонӣ даромади устувор меорад.",
-    realWorldMetric: "Иҷораи Корпоративӣ: $950/рӯз",
-    strategyDocs: "Транзити боҳашамати вазнин. Такмилдиҳӣ нишондиҳандаҳои меҳмоннавозӣ ва устувории иҷораро беҳтар мекунад."
-  },
-  {
-    id: "car_hyper_1",
-    name: "Вантаж SV-9 Апекс Родстер",
-    type: "hypercar",
-    category: "lifestyle",
-    location: "Гаражи Маъмурии Соҳибихтиёр",
-    purchasePrice: 150000,
-    rentPerSecond: 100,
-    description: "Гиперкари баландсифат бо корпуси карбон-монокок ва системаи муҳаррики барқии зерсониявӣ.",
-    equityRatio: "Иҷораи Нуфузӣ",
-    risk: "Medium",
-    educationalTakeaway: "Гиперкарҳои маҳдуд бо гузашти вақт арзиши худро зиёд мекунанд, агар тоза нигоҳ дошта шаванд, ва нуфузи олиро барои робитаҳои тиҷоратӣ таъмин месозанд.",
-    realWorldMetric: "Даромади Нуфузӣ: +15%",
-    strategyDocs: "Гиперкарҳои элитаи маъмурӣ намояндаи авҷи муҳандисии муосир мебошанд. Истифодаи шахсӣ афзоиши XP-и академияро суръат мебахшад."
-  },
-  {
-    id: "car_hyper_2",
-    name: "Аэтер-GT Фантом Родстер",
-    type: "hypercar",
-    category: "lifestyle",
-    location: "Порти Скайлайни Сюрих",
-    purchasePrice: 320000,
-    rentPerSecond: 230,
-    description: "Гиперкари консептуалии аэродинамикӣ бо плитаҳои хӯлаи композитӣ ва матритсаи парвози зерсониявӣ.",
-    equityRatio: "Маблағгузорӣ шудааст",
-    risk: "High",
-    educationalTakeaway: "Гиперкарҳои консептуалии аэродинамикӣ ба фарсудашавии вазнин дучор мешаванд, аммо дар шабакаҳои транзити роҳбарикунанда маржаи баланди иҷораро таъмин мекунанд.",
-    realWorldMetric: "Шохиси Иҷора: $3.2k/рӯз",
-    strategyDocs: "Гиперкарҳои парвозкунандаи кайҳонӣ. Такмил додани нишондиҳандаҳои техникӣ маржаи шартномаҳои корпоративиро зиёд мекунад."
-  },
-  {
-    id: "car_yacht_1",
-    name: "Супер-Яхтаи Соҳибихтиёр Апекс-6",
-    type: "yacht",
-    category: "lifestyle",
-    location: "Маринаи Элитии Монако",
-    purchasePrice: 950000,
-    rentPerSecond: 650,
-    description: "Яхтаи боҳашамати интеллектуалӣ бо палубаҳои композитии чӯб ва ҳуҷайраҳои гидрогенӣ.",
-    equityRatio: "Муштараки Синдикатӣ",
-    risk: "High",
-    educationalTakeaway: "Яхтаҳо хароҷоти зиёди нигоҳдорӣ (CapEx) доранд. Платформаҳои муштараки синдикатӣ ҳафтаҳои чартериро барои пурра пӯшонидани хароҷот оптимизатсия мекунанд.",
-    realWorldMetric: "Фармоиши Чартер: $42k/ҳафта",
-    strategyDocs: "Иҷораи яхтаҳои боҳашамати автономӣ. Танзими сифати хидматрасонӣ шартномаҳои чартерии гаронбаҳоро таъмин мекунад."
-  },
-  {
-    id: "car_jet_1",
-    name: "Тайёраи Шахсии Аэон Стратосфера",
-    type: "jet",
-    category: "lifestyle",
-    location: "Порти Авиатсияи Аэтер",
-    purchasePrice: 4200000,
-    rentPerSecond: 3600,
-    description: "Ҷети тиҷоратии зер-орбиталӣ бо авионикаи интеллектуалӣ барои парвозҳои фаврии ҷаҳонӣ.",
-    equityRatio: "Иштироки Фраксионӣ",
-    risk: "High",
-    educationalTakeaway: "Тайёраҳои шахсӣ авҷи ливерҷи дороиҳои тарзи ҳаётро намояндагӣ мекунанд ва ӯҳдадориҳои гаронарзишро ба дороиҳои чартерии корпоративӣ табдил медиҳанд.",
-    realWorldMetric: "Даромади Аэро: 11.5%",
-    strategyDocs: "Флотҳои ҷетҳои тиҷоратии шахсӣ. Шартномаҳои дарозмуддати корпоративӣ афзоиши арзиши сармояро мустаҳкам мекунанд."
-  },
-  {
-    id: "car_jet_2",
-    name: "Киштии Кайҳонии Орбитал Иклипс",
-    type: "jet",
-    category: "lifestyle",
-    location: "Пойгоҳи Парвози Аэрокосмосӣ",
-    purchasePrice: 11500000,
-    rentPerSecond: 11200,
-    description: "Ракетаи тиҷоратии орбиталӣ барои саёҳати босуръат байни нимкураҳои замин тарҳрезӣ шудааст.",
-    equityRatio: "Иҷораи Синдикатӣ",
-    risk: "High",
-    educationalTakeaway: "Дороиҳои ракетавии аэрокосмосӣ хароҷоти баландтарини харидро талаб мекунанд, аммо қудрати бесобиқаи нархгузории чартериро таъмин месозанд.",
-    realWorldMetric: "Даромади Ракета: 12.8%",
-    strategyDocs: "Киштиҳои кайҳонии саёҳати зер-орбиталӣ. Такмилдиҳии сипарҳои гармидиҳӣ хароҷоти фарсудашавии механикиро кам мекунад."
-  }
-];
+type EducationalAsset = SharedPropertyAsset;
 
 const ICONS = {
   residential: Home,
@@ -297,7 +39,7 @@ export function RealEstateView() {
   const [activeCategory, setActiveCategory] = useState<"property" | "lifestyle">("property");
   
   // Real-time market index & inflation adjustments
-  const [inflationTicker, setInflationTicker] = useState<string>("Маркази бозор устувор аст. Мониторинги бахшҳои амволи минтақавӣ...");
+  const [inflationTicker, setInflationTicker] = useState<string>("Market is stable. Monitoring regional real estate sectors...");
   const [localIndexTrends, setLocalIndexTrends] = useState<Record<string, number>>({});
 
   // 📝 PAGINATION & FILTERS STATE
@@ -327,11 +69,11 @@ export function RealEstateView() {
         const trend = newTrends[a.id] ?? 0;
         const arrow = trend >= 0 ? "▲" : "▼";
         const sign = trend >= 0 ? "+" : "";
-        return `${a.name} (${a.location}) арзиш ${trend >= 0 ? 'баланд шуд' : 'танзим шуд'} ба андозаи ${sign}${trend.toFixed(1)}% ${arrow}`;
+        return `${a.name} (${a.location}) value ${trend >= 0 ? 'appreciated' : 'adjusted'} by ${sign}${trend.toFixed(1)}% ${arrow}`;
       });
 
       const randomHighlight = highlights[Math.floor(Math.random() * highlights.length)];
-      setInflationTicker(`МОНИТОРИНГИ ТАВАРРУМ: ${randomHighlight}`);
+      setInflationTicker(`INFLATION WATCH: ${randomHighlight}`);
       setLocalIndexTrends(newTrends);
 
       updateValuations(adjustments);
@@ -470,7 +212,7 @@ export function RealEstateView() {
           className="flex items-center gap-3 text-white/40 hover:text-white transition-colors group text-xs font-black uppercase tracking-[0.2em]"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Бозгашт ба Феҳристи Дороиҳо
+          Return to Asset Registry
         </button>
 
         {/* DETAILED HEADER */}
@@ -478,15 +220,15 @@ export function RealEstateView() {
           <div className="space-y-4">
             <div className="flex items-center gap-4 text-white/20">
                <Icon className="w-4 h-4 text-[#F0B90B]" />
-               <span className="text-[11px] font-black uppercase tracking-[0.6em]">{selectedDef.name} _Идоракунии Дороиҳо</span>
+               <span className="text-[11px] font-black uppercase tracking-[0.6em]">{selectedDef.name} _Asset Management</span>
             </div>
-            <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">НАЗОРАТИ_ДОРОӢ</h1>
+            <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">ASSET_CONTROL_CENTER</h1>
           </div>
           
           <div className="text-left sm:text-right">
-             <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2">Даромади Ғайрифаъоли Иҷора (Умумӣ)</div>
+             <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2">Aggregate Passive Rental Income</div>
              <div className="text-2xl sm:text-4xl font-black font-mono text-[#F0B90B]">
-               +${(currentSingleRent * (selectedOwned.rentedCount ?? 0) * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/моҳ</span>
+               +${(currentSingleRent * (selectedOwned.rentedCount ?? 0) * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/month</span>
              </div>
           </div>
         </div>
@@ -498,39 +240,39 @@ export function RealEstateView() {
              <MonolithCard className="p-6 sm:p-10 space-y-6 border-[#F0B90B]/20 bg-[#F0B90B]/[0.02]">
                 <div className="flex items-center justify-between border-b border-white/5 pb-4">
                    <h3 className="text-lg font-black uppercase tracking-widest text-white/90 italic flex items-center gap-2">
-                      <Coins className="w-5 h-5 text-[#F0B90B]" /> Иҷораи Динамикӣ ва Танзими Стратегия
+                       <Coins className="w-5 h-5 text-[#F0B90B]" /> Dynamic Leasing & Strategic Allocations
                    </h3>
-                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Воҳидҳои Фаъол: {selectedOwned.owned}</span>
+                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Active Units: {selectedOwned.owned}</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                    <div className="space-y-3">
-                      <p className="text-xs text-white/60 font-mono leading-relaxed">
-                         Воҳидҳои худро байни тавлиди пули нақд ва мултипликаторҳои нуфуз тақсим кунед:
-                      </p>
-                      <div className="space-y-1 text-[11px] font-mono text-white/40">
-                         <div className="flex justify-between">
-                            <span>💼 Иҷора / Омода барои тиҷорат:</span>
-                            <span className="text-[#F0B90B] font-bold">{selectedOwned.rentedCount} воҳидҳо</span>
-                         </div>
-                         <div className="flex justify-between">
-                            <span>🏡 Истифодаи Шахсӣ / Иқоматгоҳи Шахсӣ:</span>
-                            <span className="text-white font-bold">{personalUnits} {isHome && personalUnits === 1 ? "воҳид (Иқоматгоҳи Асосӣ)" : "воҳидҳо"}</span>
-                         </div>
-                      </div>
-                      
-                      {isHome && selectedOwned.owned === 1 && (
-                         <div className="p-3 border border-[#F0B90B]/20 bg-[#F0B90B]/5 text-[10px] text-[#F0B90B] font-mono rounded-sm leading-relaxed uppercase tracking-wider flex items-center gap-2">
-                            <ShieldAlert className="w-4 h-4 animate-pulse flex-shrink-0" />
-                            Протоколи Иқомат: Аввалин хонаи шумо ҳамчун хонаи шахсии шумо фармоиш дода мешавад. Барои фаъол кардани иҷора, боз як воҳиди дигарро аз ин макон харед!
-                         </div>
-                      )}
+                       <p className="text-xs text-white/60 font-mono leading-relaxed">
+                          Allocate your assets between cash flow generation and prestige multipliers:
+                       </p>
+                       <div className="space-y-1 text-[11px] font-mono text-white/40">
+                          <div className="flex justify-between">
+                             <span>💼 Market Lease (Yield generating):</span>
+                             <span className="text-[#F0B90B] font-bold">{selectedOwned.rentedCount} units</span>
+                          </div>
+                          <div className="flex justify-between">
+                             <span>🏡 Personal Use (Prestige generating):</span>
+                             <span className="text-white font-bold">{personalUnits} {isHome && personalUnits === 1 ? "unit (Primary Residence)" : "units"}</span>
+                          </div>
+                       </div>
+                       
+                       {isHome && selectedOwned.owned === 1 && (
+                          <div className="p-3 border border-[#F0B90B]/20 bg-[#F0B90B]/5 text-[10px] text-[#F0B90B] font-mono rounded-sm leading-relaxed uppercase tracking-wider flex items-center gap-2">
+                             <ShieldAlert className="w-4 h-4 animate-pulse flex-shrink-0" />
+                             Primary Residence Lockout: Your first acquired residential asset is reserved as your personal home. To start leasing, acquire additional units at this location!
+                          </div>
+                       )}
                    </div>
 
                    {/* CONTROLS BUTTON GROUP */}
                    <div className="bg-[#2B2F36]/50 border border-white/5 p-6 rounded-sm flex items-center justify-between gap-6">
                       <div className="flex flex-col">
-                         <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Таносуби Иҷора</span>
+                         <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest mb-1">Lease Ratio</span>
                          <span className="text-2xl font-black font-mono text-white/80">{selectedOwned.rentedCount} / {selectedOwned.owned}</span>
                       </div>
                       
@@ -539,7 +281,7 @@ export function RealEstateView() {
                            onClick={() => recallUnit(selectedDef.id)}
                            disabled={selectedOwned.rentedCount <= 0}
                            className="w-12 h-12 border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white font-mono font-black text-lg flex items-center justify-center rounded-sm transition-all disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer"
-                           title="Бозхонд ба истифодаи шахсӣ (-1 воҳиди иҷора, +Нуфуз)"
+                           title="Recall from lease (-1 leased unit, +Prestige)"
                          >
                            -
                          </button>
@@ -547,7 +289,7 @@ export function RealEstateView() {
                            onClick={() => leaseUnit(selectedDef.id)}
                            disabled={selectedOwned.rentedCount >= maxRentable}
                            className="w-12 h-12 border border-white/10 hover:border-[#F0B90B]/50 hover:bg-[#F0B90B]/10 text-white font-mono font-black text-lg flex items-center justify-center rounded-sm transition-all disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer"
-                           title={isHome && selectedOwned.owned <= 1 ? "Протоколи Иқомат: Воҳиди аввал банд аст" : "Интиқол ба бозори иҷора (+1 воҳиди иҷора)"}
+                           title={isHome && selectedOwned.owned <= 1 ? "Primary Residence Lockout: First unit is reserved" : "Deploy to market lease (+1 leased unit)"}
                          >
                            +
                          </button>
@@ -560,89 +302,89 @@ export function RealEstateView() {
              <MonolithCard className="p-4 sm:p-10 space-y-8 bg-gradient-to-br from-[#F0B90B]/[0.01] to-transparent border-[#F0B90B]/10">
                 <div className="flex items-center justify-between border-b border-white/5 pb-6">
                    <h3 className="text-xl font-bold uppercase tracking-wide flex items-center gap-3 text-[#F0B90B]">
-                     <Sparkles className="w-6 h-6 text-[#F0B90B] animate-pulse" /> Фардикунонии Дороӣ ва Танзими Самаранокӣ
+                     <Sparkles className="w-6 h-6 text-[#F0B90B] animate-pulse" /> Asset Upgrades & Performance Optimization
                    </h3>
-                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Матритсаи Муҳандисии Оптимизатсияшуда</span>
+                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Optimized Mechanical Matrix</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                    {/* RENOVATIONS / PERFORMANCE */}
                    <div className="p-6 bg-white/[0.01] border border-white/5 hover:border-[#F0B90B]/20 rounded-sm flex flex-col justify-between transition-all group">
-                      <div className="space-y-3">
-                         <div className="flex items-center justify-between">
-                            <h4 className="text-lg font-black uppercase tracking-wider text-white/90 group-hover:text-[#F0B90B] transition-colors flex items-center gap-2">
-                               <Sparkles className="w-4 h-4 text-[#F0B90B]" /> {selectedDef.category === "property" ? "Навсозӣ" : "Танзими Самаранокӣ"}
-                            </h4>
-                            <span className="text-[10px] font-black uppercase tracking-widest bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 px-2 py-0.5 rounded-sm">
-                               Сатҳи {selectedOwned.renovationLevel ?? 0}
-                            </span>
-                         </div>
-                         <p className="text-xs text-white/50 font-mono leading-relaxed">
-                            {selectedDef.category === "property" ? (
-                              "Такмили меъморӣ ва беҳбудии эстетикиро иҷро кунед. Нархи бозорро баланд мебардорад ва даромади иҷораро дар як сатҳ +12% зиёд мекунад."
-                            ) : (
-                              "Upgrade системаҳои барқӣ, матритсаҳои автономии роҳнамоии AI ва панелҳои карбон. Даромади чартериро дар як сатҳ +12% зиёд мекунад."
-                            )}
-                         </p>
-                      </div>
+                       <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                             <h4 className="text-lg font-black uppercase tracking-wider text-white/90 group-hover:text-[#F0B90B] transition-colors flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-[#F0B90B]" /> {selectedDef.category === "property" ? "Renovations" : "Performance Tuning"}
+                             </h4>
+                             <span className="text-[10px] font-black uppercase tracking-widest bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 px-2 py-0.5 rounded-sm">
+                                Level {selectedOwned.renovationLevel ?? 0}
+                             </span>
+                          </div>
+                          <p className="text-xs text-white/50 font-mono leading-relaxed">
+                             {selectedDef.category === "property" ? (
+                               "Perform structural and aesthetic upgrades. Enhances market appraisal value and expands rental yield by +12% per level."
+                             ) : (
+                               "Upgrade avionics/propulsion, autonomous AI flight matrices, and lightweight carbon composites. Increases charter yield by +12% per level."
+                             )}
+                          </p>
+                       </div>
 
-                      <button
-                        onClick={() => renovateProperty(selectedDef.id, upgradeRenovationCost)}
-                        disabled={balance < upgradeRenovationCost || (selectedOwned.owned ?? 0) <= 0}
-                        className={`w-full mt-6 px-4 py-3 border font-black text-[10px] uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer ${
-                          balance >= upgradeRenovationCost && (selectedOwned.owned ?? 0) > 0
-                            ? "border-[#F0B90B] bg-[#F0B90B]/10 text-[#F0B90B] hover:bg-[#F0B90B] hover:text-black shadow-[0_0_20px_rgba(240,185,11,0.05)]"
-                            : "border-white/5 bg-white/[0.01] text-white/20 cursor-not-allowed"
-                        }`}
-                      >
-                         Оптимизатсия: ${upgradeRenovationCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                         <ArrowUpRight className="w-3.5 h-3.5" />
-                      </button>
-                   </div>
+                       <button
+                         onClick={() => renovateProperty(selectedDef.id, upgradeRenovationCost)}
+                         disabled={balance < upgradeRenovationCost || (selectedOwned.owned ?? 0) <= 0}
+                         className={`w-full mt-6 px-4 py-3 border font-black text-[10px] uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer ${
+                           balance >= upgradeRenovationCost && (selectedOwned.owned ?? 0) > 0
+                             ? "border-[#F0B90B] bg-[#F0B90B]/10 text-[#F0B90B] hover:bg-[#F0B90B] hover:text-black shadow-[0_0_20px_rgba(240,185,11,0.05)]"
+                             : "border-white/5 bg-white/[0.01] text-white/20 cursor-not-allowed"
+                         }`}
+                       >
+                          Optimize: ${upgradeRenovationCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                       </button>
+                    </div>
 
                    {/* TENANT UPGRADE / LUXURY OPTIMIZATION */}
                    <div className="p-6 bg-white/[0.01] border border-white/5 hover:border-[#F0B90B]/20 rounded-sm flex flex-col justify-between transition-all group">
-                      <div className="space-y-3">
-                         <div className="flex items-center justify-between">
-                            <h4 className="text-lg font-black uppercase tracking-wider text-white/90 group-hover:text-[#F0B90B] transition-colors flex items-center gap-2">
-                               <UserCheck className="w-4 h-4 text-[#F0B90B]" /> {selectedDef.category === "property" ? "Интихоби Иҷорагирон" : "Оптимизатсияи Шартнома"}
-                            </h4>
-                            <span className="text-[10px] font-black uppercase tracking-widest bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 px-2 py-0.5 rounded-sm">
-                               Сатҳи {selectedOwned.tenantQualityLevel ?? 0}
-                            </span>
-                         </div>
-                         <p className="text-xs text-white/50 font-mono leading-relaxed">
-                            {selectedDef.category === "property" ? (
-                              "Ҷалб намудани сокинони институтсионалӣ ё дорои эътибори баланди кредитӣ. Устувории сохтории иҷораро мустаҳкам мекунад ва афзоиши мураккаби арзиши амволро +8% зиёд менамояд."
-                            ) : (
-                              "Ба роҳ мондани шартномаҳои дарозмуддати парвозҳои роҳбарикунанда ё транзитӣ. Нишондиҳандаҳои арзёбиро мустаҳкам мекунад ва афзоиши мураккаби арзиши сармояро +8% зиёд менамояд."
-                            )}
-                         </p>
-                      </div>
+                       <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                             <h4 className="text-lg font-black uppercase tracking-wider text-white/90 group-hover:text-[#F0B90B] transition-colors flex items-center gap-2">
+                                <UserCheck className="w-4 h-4 text-[#F0B90B]" /> {selectedDef.category === "property" ? "Tenant Screening" : "Charter Optimization"}
+                             </h4>
+                             <span className="text-[10px] font-black uppercase tracking-widest bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 px-2 py-0.5 rounded-sm">
+                                Level {selectedOwned.tenantQualityLevel ?? 0}
+                             </span>
+                          </div>
+                          <p className="text-xs text-white/50 font-mono leading-relaxed">
+                             {selectedDef.category === "property" ? (
+                               "Attract creditworthy institutional tenants. Stabilizes rent occupancy and boosts compound asset appreciation by +8% per level."
+                             ) : (
+                               "Secure long-term corporate charters and bulk scheduling deals. Maximizes secondary asset valuation and capital appreciation by +8% per level."
+                             )}
+                          </p>
+                       </div>
 
-                      <button
-                        onClick={() => upgradePropertyTenants(selectedDef.id, upgradeTenantCost)}
-                        disabled={balance < upgradeTenantCost || (selectedOwned.owned ?? 0) <= 0}
-                        className={`w-full mt-6 px-4 py-3 border font-black text-[10px] uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer ${
-                          balance >= upgradeTenantCost && (selectedOwned.owned ?? 0) > 0
-                            ? "border-[#F0B90B] bg-[#F0B90B]/10 text-[#F0B90B] hover:bg-[#F0B90B] hover:text-black shadow-[0_0_20px_rgba(240,185,11,0.05)]"
-                            : "border-white/5 bg-white/[0.01] text-white/20 cursor-not-allowed"
-                        }`}
-                      >
-                         Танзими Шартнома: ${upgradeTenantCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                         <ArrowUpRight className="w-3.5 h-3.5" />
-                      </button>
-                   </div>
-                </div>
-             </MonolithCard>
-          </div>
+                       <button
+                         onClick={() => upgradePropertyTenants(selectedDef.id, upgradeTenantCost)}
+                         disabled={balance < upgradeTenantCost || (selectedOwned.owned ?? 0) <= 0}
+                         className={`w-full mt-6 px-4 py-3 border font-black text-[10px] uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 cursor-pointer ${
+                           balance >= upgradeTenantCost && (selectedOwned.owned ?? 0) > 0
+                             ? "border-[#F0B90B] bg-[#F0B90B]/10 text-[#F0B90B] hover:bg-[#F0B90B] hover:text-black shadow-[0_0_20px_rgba(240,185,11,0.05)]"
+                             : "border-white/5 bg-white/[0.01] text-white/20 cursor-not-allowed"
+                         }`}
+                       >
+                          Tenant/Charter Tuning: ${upgradeTenantCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                       </button>
+                    </div>
+                 </div>
+              </MonolithCard>
+           </div>
 
           {/* RIGHT: DETAILED STATS & VALUATION */}
           <div className="lg:col-span-4 space-y-8">
              {/* VALUATION STATISTICS */}
              <MonolithCard className="p-10 space-y-6">
                 <div className="flex items-center justify-between">
-                   <h3 className="text-lg font-bold uppercase tracking-wide">Профили Молиявӣ ва Дороӣ</h3>
+                   <h3 className="text-lg font-bold uppercase tracking-wide">Asset Financial Profile</h3>
                    {indexTrend !== 0 && (
                       <div className={`text-[10px] font-black font-mono flex items-center gap-1 ${indexTrend >= 0 ? 'text-[#F0B90B]' : 'text-red-400'}`}>
                          {indexTrend >= 0 ? "▲" : "▼"} {indexTrend >= 0 ? "+" : ""}{indexTrend.toFixed(1)}%
@@ -651,41 +393,41 @@ export function RealEstateView() {
                 </div>
                 <div className="space-y-4">
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Макон / Пойгоҳ:</span>
+                      <span className="text-white/30 font-mono">Location / Home Base:</span>
                       <span className="text-white font-mono truncate max-w-[180px]">{selectedDef.location}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Миқдори Дар даст Буда:</span>
-                      <span className="text-white font-mono font-bold">{selectedOwned.owned} воҳидҳо</span>
+                      <span className="text-white/30 font-mono">Quantity Held:</span>
+                      <span className="text-white font-mono font-bold">{selectedOwned.owned} units</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Нархи Харид (Воҳид):</span>
+                      <span className="text-white/30 font-mono">Unit Acquisition Cost:</span>
                       <span className="text-white font-mono">${selectedDef.purchasePrice.toLocaleString()}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Нархи Хариди Навбатӣ:</span>
+                      <span className="text-white/30 font-mono">Next Purchase Price:</span>
                       <span className="text-white font-mono">${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Арзиши Арзёбишуда (Воҳид):</span>
+                      <span className="text-white/30 font-mono">Unit Appraised Value:</span>
                       <span className="text-[#F0B90B] font-mono font-bold">${(selectedOwned.currentValue * (selectedOwned.appreciationMultiplier ?? 1.0)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Арзиши Умумии Фурӯш:</span>
+                      <span className="text-white/30 font-mono">Total Liquidation Value:</span>
                       <span className="text-[#F0B90B] font-mono">${sellValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Воҳидҳои Фаъоли Иҷора:</span>
-                      <span className="text-[#F0B90B] font-mono font-black">{selectedOwned.rentedCount} воҳидҳо</span>
+                      <span className="text-white/30 font-mono">Active Leased Units:</span>
+                      <span className="text-[#F0B90B] font-mono font-black">{selectedOwned.rentedCount} units</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Воҳидҳои Шахсии Фаъол:</span>
-                      <span className="text-white font-mono font-black">{personalUnits} воҳидҳо</span>
+                      <span className="text-white/30 font-mono">Active Personal Units:</span>
+                      <span className="text-white font-mono font-black">{personalUnits} units</span>
                    </div>
                    <div className="flex justify-between text-xs">
-                      <span className="text-white/30 font-mono">Сатҳи Хавф:</span>
+                      <span className="text-white/30 font-mono">Risk Rating:</span>
                       <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-sm border ${RISK_COLORS[selectedDef.risk]}`}>
-                         {selectedDef.risk === "Low" ? "Паст" : selectedDef.risk === "Medium" ? "Миёна" : "Баланд"}
+                         {selectedDef.risk}
                       </span>
                    </div>
                 </div>
@@ -694,13 +436,13 @@ export function RealEstateView() {
              {/* STRATEGIC INTEL */}
              <MonolithCard className="p-10 space-y-6 bg-gradient-to-br from-[#F0B90B]/[0.01] to-transparent">
                 <h3 className="text-lg font-semibold uppercase tracking-wide flex items-center gap-2 text-[#F0B90B]">
-                   <Award className="w-5 h-5" /> Маълумоти Стратегии Дороӣ
+                   <Award className="w-5 h-5" /> Asset Strategic Intelligence
                 </h3>
                 <p className="text-xs text-white/60 font-mono leading-relaxed">
                    {selectedDef.strategyDocs}
                 </p>
                 <div className="pt-4 border-t border-white/5 text-[10px] font-mono text-white/40 flex items-center justify-between">
-                   <span>НИШОНДИҲАНДАИ АСОСӢ:</span>
+                   <span>PRIMARY PERFORMANCE METRIC:</span>
                    <span className="text-white font-bold">{selectedDef.realWorldMetric}</span>
                 </div>
              </MonolithCard>
@@ -716,7 +458,7 @@ export function RealEstateView() {
                       : "border-white/5 text-white/10 bg-white/[0.01] cursor-not-allowed"
                   }`}
                 >
-                  Хариди Воҳид: ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  Acquire Unit: ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
 
@@ -734,7 +476,7 @@ export function RealEstateView() {
                       : "border-white/5 text-white/10 bg-white/[0.01] cursor-not-allowed"
                   }`}
                 >
-                  Фурӯши 1 Воҳид: +${(sellValue / selectedOwned.owned).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  Liquidate 1 Unit: +${(sellValue / selectedOwned.owned).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   <ArrowDownRight className="w-4 h-4" />
                 </button>
              </div>
@@ -751,27 +493,27 @@ export function RealEstateView() {
         <div className="space-y-4">
           <div className="flex items-center gap-4 text-white/20">
              <Landmark className="w-4 h-4" />
-             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">Дафтари_Дороиҳои_Система_Тарзи_Ҳаёт</span>
+             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">System_Asset_Registry_Lifestyle</span>
           </div>
-          <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">АМВОЛИ БОҲАШАМАТ & ХОНАҲО</h1>
+          <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">LIFESTYLE & REAL ESTATE</h1>
         </div>
         
         <div className="text-left md:text-right mt-4 md:mt-0 flex gap-8 items-center">
            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2 flex items-center md:justify-end gap-2">
-                <Award className="w-3.5 h-3.5 animate-pulse" /> Афзоиши_Нуфуз
-              </div>
-              <div className="text-4xl font-black font-mono text-white">
-                +{prestigeScore}%<span className="text-xl text-white/50"> Мулт</span>
-              </div>
+               <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2 flex items-center md:justify-end gap-2">
+                 <Award className="w-3.5 h-3.5 animate-pulse" /> Prestige_Index
+               </div>
+               <div className="text-4xl font-black font-mono text-white">
+                 +{prestigeScore}%<span className="text-xl text-white/50"> Mult</span>
+               </div>
            </div>
            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2 flex items-center md:justify-end gap-2">
-                <Sparkles className="w-3 h-3 animate-pulse" /> Ҷараёни_Умумии_Иҷора
-              </div>
-              <div className="text-4xl font-black font-mono text-[#F0B90B]">
-                +${(totalRent * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/моҳ</span>
-              </div>
+               <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2 flex items-center md:justify-end gap-2">
+                 <Sparkles className="w-3 h-3 animate-pulse" /> Aggregate_Rental_Yield
+               </div>
+               <div className="text-4xl font-black font-mono text-[#F0B90B]">
+                 +${(totalRent * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/month</span>
+               </div>
            </div>
         </div>
       </div>
@@ -779,7 +521,7 @@ export function RealEstateView() {
       {/* REAL-TIME INFLATION MARKET TICKER */}
       <div className="w-full bg-[#F0B90B]/5 border border-[#F0B90B]/20 py-3.5 px-6 rounded-sm flex items-center gap-3 overflow-hidden">
          <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] shrink-0 bg-[#F0B90B]/10 px-2.5 py-1 border border-[#F0B90B]/20 rounded-sm">
-            <LineChart className="w-3.5 h-3.5 animate-pulse" /> ТЕЛЕМЕТРИЯИ МУСТАҚИМ
+            <LineChart className="w-3.5 h-3.5 animate-pulse" /> LIVE BROADCAST
          </div>
          <div className="text-[11px] font-mono text-[#F0B90B]/90 tracking-wide font-medium marquee-scroll truncate">
             {inflationTicker}
@@ -796,7 +538,7 @@ export function RealEstateView() {
                : "border-white/5 text-white/30 hover:text-white"
            }`}
          >
-           <Building2 className="w-4 h-4" /> 🏢 Амволи Ғайриманқул & Шалеҳо
+           <Building2 className="w-4 h-4" /> 🏢 Real Estate & Properties
          </button>
          <button 
            onClick={() => setActiveCategory("lifestyle")}
@@ -806,7 +548,7 @@ export function RealEstateView() {
                : "border-white/5 text-white/30 hover:text-white"
            }`}
          >
-           <Car className="w-4 h-4" /> 🏎️ Гараж & Мошинҳои Боҳашамат
+           <Car className="w-4 h-4" /> 🏎️ Luxury Fleet & Hangars
          </button>
       </div>
 
@@ -818,7 +560,7 @@ export function RealEstateView() {
             <Search className="w-4 h-4 text-white/20 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input 
               type="text" 
-              placeholder="Ҷустуҷӯи дороиҳо ё макон..."
+              placeholder="Search properties or locations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white placeholder-white/20 font-mono outline-none transition-all"
@@ -833,20 +575,20 @@ export function RealEstateView() {
               onChange={(e) => setSubTypeFilter(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="all">Ҳамаи зер-намудҳо</option>
+              <option value="all">All Sub-Types</option>
               {activeCategory === "property" ? (
                 <>
-                  <option value="residential">Истиқоматӣ</option>
-                  <option value="commercial">Тиҷоратӣ</option>
-                  <option value="luxury">Шалеҳо & Виллаҳои Боҳашамат</option>
-                  <option value="industrial">Инфрасохтори Саноатӣ</option>
+                  <option value="residential">Residential</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="luxury">Luxury Chalets & Villas</option>
+                  <option value="industrial">Industrial Facilities</option>
                 </>
               ) : (
                 <>
-                  <option value="supercar">Суперкарҳо & SUV-ҳо</option>
-                  <option value="hypercar">Гиперкарҳои Самаранокӣ</option>
-                  <option value="yacht">Яхтаҳои Боҳашамати Офтобӣ</option>
-                  <option value="jet">Ҷетҳои Шахсии Аэро</option>
+                  <option value="supercar">Supercars & Luxury SUVs</option>
+                  <option value="hypercar">Performance Hypercars</option>
+                  <option value="yacht">Luxury Solar Yachts</option>
+                  <option value="jet">Private Aviation Jets</option>
                 </>
               )}
             </select>
@@ -860,11 +602,11 @@ export function RealEstateView() {
               onChange={(e) => setOwnershipFilter(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="all">Моликият: Ҳамаи Дороиҳо</option>
-              <option value="owned">Танҳо Дороиҳои Шахсӣ</option>
-              <option value="leased">Танҳо Иҷораҳои Фаъол</option>
-              <option value="personal">Танҳо Иқоматгоҳҳои Шахсӣ</option>
-              <option value="unowned">Танҳо Воҳидҳои Қулфшуда</option>
+              <option value="all">Ownership: All Assets</option>
+              <option value="owned">Personal Use Only</option>
+              <option value="leased">Leases Active Only</option>
+              <option value="personal">Primary Residence Only</option>
+              <option value="unowned">Locked Units Only</option>
             </select>
           </div>
 
@@ -876,17 +618,17 @@ export function RealEstateView() {
               onChange={(e) => setSortBy(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="price-asc">Нарх: Аз Паст ба Баланд</option>
-              <option value="price-desc">Нарх: Аз Баланд ба Паст</option>
-              <option value="rent-desc">Даромад: Аввал Баландтарин</option>
-              <option value="owned-desc">Миқдор: Аввал Аксарият</option>
+              <option value="price-asc">Cost: Low to High</option>
+              <option value="price-desc">Cost: High to Low</option>
+              <option value="rent-desc">Yield: High to Low</option>
+              <option value="owned-desc">Owned Quantity: High to Low</option>
             </select>
           </div>
         </div>
       </MonolithCard>
 
       {/* REGISTRY ASSET GRID */}
-      {paginatedAssets.length > 0 ? (
+      {filteredAndSortedAssets.length > 0 ? (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {paginatedAssets.map((asset) => {
             const ownedState = properties.find(p => p.id === asset.id);
@@ -922,7 +664,7 @@ export function RealEstateView() {
                      </div>
                      
                      <div className="text-right">
-                        <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Миқдори Дар даст Буда</div>
+                        <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Owned Units</div>
                         <div className="text-3xl font-black font-mono text-white/80">{owned}</div>
                      </div>
                   </div>
@@ -930,13 +672,13 @@ export function RealEstateView() {
                   {/* MATRIX RATIOS */}
                   <div className="grid grid-cols-3 gap-4 border-y border-white/5 py-6">
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Даромади Иҷора (Воҳид)</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Unit Rental Yield</div>
                         <div className="text-base font-black font-mono text-[#F0B90B]">
-                           +${(asset.rentPerSecond * 3600).toLocaleString()}/моҳ
+                           +${(asset.rentPerSecond * 3600).toLocaleString()}/month
                         </div>
                      </div>
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Арзиши Арзёбишуда</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Appraised Value</div>
                         <div className="text-base font-black font-mono text-white/85 flex items-center gap-1.5">
                            ${Math.floor(appraisedValue).toLocaleString()}
                            {trend !== 0 && (
@@ -947,9 +689,9 @@ export function RealEstateView() {
                         </div>
                      </div>
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Сатҳи Хавф</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Risk Profile</div>
                         <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-sm border ${RISK_COLORS[asset.risk]}`}>
-                           {asset.risk === "Low" ? "Паст" : asset.risk === "Medium" ? "Миёна" : "Баланд"}
+                           {asset.risk}
                         </span>
                      </div>
                   </div>
@@ -958,16 +700,16 @@ export function RealEstateView() {
                   {owned > 0 && (
                      <div className="bg-[#F0B90B]/5 border border-[#F0B90B]/20 p-4 rounded-sm flex flex-col gap-2 font-mono text-xs">
                         <div className="flex justify-between text-white/40 border-b border-white/5 pb-2">
-                           <span>Таносуби Истифодаи Воҳидҳо:</span>
-                           <span className="text-[#F0B90B] font-bold uppercase">{owned} Санади Фаъол</span>
+                           <span>Unit Allocation Ratio:</span>
+                           <span className="text-[#F0B90B] font-bold uppercase">{owned} Active Deeds</span>
                         </div>
                         <div className="flex justify-between text-[11px] items-center">
-                           <span className="text-white/30">💼 Иҷораҳои Бозорӣ (Даромад меорад):</span>
-                           <span className="text-[#F0B90B] font-bold font-mono">{rentedCount} / {owned} воҳидҳо</span>
+                           <span className="text-white/30">💼 Market Leases (Yielding cash):</span>
+                           <span className="text-[#F0B90B] font-bold font-mono">{rentedCount} / {owned} units</span>
                         </div>
                         <div className="flex justify-between text-[11px] items-center">
-                           <span className="text-white/30">🏡 Истифодаи Шахсӣ (Афзоиши Нуфуз):</span>
-                           <span className="text-white font-bold font-mono">{owned - rentedCount} / {owned} воҳидҳо</span>
+                           <span className="text-white/30">🏡 Personal Use (Prestige boost):</span>
+                           <span className="text-white font-bold font-mono">{owned - rentedCount} / {owned} units</span>
                         </div>
                      </div>
                   )}
@@ -975,7 +717,7 @@ export function RealEstateView() {
                   {/* CASE STUDY */}
                   <div className="bg-white/[0.02] border border-white/5 p-5 rounded-sm space-y-3">
                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B]">
-                        <Award className="w-4 h-4" /> Таҳлили Академикии Кор
+                        <Award className="w-4 h-4" /> Academic Case Study
                      </div>
                      <p className="text-xs text-white/60 font-mono leading-relaxed">
                        {asset.educationalTakeaway}
@@ -986,7 +728,7 @@ export function RealEstateView() {
                 {/* TRANSACTIONS */}
                 <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                    <div className="flex flex-col">
-                      <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">Сармояи Харид</span>
+                      <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">Acquisition Cost</span>
                       <span className="text-2xl font-black font-mono text-white/80">
                         ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                       </span>
@@ -999,7 +741,7 @@ export function RealEstateView() {
                           className="flex-1 sm:flex-none px-6 py-4 border border-white/10 hover:border-[#F0B90B]/30 hover:bg-white/5 text-white font-black text-xs uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 min-h-[44px] active:scale-95 cursor-pointer"
                         >
                           <Sparkles className="w-3.5 h-3.5 text-[#F0B90B] animate-pulse" />
-                          Идора & Иҷора
+                          Manage & Lease
                         </button>
                       )}
                       
@@ -1012,7 +754,7 @@ export function RealEstateView() {
                             : "border-white/10 text-white/20 bg-white/5 cursor-not-allowed"
                         }`}
                       >
-                        Хариди Санад
+                        Acquire Deed
                         <ArrowUpRight className="w-4 h-4" />
                       </button>
                    </div>
@@ -1024,9 +766,9 @@ export function RealEstateView() {
       ) : (
         <MonolithCard className="p-16 text-center space-y-4 border-dashed border-white/10 bg-white/[0.01]">
            <ShieldAlert className="w-12 h-12 text-[#F0B90B]/35 mx-auto animate-pulse" />
-           <h3 className="text-xl font-bold uppercase tracking-wide text-white/80">Ҳеҷ Мутобиқате Ёфт Нашуд</h3>
+           <h3 className="text-xl font-bold uppercase tracking-wide text-white/80">No Matching Assets Found</h3>
            <p className="text-xs text-white/40 font-mono max-w-md mx-auto leading-relaxed">
-             Ҳеҷ амволи боҳашамат ё мошинҳои гараж ба параметрҳои ҷустуҷӯ, филтр ё танзимоти шумо мувофиқат намекунанд. Филтрҳои худро аз нав барқарор кунед.
+             No properties or luxury assets match your search parameters. Try resetting your search filters.
            </p>
            <button 
              onClick={() => {
@@ -1037,7 +779,7 @@ export function RealEstateView() {
              }}
              className="mt-4 px-6 py-2.5 border border-[#F0B90B]/30 hover:border-[#F0B90B] bg-[#F0B90B]/5 hover:bg-[#F0B90B]/10 text-[#F0B90B] text-xs font-black uppercase tracking-[0.2em] transition-all rounded-sm cursor-pointer"
            >
-             Барқароркунии Ҷустуҷӯ
+             Reset Search Filters
            </button>
         </MonolithCard>
       )}
@@ -1046,7 +788,7 @@ export function RealEstateView() {
       {filteredAndSortedAssets.length > itemsPerPage && (
         <div className="flex justify-between items-center border-t border-white/5 pt-6 font-mono text-[11px] text-white/40">
            <div>
-              Нишон додани <span className="text-[#F0B90B] font-bold">{Math.min(filteredAndSortedAssets.length, (currentPage - 1) * itemsPerPage + 1)}-{Math.min(filteredAndSortedAssets.length, currentPage * itemsPerPage)}</span> аз <span className="text-white font-bold">{filteredAndSortedAssets.length}</span> дороиҳои мувофиқ
+              Showing <span className="text-[#F0B90B] font-bold">{Math.min(filteredAndSortedAssets.length, (currentPage - 1) * itemsPerPage + 1)}-{Math.min(filteredAndSortedAssets.length, currentPage * itemsPerPage)}</span> of <span className="text-white font-bold">{filteredAndSortedAssets.length}</span> matching assets
            </div>
            
            <div className="flex items-center gap-1">

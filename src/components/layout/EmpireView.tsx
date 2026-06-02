@@ -225,7 +225,7 @@ export function EmpireView() {
           className="flex items-center gap-3 text-white/40 hover:text-white transition-colors group text-xs font-black uppercase tracking-[0.2em]"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Бозгашт ба Матритсаи Амалиётӣ
+          Return to Operations Matrix
         </button>
 
         {/* HEADER DETAILED */}
@@ -233,15 +233,15 @@ export function EmpireView() {
           <div className="space-y-4">
             <div className="flex items-center gap-4 text-white/20">
                <Icon className="w-4 h-4 text-[#F0B90B]" />
-               <span className="text-[11px] font-black uppercase tracking-[0.6em]">{selectedDef.name} _Барқарорсозӣ</span>
+               <span className="text-[11px] font-black uppercase tracking-[0.6em]">{selectedDef.name} _Restructuring</span>
             </div>
-            <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">ПАЙВАСТКУНАКИ_КОРХОНА</h1>
+            <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">ENTERPRISE_CONNECTOR</h1>
           </div>
           
           <div className="text-left sm:text-right">
-             <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2">Даромади Гурӯҳ / Моҳ</div>
+             <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2">Group Revenue / Month</div>
              <div className="text-2xl sm:text-4xl font-black font-mono text-[#F0B90B]">
-               +${(currentSingleYield * (selectedOwned.owned ?? 0) * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/моҳ</span>
+               +${(currentSingleYield * (selectedOwned.owned ?? 0) * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/month</span>
              </div>
           </div>
         </div>
@@ -252,9 +252,9 @@ export function EmpireView() {
              <MonolithCard className="p-4 sm:p-10 space-y-8 bg-gradient-to-br from-white/[0.01] to-transparent border-[#F0B90B]/10">
                 <div className="flex items-center justify-between border-b border-white/5 pb-6">
                    <h3 className="text-xl font-bold uppercase tracking-wide flex items-center gap-3">
-                     <Brain className="w-6 h-6 text-[#F0B90B] animate-pulse" /> Ёрдамчии AI-и Барқарорсозии VANTAGE
+                     <Brain className="w-6 h-6 text-[#F0B90B] animate-pulse" /> VANTAGE AI RESTRUCTURING ASSISTANT
                    </h3>
-                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Бо дастгирии Gemini</span>
+                   <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">Powered by Gemini</span>
                 </div>
 
                 {isLoadingAI ? (
@@ -292,9 +292,9 @@ export function EmpireView() {
                                    onClick={() => {
                                       applyCorporateStrategy(selectedDef.id, strategy.id, strategy.cost, strategy.yieldBoostPercent);
                                       setSimulatedLogs(prev => [
-                                         `[${new Date().toLocaleTimeString()}] [RESTRENGTHEN] Дастури AI иҷро шуд: "${strategy.title}"`,
-                                         `[OK] Нархи стратегия тарҳ шуд: $${strategy.cost.toLocaleString()}`,
-                                         `[SUCCESS] Мултипликатори даромад навсозӣ шуд: +${strategy.yieldBoostPercent}%`,
+                                         `[${new Date().toLocaleTimeString()}] [RESTRENGTHEN] AI directive executed: "${strategy.title}"`,
+                                         `[OK] Strategy cost deducted: $${strategy.cost.toLocaleString()}`,
+                                         `[SUCCESS] Revenue multiplier updated: +${strategy.yieldBoostPercent}%`,
                                          ...prev
                                       ]);
                                    }}
@@ -305,7 +305,7 @@ export function EmpireView() {
                                        : "border-white/5 bg-white/[0.01] text-white/20 cursor-not-allowed"
                                    }`}
                                  >
-                                    Иҷрои Стратегия: ${strategy.cost.toLocaleString()}
+                                    Execute Strategy: ${strategy.cost.toLocaleString()}
                                     <ArrowUpRight className="w-3.5 h-3.5" />
                                  </button>
                               </div>
@@ -319,7 +319,7 @@ export function EmpireView() {
              {/* LIVE TERMINAL LOG PANEL */}
              <MonolithCard className="p-10 space-y-6">
                 <h3 className="text-xl font-bold uppercase tracking-wide flex items-center gap-3">
-                  <TermIcon className="w-5 h-5 text-white/40" /> Журнали Амалиётҳои ФАЪОЛ
+                  <TermIcon className="w-5 h-5 text-white/40" /> Active Operations Log
                 </h3>
                 <div className="bg-[#0B0E11] border border-white/5 p-6 rounded-sm h-[200px] overflow-y-auto font-mono text-xs text-[#F0B90B]/80 space-y-2 no-scrollbar">
                    {simulatedLogs.map((log, idx) => (
@@ -333,30 +333,30 @@ export function EmpireView() {
           <div className="lg:col-span-4 space-y-8">
              {/* STATS MATRIX */}
              <MonolithCard className="p-10 space-y-6">
-                <h3 className="text-lg font-bold uppercase tracking-wide mb-4">Омори Дороиҳо</h3>
+                <h3 className="text-lg font-bold uppercase tracking-wide mb-4">Asset Metrics</h3>
                 <div className="space-y-4">
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Корхонаҳои соҳибшуда:</span>
+                      <span className="text-white/30 font-mono">Owned enterprises:</span>
                       <span className="text-white font-mono font-bold">{selectedOwned.owned}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Нархи Воҳид:</span>
+                      <span className="text-white/30 font-mono">Unit Acquisition Cost:</span>
                       <span className="text-white font-mono">${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Арзиши Фурӯши Дубора:</span>
+                      <span className="text-white/30 font-mono">Secondary Liquidation Value:</span>
                       <span className="text-[#F0B90B] font-mono">${sellValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Мултипликатори Умумӣ:</span>
+                      <span className="text-white/30 font-mono">Aggregate Multiplier:</span>
                       <span className="text-[#F0B90B] font-mono font-bold">{(selectedOwned.customYieldMultiplier ?? 1.0).toFixed(2)}x</span>
                    </div>
                    <div className="flex justify-between border-b border-white/5 pb-2 text-xs">
-                      <span className="text-white/30 font-mono">Суръати Даромади Умумӣ:</span>
-                      <span className="text-[#F0B90B] font-mono font-black">${(currentSingleYield * (selectedOwned.owned ?? 0) * 3600).toFixed(1)}/моҳ</span>
+                      <span className="text-white/30 font-mono">Aggregate Yield Rate:</span>
+                      <span className="text-[#F0B90B] font-mono font-black">${(currentSingleYield * (selectedOwned.owned ?? 0) * 3600).toFixed(1)}/month</span>
                    </div>
                    <div className="flex justify-between text-xs">
-                      <span className="text-white/30 font-mono">Профили Хавф:</span>
+                      <span className="text-white/30 font-mono">Risk Profile:</span>
                       <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-sm border ${RISK_COLORS[selectedDef.risk]}`}>
                          {selectedDef.risk}
                       </span>
@@ -367,13 +367,13 @@ export function EmpireView() {
              {/* CORPORATE INTEL */}
              <MonolithCard className="p-10 space-y-6 bg-gradient-to-br from-[#F0B90B]/[0.01] to-transparent">
                 <h3 className="text-lg font-semibold uppercase tracking-wide flex items-center gap-2 text-[#F0B90B]">
-                   <Award className="w-5 h-5" /> Маълумоти Молиявӣ
+                   <Award className="w-5 h-5" /> Financial Intelligence
                 </h3>
                 <p className="text-xs text-white/60 font-mono leading-relaxed">
                    {selectedDef.strategyDocs}
                 </p>
                 <div className="pt-4 border-t border-white/5 text-[10px] font-mono text-white/40 flex items-center justify-between">
-                   <span>КОЭФФИТСИЕНТИ МЕЪЁРӢ:</span>
+                   <span>STANDARDIZED METRIC:</span>
                    <span className="text-white font-bold">{selectedDef.realWorldMetric}</span>
                 </div>
              </MonolithCard>
@@ -389,7 +389,7 @@ export function EmpireView() {
                       : "border-white/5 text-white/10 bg-white/[0.01] cursor-not-allowed"
                   }`}
                 >
-                  Харидани Корхона: ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  Acquire Enterprise: ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
 
@@ -407,7 +407,7 @@ export function EmpireView() {
                       : "border-white/5 text-white/10 bg-white/[0.01] cursor-not-allowed"
                   }`}
                 >
-                  Барҳам додани Корхона: +${sellValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  Liquidate Enterprise: +${sellValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                   <ArrowDownRight className="w-4 h-4" />
                 </button>
              </div>
@@ -424,19 +424,19 @@ export function EmpireView() {
         <div className="space-y-4">
           <div className="flex items-center gap-4 text-white/20">
              <Network className="w-4 h-4 animate-pulse" />
-             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">Матритсаи_Инфрасохтори_Система</span>
+             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#848E9C]">System_Infrastructure_Matrix</span>
           </div>
-          <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">ИМПЕРИЯИ_ТИҶОРАТӢ</h1>
+          <h1 className="text-3xl sm:text-6xl font-extrabold text-[#EAECEF] tracking-tight ">BUSINESS_EMPIRE</h1>
           <div className="inline-flex items-center gap-2 text-[9px] font-semibold uppercase tracking-wide text-[#F0B90B] border border-[#F0B90B]/20 bg-[#F0B90B]/5 px-3 py-1 rounded-sm">
-             <Clock className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '60s' }} /> ⌬ ДАВРАИ ФАЪОЛИЯТ: 1 Моҳ = 1 Соат (1 Рӯз = 120 Сония)
+             <Clock className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '60s' }} /> ⌬ OPERATIONS CYCLE: 1 Month = 1 Hour (1 Day = 120 Seconds)
           </div>
         </div>
         <div className="text-left md:text-right mt-4 md:mt-0">
            <div className="text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B] mb-2 flex items-center md:justify-end gap-2">
-             <Zap className="w-3.5 h-3.5 animate-pulse" /> Даромади_Умумӣ
+             <Zap className="w-3.5 h-3.5 animate-pulse" /> Aggregate_Revenue
            </div>
            <div className="text-4xl font-black font-mono text-[#F0B90B]">
-             +${(totalYield * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/моҳ</span>
+             +${(totalYield * 3600).toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xl text-[#F0B90B]/50">/month</span>
            </div>
         </div>
       </div>
@@ -449,7 +449,7 @@ export function EmpireView() {
             <Search className="w-4 h-4 text-white/20 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input 
               type="text" 
-              placeholder="Ҷустуҷӯи тиҷоратҳо..."
+              placeholder="Search enterprises..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white placeholder-white/20 font-mono outline-none transition-all"
@@ -464,11 +464,11 @@ export function EmpireView() {
               onChange={(e) => setTypeFilter(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="all">Ҳамаи намудҳои инфрасохтор</option>
-              <option value="data_center">SaaS ва CDN-ҳо</option>
-              <option value="orbital_satellite">FinTech ва PropTech</option>
-              <option value="quantum_rig">Лабораторияҳои Квантӣ</option>
-              <option value="ai_cluster">AGI ва Системаҳои Захиравӣ</option>
+              <option value="all">All Infrastructure Types</option>
+              <option value="data_center">SaaS and CDNs</option>
+              <option value="orbital_satellite">FinTech and PropTech</option>
+              <option value="quantum_rig">Quantum Laboratories</option>
+              <option value="ai_cluster">AGI and Reserve Clusters</option>
             </select>
           </div>
 
@@ -480,9 +480,9 @@ export function EmpireView() {
               onChange={(e) => setOwnershipFilter(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="all">Моликият: Ҳамаи Корхонаҳо</option>
-              <option value="owned">Танҳо Корхонаҳои Ман</option>
-              <option value="unowned">Танҳо Корхонаҳои Қулфшуда</option>
+              <option value="all">Ownership: All Enterprises</option>
+              <option value="owned">My Enterprises Only</option>
+              <option value="unowned">Locked Enterprises Only</option>
             </select>
           </div>
 
@@ -494,17 +494,17 @@ export function EmpireView() {
               onChange={(e) => setSortBy(e.target.value)}
               className="w-full bg-[#2B2F36]/40 border border-white/10 hover:border-white/20 focus:border-[#F0B90B]/50 rounded-sm pl-10 pr-4 py-2.5 text-xs text-white font-mono outline-none transition-all appearance-none cursor-pointer"
             >
-              <option value="price-asc">Нарх: Аз арзон ба қимат</option>
-              <option value="price-desc">Нарх: Аз қимат ба арзон</option>
-              <option value="yield-desc">Даромад: Аввал даромади баланд</option>
-              <option value="owned-desc">Миқдори соҳибшуда: Аввал аз ҳама зиёд</option>
+              <option value="price-asc">Cost: Low to High</option>
+              <option value="price-desc">Cost: High to Low</option>
+              <option value="yield-desc">Yield: High to Low</option>
+              <option value="owned-desc">Owned: High to Low</option>
             </select>
           </div>
         </div>
       </MonolithCard>
 
       {/* MINIMALISTIC BUSINESS TILES */}
-      {paginatedNodes.length > 0 ? (
+      {filteredAndSortedNodes.length > 0 ? (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {paginatedNodes.map((node) => {
             const owned = infrastructure.find(n => n.id === node.id)?.owned || 0;
@@ -530,7 +530,7 @@ export function EmpireView() {
                      </div>
                      
                      <div className="text-right">
-                        <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Корхонаҳои соҳибшуда</div>
+                        <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Owned Units</div>
                         <div className="text-3xl font-black font-mono text-white/80">{owned}</div>
                      </div>
                   </div>
@@ -538,15 +538,15 @@ export function EmpireView() {
                   {/* METRICS & RATIOS GRID */}
                   <div className="grid grid-cols-3 gap-4 border-y border-white/5 py-6">
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Суръати Даромад</div>
-                        <div className="text-base font-black font-mono text-[#F0B90B]">+${(node.yieldPerSecond * 3600).toLocaleString()}/моҳ</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Base Yield Rate</div>
+                        <div className="text-base font-black font-mono text-[#F0B90B]">+${(node.yieldPerSecond * 3600).toLocaleString()}/month</div>
                      </div>
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Коэффитсиенти LTV/CAC</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">LTV/CAC Ratio</div>
                         <div className="text-base font-black font-mono text-white/85">{node.ltvCac}</div>
                      </div>
                      <div>
-                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Профили Хавф</div>
+                        <div className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Risk Profile</div>
                         <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-sm border ${RISK_COLORS[node.risk]}`}>
                            {node.risk}
                         </span>
@@ -556,7 +556,7 @@ export function EmpireView() {
                   {/* EDUCATIONAL DIRECTIVE */}
                   <div className="bg-white/[0.02] border border-white/5 p-5 rounded-sm space-y-3">
                      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wide text-[#F0B90B]">
-                        <Award className="w-4 h-4" /> Маълумоти Молиявии Корпоративӣ
+                        <Award className="w-4 h-4" /> Corporate Financial Intel
                      </div>
                      <p className="text-xs text-white/60 font-mono leading-relaxed">
                        {node.educationalTakeaway}
@@ -569,7 +569,7 @@ export function EmpireView() {
                    {/* Row 1: Capital info & owned status check */}
                    <div className="flex justify-between items-center">
                       <div className="flex flex-col">
-                         <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">Сармояи Зарурӣ</span>
+                         <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">Required Capital</span>
                          <span className="text-2xl font-black font-mono text-white/80">
                            ${currentCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                          </span>
@@ -578,7 +578,7 @@ export function EmpireView() {
                       {owned > 0 && (
                          <div className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest bg-[#F0B90B]/10 text-[#F0B90B] border border-[#F0B90B]/20 px-2.5 py-1 rounded-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#F0B90B] animate-pulse"></span>
-                            ФАЪОЛ: {owned} адад
+                            ACTIVE: {owned} units
                          </div>
                       )}
                    </div>
@@ -591,7 +591,7 @@ export function EmpireView() {
                           className="w-full px-6 py-4 border border-white/10 hover:border-[#F0B90B]/30 hover:bg-white/5 text-white font-black text-xs uppercase tracking-[0.2em] transition-all rounded-sm flex items-center justify-center gap-2 min-h-[44px] active:scale-95 cursor-pointer"
                         >
                           <Brain className="w-3.5 h-3.5 text-[#F0B90B] animate-pulse" />
-                          Барқарорсозии AI
+                          AI Restructure
                         </button>
                       )}
                       
@@ -606,7 +606,7 @@ export function EmpireView() {
                             : "border-white/10 text-white/20 bg-white/5 cursor-not-allowed"
                         }`}
                       >
-                        Харидани Корхона
+                        Acquire Enterprise
                         <ArrowUpRight className="w-4 h-4" />
                       </button>
                    </div>
@@ -618,9 +618,9 @@ export function EmpireView() {
       ) : (
         <MonolithCard className="p-16 text-center space-y-4 border-dashed border-white/10 bg-white/[0.01]">
            <ShieldAlert className="w-12 h-12 text-[#F0B90B]/35 mx-auto animate-pulse" />
-           <h3 className="text-xl font-bold uppercase tracking-wide text-white/80">Ҳеҷ гуна амалиёт ёфт нашуд</h3>
+           <h3 className="text-xl font-bold uppercase tracking-wide text-white/80">No Operations Found</h3>
            <p className="text-xs text-white/40 font-mono max-w-md mx-auto leading-relaxed">
-             Ҳеҷ як корхонаи инфрасохторӣ ба ҷустуҷӯ ва филтрҳои шумо мувофиқат намекунад. Филтрҳоро аз нав танзим кунед.
+             No infrastructure nodes match your search query and filter criteria. Try updating your filters.
            </p>
            <button 
              onClick={() => {
@@ -631,7 +631,7 @@ export function EmpireView() {
              }}
              className="mt-4 px-6 py-2.5 border border-[#F0B90B]/30 hover:border-[#F0B90B] bg-[#F0B90B]/5 hover:bg-[#F0B90B]/10 text-[#F0B90B] text-xs font-black uppercase tracking-[0.2em] transition-all rounded-sm cursor-pointer"
            >
-             Танзими дубораи филтрҳо
+             Reset All Filters
            </button>
         </MonolithCard>
       )}
@@ -640,7 +640,7 @@ export function EmpireView() {
       {filteredAndSortedNodes.length > itemsPerPage && (
         <div className="flex justify-between items-center border-t border-white/5 pt-6 font-mono text-[11px] text-white/40">
            <div>
-              Намоиши <span className="text-[#F0B90B] font-bold">{Math.min(filteredAndSortedNodes.length, (currentPage - 1) * itemsPerPage + 1)}-{Math.min(filteredAndSortedNodes.length, currentPage * itemsPerPage)}</span> аз <span className="text-white font-bold">{filteredAndSortedNodes.length}</span> корхонаҳои корпоративии мувофиқ
+              Showing <span className="text-[#F0B90B] font-bold">{Math.min(filteredAndSortedNodes.length, (currentPage - 1) * itemsPerPage + 1)}-{Math.min(filteredAndSortedNodes.length, currentPage * itemsPerPage)}</span> of <span className="text-white font-bold">{filteredAndSortedNodes.length}</span> matching corporate enterprises
            </div>
            
            <div className="flex items-center gap-1">

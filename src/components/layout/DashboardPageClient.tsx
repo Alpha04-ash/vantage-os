@@ -155,7 +155,7 @@ export default function Home() {
               </div>
               <div className="flex-1 space-y-3">
                 <h4 className="text-xs font-black uppercase tracking-widest text-[#F0B90B] font-mono">
-                  НАВСОЗИИ_ҒАЙРИФАЪОЛ // IDLE_REPORT
+                  OFFLINE_REPORT // IDLE_REPORT
                 </h4>
                 <p className="text-[11px] text-[#EAECEF] font-mono leading-relaxed whitespace-pre-line">
                   {offlineNotice}
@@ -164,7 +164,7 @@ export default function Home() {
                   onClick={() => setOfflineNotice(null)}
                   className="px-4 py-1.5 bg-[#F0B90B] text-black font-black uppercase tracking-wider text-[9px] rounded hover:bg-[#F8D33A] active:scale-95 transition-all cursor-pointer"
                 >
-                  ҚАБУЛ КАРДАН
+                  DISMISS
                 </button>
               </div>
             </div>

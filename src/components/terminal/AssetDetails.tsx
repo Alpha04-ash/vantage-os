@@ -30,7 +30,7 @@ export function AssetDetails({ asset, onClose, onTrade }: { asset: CryptoPrice, 
            <div className="absolute top-12 left-12 z-20">
               <div className="flex items-center gap-6 mb-4">
                  <div className="w-2 h-2 bg-white animate-pulse" />
-                 <span className="text-[11px] font-black uppercase tracking-[0.8em] text-white/40 font-mono">БОРКУНИИ_ФАЪОЛИ_ГИРЕҲ</span>
+                 <span className="text-[11px] font-black uppercase tracking-[0.8em] text-white/40 font-mono">ACTIVE_NODE_LOAD</span>
               </div>
               <h2 className="text-8xl font-black uppercase tracking-tighter italic leading-none text-white/90">
                  {asset.symbol.toUpperCase()}
@@ -49,16 +49,16 @@ export function AssetDetails({ asset, onClose, onTrade }: { asset: CryptoPrice, 
            <div className="space-y-16">
               <div>
                  <h3 className="text-[12px] font-black uppercase tracking-[0.5em] text-white/20 mb-6 flex items-center gap-3">
-                    <Fingerprint className="w-4 h-4" /> МУШАХХАСОТИ_ДОРОӢ
+                    <Fingerprint className="w-4 h-4" /> ASSET_IDENTIFICATION
                  </h3>
                  <h4 className="text-5xl font-black uppercase tracking-tighter italic text-white/80 leading-none">{asset.name}</h4>
               </div>
 
               <div className="grid grid-cols-1 gap-8">
                  {[
-                   { label: "Даромади_Истихроҷ", value: `$${(asset.current_price || 0).toLocaleString()}`, sub: "НАРХИ_БОЗОРИИ_USD" },
-                   { label: "Сармояи_Шабака", value: `$${(asset.market_cap || 0).toLocaleString()}`, sub: "АРЗИШИ_УМУМӢ" },
-                   { label: "Тағйирёбии_Давра", value: `${asset.price_change_percentage_24h?.toFixed(2)}%`, sub: "ТАҒЙИРОТИ_24-СОАТА", color: asset.price_change_percentage_24h >= 0 ? "text-white" : "text-white/40" }
+                   { label: "Mining_Yield", value: `$${(asset.current_price || 0).toLocaleString()}`, sub: "USD_MARKET_PRICE" },
+                   { label: "Network_Capital", value: `$${(asset.market_cap || 0).toLocaleString()}`, sub: "TOTAL_CAPITALIZATION" },
+                   { label: "Period_Volatility", value: `${asset.price_change_percentage_24h?.toFixed(2)}%`, sub: "24-HOUR_CHANGE", color: asset.price_change_percentage_24h >= 0 ? "text-white" : "text-white/40" }
                  ].map(m => (
                    <div key={m.label} className="border-l border-white/10 pl-8 py-2">
                       <div className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-2">{m.label}</div>
@@ -71,10 +71,10 @@ export function AssetDetails({ asset, onClose, onTrade }: { asset: CryptoPrice, 
               <div className="space-y-6 pt-10 border-t border-[#2B2F36]">
                  <div className="flex items-center gap-4 text-white/20">
                     <Activity className="w-5 h-5" />
-                    <span className="text-[11px] font-black uppercase tracking-[0.4em]">АУДИТИ_НЕЙРОНИИ_УСТУВОР</span>
+                    <span className="text-[11px] font-black uppercase tracking-[0.4em]">NEURAL_STABILITY_AUDIT</span>
                  </div>
                  <p className="text-sm text-white/40 italic leading-relaxed font-mono">
-                    Резонанси системавӣ пардохтпазирии оптималиро барои ин гиреҳ нишон медиҳад. Самаранокии пешбинишудаи истихроҷ дар доираи параметрҳои алфа мебошад.
+                    Systemic resonance indicates optimal volatility for this computational node. Projected mining efficiency remains within alpha parameters.
                  </p>
               </div>
            </div>
@@ -84,7 +84,7 @@ export function AssetDetails({ asset, onClose, onTrade }: { asset: CryptoPrice, 
                 onClick={() => onTrade(asset)}
                 className="w-full py-8 bg-white text-black text-[12px] font-black uppercase tracking-[0.6em] hover:bg-white/90 transition-all flex items-center justify-center gap-6 group"
               >
-                 ОҒОЗ_КАРДАНИ_САВДО
+                 EXECUTE_TRADE_DIRECTIVE
                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </button>
            </div>

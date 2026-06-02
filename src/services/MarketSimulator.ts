@@ -14,35 +14,35 @@ export interface MarketEvent {
 const EVENT_POOL: MarketEvent[] = [
   {
     id: "hack_1",
-    headline: "🚨 ХАТОГИИ БУЗУРГИ CEX ОШКОР ШУД | ХАРОҶОТИ $400М",
+    headline: "🚨 CRITICAL CEX EXPLOIT DETECTED | $400M EXPOSED",
     affectedAssets: { btc: -0.05, eth: -0.08, sol: -0.1 },
     duration: 30,
     activeTicks: 0
   },
   {
     id: "sec_1",
-    headline: "⚖️ SEC ФОНДИ НАВИ КРИПТОИИ САРВАТИ СОҲИБИХТИЁРРО ТАСДИҚ КАРД",
+    headline: "⚖️ SEC APPROVES SOVEREIGN WEALTH CRYPTO FUND",
     affectedAssets: { btc: 0.08, eth: 0.05 },
     duration: 45,
     activeTicks: 0
   },
   {
     id: "quantum_1",
-    headline: "⚛️ САТҲИ ТАҲДИДИ РАМЗКУШОИИ КВАНТӢ БАЛАНД ШУД",
+    headline: "⚛️ QUANTUM DECRYPTION THREAT ESCALATED",
     affectedAssets: { btc: -0.15, eth: -0.1 },
     duration: 20,
     activeTicks: 0
   },
   {
     id: "asia_1",
-    headline: "🌏 БОЗОРҲОИ ОСИЁ $50 МИЛЛИАРД ЛИКВИДНОКӢ ВОРИД КАРДАНД",
+    headline: "🌏 ASIAN MARKETS INJECT $50B LIQUIDITY",
     affectedAssets: { btc: 0.04, eth: 0.06, sol: 0.08, ada: 0.05 },
     duration: 60,
     activeTicks: 0
   },
   {
     id: "network_1",
-    headline: "⚡ НАВСОЗИИ ШАБАКАИ SOLANA ТАЪХИРРО 90% КАМ МЕКУНАД",
+    headline: "⚡ SOLANA NETWORK UPGRADE REDUCES LATENCY BY 90%",
     affectedAssets: { sol: 0.15, eth: -0.02 },
     duration: 30,
     activeTicks: 0
@@ -117,7 +117,7 @@ class Simulator {
     };
 
     ws.onerror = (err) => {
-      console.error("[VANTAGE SIMULATOR WS] Connection error:", err);
+      console.warn("[VANTAGE SIMULATOR WS] Live Binance feed connection failed. Simulator is running on offline-first mode using stable simulated algorithms.");
     };
 
     ws.onclose = () => {
@@ -163,7 +163,7 @@ class Simulator {
   }
 
   getNewsFeed(): string {
-    if (this.activeEvents.length === 0) return "БОЗОР УСТУВОР АСТ | ЯГОН ХАТОӢ ОШКОР НАШУД";
+    if (this.activeEvents.length === 0) return "MARKET STABLE | NO CRITICAL SYSTEM ANOMALIES DETECTED";
     return this.activeEvents.map(e => e.headline).join(" | ");
   }
 }

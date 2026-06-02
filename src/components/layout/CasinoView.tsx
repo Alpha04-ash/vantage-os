@@ -72,19 +72,19 @@ export function CasinoView() {
 
             <div className="max-w-2xl mx-auto space-y-4">
               <span className="px-3 py-1 text-[9px] font-bold tracking-widest bg-red-500/20 text-red-400 border border-red-500/30 rounded-full font-mono uppercase">
-                ҲУШДОРИ БЕХАТАРӢ // SECURITY THREAT DETECTED
+                SECURITY WARNING // SECURITY THREAT DETECTED
               </span>
               
               <h1 className="text-3xl font-black tracking-tight text-white uppercase mt-2 leading-tight">
-                Шумо дар ҳақиқат хостед ба Казино ворид шавед?! 😂
+                Did you really want to enter the Casino?! 😂
               </h1>
               
               <p className="text-sm font-mono text-[#848E9C] leading-relaxed">
-                Система фавран кӯшиши воридшавии шуморо боздошт. Оё фикр кардед, ки ба осонӣ ва зуд пул кор карда, бой мешавед? Системаи <strong className="text-red-400">VANTAGE Sovereign OS</strong> норасоии ҷиддии интизоми молиявии шуморо ошкор кард!
+                The system immediately intercepted your access attempt. Did you think you could get rich quickly and easily? The <strong className="text-red-400">VANTAGE Sovereign OS</strong> engine detected a critical lack of financial discipline!
               </p>
 
               <div className="bg-[#14151A]/90 border border-[#2B2F36] rounded-xl p-4 my-6 text-[12px] font-mono text-[#F6465D] inline-block">
-                🚨 СИСТЕМА ДИД, КИ САРВАТИ ХУДРО БА ДАСТИ КАЗИНОҲО ХОЛИС КАРДАНӢ ШУДЕД!
+                🚨 THE SYSTEM DETECTED THAT YOU TRIED TO HAND OVER YOUR WEALTH TO CASINO OPERATORS!
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -93,7 +93,7 @@ export function CasinoView() {
                   className="px-8 py-3.5 bg-[#F0B90B] hover:bg-[#F8D33A] text-black font-black text-xs tracking-widest uppercase rounded-lg shadow-lg hover:shadow-[#F0B90B]/10 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <HelpCircle className="w-4 h-4" />
-                  Бозҳам бештар донистан // WHY IS THIS DANGEROUS?
+                  Learn more // WHY IS THIS DANGEROUS?
                 </button>
               </div>
             </div>
@@ -115,20 +115,20 @@ export function CasinoView() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 text-[8px] font-bold tracking-widest bg-amber-500/20 text-amber-500 border border-amber-500/30 rounded">
-                      ТАҲЛИЛИ МУФЛИСШАВӢ // SYSTEMIC HAZARDS
+                      BANKRUPTCY ANALYSIS // SYSTEMIC HAZARDS
                     </span>
                   </div>
                   <h1 className="text-2xl font-extrabold tracking-tight uppercase mt-1">
-                    МОДУЛИ МАЪРИФАТӢ: ЧАРО КАЗИНО ХАРОБКОР АСТ?
+                    COGNITIVE MODULE: WHY IS THE CASINO DESTRUCTIVE?
                   </h1>
                   <p className="text-[11px] text-[#848E9C] font-mono uppercase tracking-wider mt-0.5">
-                    Дастури омӯзишии система оид ба муфлисшавии математикии қиморбозӣ
+                    The system's tutorial guide on the mathematical bankruptcy of gambling
                   </p>
                 </div>
               </div>
 
               <div className="bg-[#1E2026] border border-[#2B2F36] rounded-xl p-3 flex flex-col items-end leading-none font-mono">
-                <span className="text-[9px] text-[#848E9C] uppercase tracking-wider mb-1">САТҲИ ДОНИШ // XP:</span>
+                <span className="text-[9px] text-[#848E9C] uppercase tracking-wider mb-1">KNOWLEDGE LEVEL // XP:</span>
                 <span className="text-lg font-black text-amber-400">{learningXP} XP</span>
               </div>
             </div>
@@ -140,19 +140,19 @@ export function CasinoView() {
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center gap-2 text-amber-400 font-mono text-xs font-bold uppercase">
                     <ShieldAlert className="w-4 h-4" />
-                    Кӯшиши қиморбозӣ боздошт шуд // SYSTEMIC FINANCIAL WEAKNESS EXPOSED
+                    Gambling attempt intercepted // SYSTEMIC FINANCIAL WEAKNESS EXPOSED
                   </div>
                   <h2 className="text-lg font-black tracking-wider uppercase text-white">
-                    Чаро дар ин система КАЗИНО комилан баста аст?
+                    Why is the CASINO completely locked in this OS?
                   </h2>
                   <p className="text-[12px] font-mono text-[#848E9C] leading-relaxed">
-                    Қиморбозӣ (Casino) як раванди **Арзиши Манфии Интизорӣ (-EV)** мебошад, ки ба таври математикӣ барои нест кардани сармоя ва заиф сохтани майна офарида шудааст. Барои озодии молиявии шумо, дастрасӣ ба бозиҳои қимор баста шудааст ва ба ҷои он ин <strong>Модули Маърифатӣ</strong> фаъол гардид, то риёзиёти пушти ин домро омӯзед.
+                    Gambling is a **Negative Expected Value (-EV)** loop, mathematically engineered to drain capital and weaken neural pathways. To protect your financial sovereignty, access to gambling is restricted, and this <strong>Cognitive Module</strong> was activated to teach you the mathematics behind this trap.
                   </p>
                 </div>
                 <div className="px-5 py-4 bg-[#14151A] border border-[#2B2F36] rounded-xl text-center shrink-0 w-full lg:w-72">
-                  <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest block font-mono mb-2">ХУЛОСАИ РИЁЗӢ</span>
+                  <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest block font-mono mb-2">MATHEMATICAL VERDICT</span>
                   <div className="text-2xl font-black text-red-500 font-mono">-100%</div>
-                  <span className="text-[9px] text-[#848E9C] uppercase tracking-wider block font-mono mt-1">ИНТИЗОРИИ БАЛАНС ДАР ДАРОЗМУДДАТ</span>
+                  <span className="text-[9px] text-[#848E9C] uppercase tracking-wider block font-mono mt-1">LONG-TERM EXPECTED BALANCE</span>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ export function CasinoView() {
               {/* LESSON NAVIGATION TABS */}
               <div className="lg:col-span-1 space-y-3">
                 <span className="text-[9px] font-bold text-[#848E9C] font-mono uppercase tracking-widest block px-1">
-                  // МЕНЮИ ДАРСҲО
+                  // LESSON MENU
                 </span>
                 <button
                   onClick={() => setActiveLessonTab("math")}
@@ -175,9 +175,9 @@ export function CasinoView() {
                 >
                   <BookOpen className="w-5 h-5 mt-0.5 text-amber-500 shrink-0" />
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider">Дарси 1: Риёзиёти Харобшавӣ</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider">Lesson 1: Mathematics of Ruin</h3>
                     <p className="text-[10px] font-mono mt-1 leading-normal text-[#848E9C]">
-                      Омӯзиши House Edge ва эҳтимолияти манфии математикӣ.
+                      Studying the House Edge and negative mathematical expectations.
                     </p>
                   </div>
                 </button>
@@ -192,9 +192,9 @@ export function CasinoView() {
                 >
                   <Brain className="w-5 h-5 mt-0.5 text-amber-500 shrink-0" />
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider">Дарси 2: Домҳои Допаминӣ</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider">Lesson 2: Dopaminergic Traps</h3>
                     <p className="text-[10px] font-mono mt-1 leading-normal text-[#848E9C]">
-                      Чӣ тавр казино майнаи шуморо бар зидди худатон истифода мебарад.
+                      How the casino turns your brain's chemistry against you.
                     </p>
                   </div>
                 </button>
@@ -209,9 +209,9 @@ export function CasinoView() {
                 >
                   <TrendingDown className="w-5 h-5 mt-0.5 text-amber-500 shrink-0" />
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider">Дарси 3: Роҳи Суверенӣ</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-wider">Lesson 3: The Sovereign Path</h3>
                     <p className="text-[10px] font-mono mt-1 leading-normal text-[#848E9C]">
-                      Муқоисаи нестшавии сармоя бо сармоягузории фоидаовар.
+                      Comparing capital destruction with productive investing.
                     </p>
                   </div>
                 </button>
@@ -231,16 +231,16 @@ export function CasinoView() {
                     {activeLessonTab === "math" && (
                       <div className="space-y-3 font-mono text-[12px] text-[#848E9C] leading-relaxed">
                         <h3 className="text-sm font-extrabold text-[#EAECEF] uppercase tracking-wider border-b border-[#2B2F36] pb-2">
-                          ДАРСИ 1: РИЁЗИЁТ ВА МАТЕМАТИКАИ КАЗИНО // -EV
+                          LESSON 1: THE MATHEMATICS OF RUIN // -EV
                         </h3>
                         <p>
-                          Дар казино, ҳама гуна бозӣ (рулетка, слот, блэкджек) дорои <strong className="text-red-400">Афзалияти Хона (House Edge)</strong> мебошад. Масалан, дар рулеткаи аврупоӣ ин афзалият <strong>2.7%</strong>-ро ташкил медиҳад. Ин маънои онро дорад, ки ба ҳисоби миёна одам барои ҳар як $100 гузоштааш, ба таври автоматӣ $2.7-ро комилан бой медиҳад.
+                          In a casino, every game (roulette, slots, blackjack) has a built-in <strong className="text-red-400">House Edge</strong>. For example, in European Roulette, the edge is <strong>2.7%</strong>. This means that on average, for every $100 wagered, an operator mathematically yields $2.70 directly to the house.
                         </p>
                         <p>
-                          Ба шарофати <strong>Қонуни Рақамҳои Калон (Law of Large Numbers)</strong>, агар шумо бозиро такрор кардан гиред, тавозуни шумо новобаста аз бурдҳои хурди тасодуфӣ, бемайлон ба сифр наздик мешавад. Ин риёзиёт аст, на бахт. Хона ҳамеша бозиро дар дарозмуддат бохт мегардонад.
+                          By the <strong>Law of Large Numbers</strong>, as the number of games played increases, your balance will inevitably decay to zero, regardless of short-term wins. This is pure mathematics, not luck. The house always wins in the long run.
                         </p>
                         <div className="p-3 bg-[#14151A] rounded-lg border border-[#2B2F36]">
-                          <span className="text-[10px] text-amber-500 font-bold block mb-1">ФОРМУЛАИ МУФЛИСШАВӢ:</span>
+                          <span className="text-[10px] text-amber-500 font-bold block mb-1">RUIN FORMULA:</span>
                           <code className="text-xs text-[#EAECEF]">Lim (Bets -&gt; Infinity) [Balance] = $0</code>
                         </div>
                       </div>
@@ -249,17 +249,17 @@ export function CasinoView() {
                     {activeLessonTab === "psychology" && (
                       <div className="space-y-3 font-mono text-[12px] text-[#848E9C] leading-relaxed">
                         <h3 className="text-sm font-extrabold text-[#EAECEF] uppercase tracking-wider border-b border-[#2B2F36] pb-2">
-                          ДАРСИ 2: ДОМҲОИ НЕЙРОЛОГИИ ДОПАМИН
+                          LESSON 2: DOPAMINERGIC NEURAL TRAPS
                         </h3>
                         <p>
-                          Казиноҳо аз ҷониби нейробиологҳо барои идора ва ҳабс кардани системаи асаб тарҳрезӣ шудаанд. Вақте ки одам бозӣ мекунад, майнаи ӯ бо ҳар як бурди хурди тасодуфӣ миқдори зиёди <strong>Допамин</strong> хориҷ мекунад.
+                          Casinos are designed by neuroscientists to exploit and trap human nervous systems. When gambling, the brain releases bursts of <strong>Dopamine</strong> at unpredictable intervals following small, random wins.
                         </p>
                         <p>
-                          Ин боиси пайдоиши одати харобкори **"мукофоти зуд ва бе заҳмат"** мегардад. Ин раванд одати банақшагирии молиявии оқилона, сабр ва хоҳиши сохтани тиҷорати воқеиро дар майна пурра нест мекунад. Корбар оҳиста-оҳиста қобилияти қабули қарорҳои мантиқии молиявиро аз даст медиҳад.
+                          This triggers a highly destructive habit loop based on the illusion of **"fast, effortless rewards."** Over time, this process erodes the pathways of rational financial planning, patience, and the drive to build genuine cash-flowing systems. The operator gradually loses the capacity to execute logical financial allocations.
                         </p>
                         <div className="p-3 bg-red-950/10 border border-red-500/20 rounded-lg flex items-center gap-3">
                           <ShieldAlert className="w-5 h-5 text-red-400 shrink-0" />
-                          <span className="text-[10px] text-red-400 font-bold">ХАТАРИ СУСТШАВИИ СУВЕРЕНИТЕТИ ФАРДӢ.</span>
+                          <span className="text-[10px] text-red-400 font-bold">THREAT OF INDIVIDUAL SOVEREIGNTY DECAY.</span>
                         </div>
                       </div>
                     )}
@@ -267,22 +267,22 @@ export function CasinoView() {
                     {activeLessonTab === "wealth" && (
                       <div className="space-y-3 font-mono text-[12px] text-[#848E9C] leading-relaxed">
                         <h3 className="text-sm font-extrabold text-[#EAECEF] uppercase tracking-wider border-b border-[#2B2F36] pb-2">
-                          ДАРСИ 3: РОҲИ МУТЛАҚИ СУВЕРЕНӢ ВА САРМОЯ
+                          LESSON 3: THE SOVEREIGN ACCUMULATION ROAD
                         </h3>
                         <p>
-                          Сармоягузори суверенӣ фарқияти куллии байни нест кардани сармоя ва зиёд кардани онро медонад. 
+                          A sovereign operator understands the stark difference between capital destruction and wealth compounding.
                         </p>
                         <p>
-                          Баръакси казино, ки дороиҳои сохта ва беарзиш дорад, сармоягузорӣ ба <strong>Амволи Ғайриманқул (Real Estate)</strong> ва <strong>Гиреҳҳои Империя (SaaS, Data Centers)</strong> дороиҳои ҳақиқӣ мебошанд, ки барои шумо **Иҷорапулӣ (Yield)**, **Суръати афзоиши нарх (Appreciation)** ва **Фоизи Мураккаби мусбат** истеҳсол мекунанд. Ин роҳи ягонаи устувори бой шудан аст.
+                          Unlike a casino, which deals in synthetic, zero-sum structures, allocating capital to <strong>Real Estate</strong> and <strong>Empire Nodes (SaaS, DeFi nodes)</strong> acquires real assets. These generate consistent **Yield**, benefit from **Asset Appreciation**, and leverage positive **Compound Interest**. This is the only mathematically proven road to long-term sovereign wealth.
                         </p>
                         <div className="grid grid-cols-2 gap-3 mt-2 text-center">
                           <div className="p-3 bg-red-950/20 border border-red-500/20 rounded-lg">
-                            <span className="text-[9px] text-[#848E9C] block">ҚИМОР / КАЗИНО</span>
-                            <span className="text-xs font-black text-red-400 block mt-1">ЗАРАРИ АНИҚ (-EV)</span>
+                            <span className="text-[9px] text-[#848E9C] block">GAMBLING / CASINO</span>
+                            <span className="text-xs font-black text-red-400 block mt-1">GUARANTEED LOSS (-EV)</span>
                           </div>
                           <div className="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-lg">
-                            <span className="text-[9px] text-[#848E9C] block">САРМОЯИ ВОҚЕӢ</span>
-                            <span className="text-xs font-black text-emerald-400 block mt-1">ФОИДАИ МУТЛАҚ (+EV)</span>
+                            <span className="text-[9px] text-[#848E9C] block">REAL CAPITAL</span>
+                            <span className="text-xs font-black text-emerald-400 block mt-1">ABSOLUTE YIELD (+EV)</span>
                           </div>
                         </div>
                       </div>
@@ -295,18 +295,18 @@ export function CasinoView() {
                   <div>
                     <h4 className="text-xs font-bold text-[#EAECEF] uppercase tracking-wider flex items-center gap-1.5 font-mono">
                       <ChevronRight className="w-4 h-4 text-amber-500" />
-                      ОЗМОИШИ ТЕЛЕМЕТРИИ ХАРОБШАВӢ (VISUAL DEMO)
+                      RUIN TELEMETRY WAVEFORM (VISUAL DEMO)
                     </h4>
                     <p className="text-[10px] font-mono text-[#848E9C] mt-1 leading-normal">
-                      Бо пахш кардани тугмаи поён, шумо симулятсияи автоматии муфлисшавии як қиморбозро бо $10,000 сармоя дар давоми 50 бозӣ мебинед. Ин исботи визуалии дарс мебошад.
+                      Click the button below to execute an automated simulation showing a gambler's capital ($10,000) decaying over 50 rounds. This visually proves the negative expectation of the house edge.
                     </p>
                   </div>
 
                   {simulationRun && (
                     <div className="bg-[#14151A] border border-[#2B2F36] p-4 rounded-xl space-y-3 font-mono">
                       <div className="flex justify-between text-[10px]">
-                        <span>Тавозуни Симулятсионӣ: <strong className="text-red-400">${simBalance}</strong></span>
-                        <span>Қадамҳо (Bets): <strong>{simStep}/50</strong></span>
+                        <span>Simulated Balance: <strong className="text-red-400">${simBalance}</strong></span>
+                        <span>Rounds (Bets): <strong>{simStep}/50</strong></span>
                       </div>
                       
                       {/* Telemetry wave */}
@@ -331,11 +331,11 @@ export function CasinoView() {
                         onClick={runEducationalSimulation}
                         className="w-full sm:w-auto px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-[10px] tracking-widest uppercase rounded-lg transition-all cursor-pointer"
                       >
-                        ОҒОЗИ ВИЗУАЛИЗАТСИЯИ ДАРС
+                        RUN RUIN SIMULATION
                       </button>
                     ) : (
                       <div className="text-[11px] font-mono text-amber-400 animate-pulse">
-                        ⚡ ТАҲЛИЛИ РИЁЗӢ ДАР ҲОЛИ ИҶРО...
+                        ⚡ EXECUTING MATHEMATICAL ANALYSIS...
                       </div>
                     )}
 
@@ -346,7 +346,7 @@ export function CasinoView() {
                         className="flex items-center gap-2 text-emerald-400 font-mono text-[11px] bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg"
                       >
                         <CheckCircle2 className="w-4 h-4" />
-                        ДАРС БО МУВАФФАҚИЯТ АДО ШУД // +150 XP REWARDED
+                        MODULE COMPLETED SUCCESSFULLY // +150 XP AWARDED
                       </motion.div>
                     )}
                   </div>
@@ -361,7 +361,7 @@ export function CasinoView() {
               <div className="flex items-center gap-3">
                 <Award className="w-5 h-5 text-emerald-400 shrink-0 animate-bounce" />
                 <span className="text-emerald-400 uppercase tracking-wide leading-relaxed">
-                  ХУЛОСАИ ДАРС: ОПЕРАТОРИ ХУДМУХТОР ҲЕҶ ГОҲ САРМОЯИ ГИРОНҚАДРИ ХУДРО БА КАЗИНОҲО ҚУРБОН НЕСТ КУНАД, ЗЕРО МАТЕМАТИКАИ КАЗИНО ТАҲҚИРИ СУВЕРЕНИТЕТИ ШУМОСТ.
+                  LESSON SUMMARY: A SOVEREIGN OPERATOR NEVER SACRIFICES LIQUID CAPITAL TO NEGATIVE EXPECTATION SYSTEMS. CASINO MATHEMATICS IS A DIRECT ATTACK ON YOUR SYSTEMIC SOVEREIGNTY.
                 </span>
               </div>
             </div>

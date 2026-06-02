@@ -118,35 +118,53 @@ async function callGemini(prompt: string, maxTokens: number = 50, responseMimeTy
   throw new Error("Invalid response format or blocked by safety filter");
 }
 
-export async function generatePortfolioAudit(portfolio: any[]) {
+export async function generatePortfolioAudit(portfolio: any[], balance: number = 0, properties: any[] = [], activeLoan: any = null) {
   const assets = portfolio.length > 0 
     ? portfolio.map(a => `${a.symbol} (${a.amount})`).join(", ")
-    : "Ягон дороии фаъол нест. Ҳамаи пардохтпазирӣ дар шакли пули нақд.";
+    : "No active assets. All liquidity is held as cash.";
     
-  const prompt = `You are the VANTAGE PORTFOLIO AI. Analyze these holdings: ${assets}.
-Provide a highly professional, cinematic, institutional-grade risk assessment.
-CRITICAL: You must write your complete response STRICTLY in the Tajik language.
-Keep it very short, absolute maximum 20 words. Speak like a cyberpunk financial operating system.
-Example in Tajik: "Алоқамандии дороиҳо оптималӣ аст. Ба ҷамъоварии хашмгин идома диҳед."`;
+  const propertiesStr = properties.length > 0
+    ? properties.map(p => `${p.name} (owned: ${p.owned || 0}, value: $${(p.currentValue || 0).toLocaleString()})`).join(", ")
+    : "No owned properties.";
+
+  const debtStr = activeLoan
+    ? `Active loan: principal $${(activeLoan.principal || 0).toLocaleString()}, total due $${(activeLoan.totalDue || 0).toLocaleString()}, remaining time: ${activeLoan.timeLeft || 0} cycles.`
+    : "No outstanding debt.";
+
+  const totalValue = balance + (portfolio.reduce((acc, p) => acc + (p.amount * (p.avgPrice || 100)), 0)) + (properties.reduce((acc, p) => acc + ((p.owned || 0) * (p.currentValue || 0)), 0));
+
+  const prompt = `You are the VANTAGE PORTFOLIO AI ADVISOR. Analyze this operator's state:
+- Liquid Cash Balance: $${balance.toLocaleString()}
+- Crypto Portfolio Assets: ${assets}
+- Real Estate Properties: ${propertiesStr}
+- Liabilities: ${debtStr}
+- Total Net Worth: $${totalValue.toLocaleString()}
+
+Deliver a highly specific, action-oriented, direct financial directive.
+If their debt is high, tell them to sell assets or risk default. If they are holding too much cash, suggest specific crypto buys or property renovations.
+CRITICAL: You must write your complete response STRICTLY in the English language.
+Keep it extremely concise and direct, maximum 25 words. Speak like a cyberpunk financial operating system adviser.
+Example: "Debt-to-equity ratio critical. Liquidate crypto holdings immediately or face bank default in 3 cycles."
+Or: "Liquid cash excessive. Renovate Smart-Chalet to boost rental yields or purchase BTC."`;
 
   try {
     return await callGemini(prompt, 50);
   } catch (error) {
-    return "Консентратсияи пардохтпазирӣ оптималӣ аст. Мавқеъҳоро нигоҳ доред.";
+    return "Liquidity concentration is optimal. Maintain positions.";
   }
 }
 
 export async function generateAcademyDirective(xp: number) {
   const prompt = `You are the VANTAGE COGNITIVE TUTOR. The operator has ${xp} XP.
 Suggest a futuristic, highly advanced financial concept they should master next.
-CRITICAL: You must write your complete response STRICTLY in the Tajik language.
+CRITICAL: You must write your complete response STRICTLY in the English language.
 Keep it very short, absolute maximum 15 words. Speak like a cyberpunk AI.
-Example in Tajik: "Минбаъд азхудкунии протоколҳои қарзии фаврии ғайримарказиро оғоз кунед."`;
+Example in English: "Begin mastering decentralized instant lending protocols next."`;
 
   try {
     return await callGemini(prompt, 40);
   } catch (error) {
-    return "Минбаъд Протоколҳои Пардохтпазирии Ғайримарказиро азхуд кунед.";
+    return "Master Decentralized Liquidity Protocols next.";
   }
 }
 
@@ -162,22 +180,22 @@ const STATIC_FALLBACK_STRATEGIES: Record<string, CorporateStrategy[]> = {
   "node_dc_1": [
     {
       id: "saas_strat_1",
-      title: "Гузариш ба Шартномаҳои Пардохти Солона",
-      rationale: "Меъёри аз даст додани муштариёнро аз 2.1% то 1.2% тавассути пешниҳоди 10% тахфиф дар пардохтҳои пешакӣ коҳиш медиҳад ва устувории ARR-ро ба таври назаррас афзоиш медиҳад.",
+      title: "Transition to Annual Billing Cycles",
+      rationale: "Reduces customer churn from 2.1% to 1.2% by offering a 10% discount on upfront payments, significantly increasing ARR predictability.",
       cost: 15000,
       yieldBoostPercent: 25
     },
     {
       id: "saas_strat_2",
-      title: "Автоматикунонии Низоми Муваффақияти Муштариён",
-      rationale: "Мониторинги автоматии вазъи муштариёнро барои муайян кардани пешгирии рафтани онҳо дар марҳилаҳои аввал роҳандозӣ мекунад ва LTV-ро ба 4.8 баробар афзоиш медиҳад.",
+      title: "Automate Customer Success Workflows",
+      rationale: "Deploys automated customer health monitoring to preemptively address churn indicators, expanding average LTV to 4.8x.",
       cost: 8000,
       yieldBoostPercent: 15
     },
     {
       id: "saas_strat_3",
-      title: "Бозсозии Корхонаҳои Насли Нав",
-      rationale: "Системаҳои пешрафтаи амнияти корпоративӣ ва SSO-ро барои ҷалби муштариёни калони Fortune 500 роҳандозӣ менамояд.",
+      title: "Enterprise Readiness Restructuring",
+      rationale: "Implements advanced enterprise security features and single sign-on (SSO) to target high-value Fortune 500 client contracts.",
       cost: 30000,
       yieldBoostPercent: 40
     }
@@ -185,22 +203,22 @@ const STATIC_FALLBACK_STRATEGIES: Record<string, CorporateStrategy[]> = {
   "node_sat_1": [
     {
       id: "prop_strat_1",
-      title: "Оптимизатсияи Шабакаи Хушманди Энергия",
-      rationale: "Хароҷоти иловагии биноро тавассути тақсимоти автоматии энергияи сабз ва танзими алгоритмии масраф 15% коҳиш медиҳад.",
+      title: "Smart Grid Energy Optimization",
+      rationale: "Reduces building utility overhead by 15% through autonomous solar power routing and machine learning load adjustments.",
       cost: 45000,
       yieldBoostPercent: 20
     },
     {
       id: "prop_strat_2",
-      title: "Шартномаҳои Динамикии Иҷораи Хушманд",
-      rationale: "Маълумоти мустақими талаботи идоравиро барои танзими динамикии хароҷоти иҷора истифода мебарад ва сатҳи бандшавии ҷойҳоро то 98.2% зиёд мекунад.",
+      title: "Dynamic Smart-Lease Contracts",
+      rationale: "Integrates real-time commercial workspace demand data to dynamically adjust leasing fees, driving occupancy rates to 98.2%.",
       cost: 60000,
       yieldBoostPercent: 30
     },
     {
       id: "prop_strat_3",
-      title: "Маблағгузории Дубораи Уҳдадориҳои Қарзӣ",
-      rationale: "Шартҳои фоизии қарзи амволи ғайриманқулро бозсозӣ мекунад, пардохтҳои ҳармоҳаро кам ва даромади EBITDA-ро васеъ менамояд.",
+      title: "Debt Restructuring & Refinancing",
+      rationale: "Renegotiates property mortgage terms to lower monthly service payments, directly expanding EBITDA margins.",
       cost: 100000,
       yieldBoostPercent: 45
     }
@@ -208,22 +226,22 @@ const STATIC_FALLBACK_STRATEGIES: Record<string, CorporateStrategy[]> = {
   "node_quant_1": [
     {
       id: "defi_strat_1",
-      title: "Хеҷи Алгоритмии Аз Даст Додани Муваққатӣ",
-      rationale: "Шартномаҳои фаврии опсиониро барои пӯшонидани хавфи аз даст додани маблағ дар давраи ноустувории баланди бозор истифода мебарад.",
+      title: "Algorithmic Impermanent Loss Hedging",
+      rationale: "Deploys automated options contracts to hedge pooled asset downside during periods of high price volatility.",
       cost: 150000,
       yieldBoostPercent: 35
     },
     {
       id: "defi_strat_2",
-      title: "Масири Хушманди Муҳофизати MEV",
-      rationale: "Барои пешгирӣ аз ҳамлаҳои сендвичӣ ва пешгузарии транзаксияҳо шабакаҳои хусусиро истифода мебарад ва +15% даромади иловагӣ меорад.",
+      title: "MEV Shield Smart Router",
+      rationale: "Bypasses public memory pools via private relay nodes to prevent frontrunning and sandwich attacks, boosting yield by 15%.",
       cost: 100000,
       yieldBoostPercent: 20
     },
     {
       id: "defi_strat_3",
-      title: "Маркази Арбитражи Пардохтпазирии байни Шабакаҳо",
-      rationale: "Пардохтпазириро дар шабакаҳои Layer-2 барои ба даст овардани мукофотпулиҳои баланди даромад дар ҷуфтҳои бозорҳои навбунёд васеъ менамояд.",
+      title: "Cross-Chain Liquidity Arbitrage Hub",
+      rationale: "Routes pool capital across Layer-2 networks to capture high yield rewards on emerging trading pairs.",
       cost: 250000,
       yieldBoostPercent: 50
     }
@@ -231,22 +249,22 @@ const STATIC_FALLBACK_STRATEGIES: Record<string, CorporateStrategy[]> = {
   "node_ai_1": [
     {
       id: "ai_strat_1",
-      title: "Танзими Топологияи Шабакаи AI",
-      rationale: "Моделҳои нейронии масирро барои коҳиш додани таъхири иҷрои вазифаҳо ба андозаи 32% беҳтар мекунад ва маржаи амалиётиро ба таври назаррас афзоиш медиҳад.",
+      title: "AI Network Topology Optimization",
+      rationale: "Refines routing network neural weights to reduce operational compute latency by 32%, directly increasing margins.",
       cost: 600000,
       yieldBoostPercent: 30
     },
     {
       id: "ai_strat_2",
-      title: "Автоматикунонии Флоти Худгард",
-      rationale: "Хизматрасониҳои хаткашони беруниро бо гиреҳҳои логистикии автоматӣ иваз намуда, маржаи EBITDA-ро то 78% баланд мебардорад.",
+      title: "Autonomous Fleet Integration",
+      rationale: "Replaces third-party shipping solutions with self-directed logistics hubs, increasing EBITDA margin to 78%.",
       cost: 900000,
       yieldBoostPercent: 45
     },
     {
       id: "ai_strat_3",
-      title: "Шабакаи Пешгӯии Занҷири Таъминот",
-      rationale: "Барои пешакӣ ҷойгир кардани молҳои ҷисмонӣ дар наздикии марказҳои сераҳолӣ моделсозии пешгӯии талаботкунандаро истифода мебарад.",
+      title: "Predictive Demand Supply Chain Engine",
+      rationale: "Implements predictive models to pre-stage physical goods near key high-demand hubs before orders are finalized.",
       cost: 1200000,
       yieldBoostPercent: 60
     }
@@ -267,14 +285,14 @@ export async function generateCorporateStrategies(
 
   const prompt = `You are the VANTAGE FINANCIAL CO-PILOT.
 Generate exactly 3 advanced, highly realistic corporate finance optimization decisions for this business class: "${entityName}" which currently operates under metrics: "${entityMetrics}".
-CRITICAL: You must write all output strings ("title", "rationale") strictly in the Tajik language.
+CRITICAL: You must write all output strings ("title", "rationale") strictly in the English language.
 Return ONLY a valid JSON array of 3 objects containing exactly these fields: "id", "title", "rationale", "cost", "yieldBoostPercent".
 Do not wrap it in markdown block tags, code blocks, or include any extra text.
 
 Rules:
 1. "id" must be strings like "${nodeId}_strat_1", "${nodeId}_strat_2", "${nodeId}_strat_3".
-2. "title" must be a highly realistic financial restructuring action written in TAJIK.
-3. "rationale" must be a professional justification written in TAJIK outlining the CAC, LTV, EBITDA, or Margin improvements.
+2. "title" must be a highly realistic financial restructuring action written in ENGLISH.
+3. "rationale" must be a professional justification written in ENGLISH outlining the CAC, LTV, EBITDA, or Margin improvements.
 4. "cost" must be a reasonable number between ${baseCost * 0.15} and ${baseCost * 0.5}.
 5. "yieldBoostPercent" must be a number between 15 and 55.`;
 
@@ -312,8 +330,8 @@ export async function generateCreditDecision(
   const fallbackApprove = amount <= totalEquity * 2.0;
   const fallbackApr = fallbackApprove ? 12 : 0;
   const fallbackVerdict = fallbackApprove 
-    ? `Қарз тасдиқ шуд (Ҳадди қобилияти пардохтпазирии соҳибихтиёр қонеъ гардонида шуд). Сармояи оператор ба маблағи $${totalEquity.toLocaleString()} фишанги қарзиро дастгирӣ мекунад. Меъёри 12% APR барои давраи ${term} сония муқаррар карда шуд.` 
-    : `Рад карда шуд: Дархости стратегӣ ба маблағи $${amount.toLocaleString()} аз имкониятҳои фишанги молиявии оператор нисбат ба ҳавзи сармояи $${totalEquity.toLocaleString()} зиёд аст. Дастурҳои андеррайтинг вайрон карда шуданд.`;
+    ? `Credit approved (Sovereign underwriting parameters satisfied). Operator capital of $${totalEquity.toLocaleString()} supports this leverage request. An interest rate of 12% APR has been established for a term of ${term} seconds.` 
+    : `Rejected: The requested strategic loan of $${amount.toLocaleString()} exceeds the operator's leverage capacity relative to the capital pool of $${totalEquity.toLocaleString()}. Underwriting criteria violated.`;
     
   const fallbackDecision: CreditDecision = {
     approved: fallbackApprove,
@@ -333,7 +351,7 @@ Evaluate this credit request:
 - Operator Total Assets Equity: $${totalEquity}
 
 Decide whether to Approve or Reject the request based on credit risk principles.
-CRITICAL: You must write the underwriting "verdict" STRICTLY in the Tajik language.
+CRITICAL: You must write the underwriting "verdict" STRICTLY in the English language.
 Return ONLY a valid JSON object containing exactly these fields: "approved", "apr", "verdict".
 Do not wrap it in markdown code blocks or add any other text.`;
 
@@ -357,8 +375,8 @@ The operator (user) has learning level metrics of ${xp} XP and has sent the foll
 "${query}"
 
 Formulate a highly premium, futuristic, concise, and incredibly smart reply.
-CRITICAL: You must write the complete response STRICTLY in the Tajik language.
-- Break your response into a short executive overview and then 2-3 bulleted strategic points in Tajik.
+CRITICAL: You must write the complete response STRICTLY in the English language.
+- Break your response into a short executive overview and then 2-3 bulleted strategic points in English.
 - Speak in a sleek, cyber-industrial, professional tone.
 - Keep the entire reply under 60-70 words so it stays ultra-focused, sharp, and easy to read.`;
 
@@ -366,24 +384,24 @@ CRITICAL: You must write the complete response STRICTLY in the Tajik language.
     return await callGemini(prompt, 200);
   } catch (error) {
     console.error("generateSynapseResponse failed, falling back:", error);
-    // Local offline mock responses in Tajik based on queries
+    // Local offline mock responses in English based on queries
     const cleanQuery = query.toLowerCase();
     if (cleanQuery.includes("arr") || cleanQuery.includes("cac") || cleanQuery.includes("sass") || cleanQuery.includes("empire")) {
-      return `АУДИТИ АМАЛИЁТИИ SYNAPSE:
-• Диққати бозсозиро ба васеъ кардани гиреҳҳои SaaS ё AI-и худ равона кунед.
-• Хароҷоти маркетингӣ ва бозсозии стратегиро ҳамзамон зиёд кунед, то мултипликаторҳои умумии даромадро афзоиш диҳед.
-• Дороиҳои SaaS-ро дар давраҳои мултипликатори баланд фурӯшед, то фоидаи бузурги сармоя ба даст оред.`;
+      return `SYNAPSE OPERATIONAL AUDIT:
+• Focus restructuring resources on expanding your SaaS or AI nodes.
+• Sequentially scale marketing and strategic optimizations to maximize total yield multipliers.
+• Liquidate SaaS assets during high valuation cycles to realize massive capital gains.`;
     }
     if (cleanQuery.includes("debt") || cleanQuery.includes("credit") || cleanQuery.includes("loan") || cleanQuery.includes("bank")) {
-      return `ТАҲЛИЛИ ФИШАНГИ МОЛИЯВИИ SYNAPSE:
-• Имкониятҳои қарзии Бонки Марказиро дар марҳилаҳои аввали хариди дороиҳо истифода баред.
-• Сармояи қарзии зиёдатиро фавран дар Хазинаи Амонатӣ (даромади 5.5% дар як соат) ҷойгир кунед, то хароҷоти қарзро ҷуброн намоед.
-• Пеш аз ба охир расидани ҳисоби ақиб, пардохти пурраи қарзро таъмин кунед, то аз ҷаримаи мусодираи дороиҳо аз сабаби дефолт пешгирӣ намоед.`;
+      return `SYNAPSE LEVERAGE ANALYSIS:
+• Utilize Central Bank credit facilities during the early acquisition phases of cash-yielding nodes.
+• Immediately deposit excess credit into the High-Yield Savings Vault (5.5% passive return) to offset cost of debt.
+• Ensure full debt payoff before the loan maturity timer expires to prevent asset seizure penalty due to default.`;
     }
-    return `ҶАВОБИ УМУМИИ НЕЙРОНИИ SYNAPSE:
-• Мувозинати стратегиро байни гиреҳҳои тиҷоратии сердаромад ва токенҳои криптографии ноустувор нигоҳ доред.
-• Барои ба даст овардани таҷриба ва кушодани бозсозиҳои сатҳи боло, дарсҳои омӯзиширо идома диҳед.
-• Барои гирифтани огоҳиҳои хавф дар вақти воқеӣ, навсозиҳои Қарори Нейрониро назорат кунед.`;
+    return `SYNAPSE GENERAL COGNITIVE RESPONSE:
+• Maintain a strategic balance between high-yielding business nodes and volatile crypto assets.
+• Continue completing academy modules to accumulate experience and unlock top-tier infrastructure upgrades.
+• Monitor neural decision prompts for real-time risk alerts and system diagnostic feedback.`;
   }
 }
 
@@ -399,22 +417,22 @@ export async function generateMacroeconomicNews(symbol: string, price: number): 
   const now = new Date().toLocaleTimeString();
   const fallbacks: MacroeconomicNews[] = [
     {
-      headline: `ФЕҲРИСТИ СУРЪАТИ НЕЙРОНИИ ${symbol} БОЛО МЕРАВАД`,
-      description: `Воридшавии рекордии сармояи соҳибихтиёр ба ${symbol} дар сатҳи $${price.toLocaleString()} сабт гардид. Шӯрои нейронӣ афзоиши фаъолияти тиҷоратиро пешгӯӣ мекунад.`,
+      headline: `NEURAL TICKER: ${symbol} INFLOWS SURGE`,
+      description: `Record sovereign capital inflow to ${symbol} recorded at $${price.toLocaleString()}. The neural council forecasts a prolonged expansion in trading volume.`,
       sentiment: "BULLISH",
       sentimentScore: 88,
       timestamp: now
     },
     {
-      headline: `ФИШОРИ ЛИКВИДАТСИЯИ БОЗОРИ ДУЮМДАРАҶАИ ${symbol}`,
-      description: `Афзоиши фишори фурӯш дар бозори ${symbol} дар марзи $${price.toLocaleString()} ба мушоҳида мерасад. Эҳтимоли ислоҳоти кӯтоҳмуддати нархҳо баланд аст.`,
+      headline: `SECONDARY MARKET LIQUIDATION PRESSURE FOR ${symbol}`,
+      description: `Surging sell pressure observed for ${symbol} around $${price.toLocaleString()}. Short-term price correction probability is elevated.`,
       sentiment: "BEARISH",
       sentimentScore: 19,
       timestamp: now
     },
     {
-      headline: `КОНСОЛИДАТСИЯИ ДИНАМИКИИ ${symbol} ДАР САҲНАИ БАЙНАЛМИЛАЛӢ`,
-      description: `Нархи ${symbol} дар сатҳи $${price.toLocaleString()} ба эътидол омад. Санҷиши нейронии пардохтпазирӣ нишон медиҳад, ки бозор дар марҳилаи ҷамъкунӣ қарор дорад.`,
+      headline: `DYNAMIC CONSOLIDATION DETECTED IN ${symbol}`,
+      description: `${symbol} price stabilized at $${price.toLocaleString()}. Neural liquidity checks indicate the market is in a healthy accumulation phase.`,
       sentiment: "NEUTRAL",
       sentimentScore: 50,
       timestamp: now
@@ -430,13 +448,13 @@ export async function generateMacroeconomicNews(symbol: string, price: number): 
 
   const prompt = `You are the VANTAGE SOVEREIGN MACROECONOMIC SENTIMENT ENGINE.
 Generate a highly premium, cinematic, and professional macroeconomic news alert for the asset with symbol: "${symbol}" currently trading at price: "$${price}".
-CRITICAL: You must write the "headline" and "description" STRICTLY in the Tajik language. Speak like a cyberpunk Bloomberg terminal or institutional finance intelligence oracle.
+CRITICAL: You must write the "headline" and "description" STRICTLY in the English language. Speak like a cyberpunk Bloomberg terminal or institutional finance intelligence oracle.
 Return ONLY a valid JSON object containing exactly these fields: "headline", "description", "sentiment", "sentimentScore".
 Do not wrap it in markdown block tags, code blocks, or include any extra text.
 
 Rules:
-1. "headline" must be a sleek, high-impact news title in Tajik.
-2. "description" must be an advanced macroeconomic analysis in Tajik describing interest rates, liquidity flows, geopolitical risk, or central banking policy for ${symbol}.
+1. "headline" must be a sleek, high-impact news title in English.
+2. "description" must be an advanced macroeconomic analysis in English describing interest rates, liquidity flows, geopolitical risk, or central banking policy for ${symbol}.
 3. "sentiment" must be exactly "BULLISH", "BEARISH", or "NEUTRAL".
 4. "sentimentScore" must be a number between 0 and 100 corresponding to the strength of the sentiment.`;
 
@@ -455,3 +473,58 @@ Rules:
     return fallback;
   }
 }
+
+export async function generateSecurityAudit(
+  protocols: {
+    quantumLedger: boolean;
+    neuralFirewall: boolean;
+    biometricMfa: boolean;
+    multisigAuth: boolean;
+  },
+  portfolio: any[],
+  balance: number
+): Promise<string> {
+  const activeList = [];
+  if (protocols?.quantumLedger) activeList.push("Quantum Cryptographic Ledger");
+  if (protocols?.neuralFirewall) activeList.push("Neural AI Firewall");
+  if (protocols?.biometricMfa) activeList.push("Biometric MFA");
+  if (protocols?.multisigAuth) activeList.push("Multi-Signature Authorization");
+
+  const protocolsStr = activeList.length > 0 ? activeList.join(", ") : "None (CRITICAL RISK)";
+  const assetsStr = portfolio.length > 0 
+    ? portfolio.map(a => `${a.symbol} (${a.amount})`).join(", ")
+    : "Only Liquid Cash Assets";
+
+  const prompt = `You are the VANTAGE CYBERSECURITY INTELLIGENCE ORACLE.
+Analyze the security defense state of our Sovereign Wealth Fund OS:
+- Enabled Defense Protocols: ${protocolsStr}
+- Protected Fund Cash: $${balance.toLocaleString()}
+- Monitored Portfolio: ${assetsStr}
+
+Provide a highly cinematic, premium, and professional cybersecurity threat analysis.
+CRITICAL: You must write your complete response STRICTLY in the English language.
+- Speak in a highly technical, futuristic cyber-industrial tone.
+- Discuss system vulnerability, cryptographic integrity, active threat vectors, and recommended defensive updates.
+- Keep the entire output concise, under 60-70 words so it fits perfectly on a premium terminal screen.`;
+
+  try {
+    return await callGemini(prompt, 250);
+  } catch (error) {
+    console.warn("AI security audit failed, using offline heuristic audit.");
+    const enabledCount = activeList.length;
+    if (enabledCount === 0) {
+      return `📟 SECURITY STATUS: CRITICAL (HIGH RISK)
+• ZERO DEFENSIVE PROTOCOLS ACTIVE. System is completely vulnerable to port scanning, database intrusion, and DDoS attacks.
+• Action Required: Instantly enable Neural AI Firewall and Quantum Cryptographic Ledger to prevent database manipulation in db.json.`;
+    }
+    if (enabledCount < 3) {
+      return `📟 SECURITY STATUS: MODERATE (SECURED)
+• ACTIVE PROTOCOLS: ${protocolsStr}. Peripheral defenses functional, but complex exploits targeting the $${balance.toLocaleString()} liquid reserve remain possible.
+• Action Required: Implement Multi-Signature Authorization to establish absolute transaction security.`;
+    }
+    return `📟 SECURITY STATUS: COGNITIVE LOCKDOWN (MAXIMUM DEFENSE)
+• ACTIVE PROTOCOLS: ${protocolsStr}. Entire Vantage financial framework insulated via advanced cryptographic and neural barriers.
+• Database synchronization latency optimal. Unauthorized access vectors 100% blocked.`;
+  }
+}
+

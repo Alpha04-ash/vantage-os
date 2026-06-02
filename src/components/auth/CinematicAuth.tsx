@@ -40,7 +40,7 @@ export const CinematicAuth = () => {
         if (success) {
           router.push("/dashboard");
         } else {
-          setError("ХАТОИ_ВУРУД: Рамзи гузариш барои ин оператор нодуруст аст.");
+          setError("AUTH_ERROR: Access key is incorrect for this operator.");
           setLoading(false);
         }
       } else {
@@ -69,7 +69,7 @@ export const CinematicAuth = () => {
         if (success) {
           router.push("/dashboard");
         } else {
-          setError("ХАТОИ_РӮЙХАТГИРӢ: Сохтани ҳисоб қатъ гардид.");
+          setError("REGISTRATION_ERROR: Failed to establish sovereign credentials.");
           setLoading(false);
         }
       }
@@ -96,11 +96,11 @@ export const CinematicAuth = () => {
         <div className="flex flex-col items-center mb-8">
           <Terminal className="text-white w-12 h-12 mb-4 group-hover:text-[#F0B90B] transition-colors duration-700" />
           <h2 className="text-2xl font-black tracking-widest uppercase text-white">
-            {mode === "LOGIN" ? "Воридшавӣ" : "Рӯйхатгирӣ"}
+            {mode === "LOGIN" ? "Login" : "Register"}
           </h2>
           <p className="text-[#F0B90B] font-mono mt-2 text-xs tracking-widest uppercase flex items-center gap-2 text-center">
             <span className="w-1.5 h-1.5 bg-[#F0B90B] rounded-full animate-pulse"></span>
-            {mode === "LOGIN" ? "Маълумоти худро барои вуруд ба система ворид кунед" : "Барои оғоз ҳисоби нави худро созед"}
+            {mode === "LOGIN" ? "Enter credentials to access sovereign terminal" : "Create new credentials to initiate session"}
           </p>
         </div>
 
@@ -115,7 +115,7 @@ export const CinematicAuth = () => {
               placeholder="Username"
             />
             <label className="absolute left-0 top-3 text-zinc-600 font-mono text-xs tracking-widest pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[#F0B90B] peer-focus:text-[10px] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-zinc-400">
-              Номи корбарӣ
+              Username
             </label>
           </div>
 
@@ -129,7 +129,7 @@ export const CinematicAuth = () => {
               placeholder="Password"
             />
             <label className="absolute left-0 top-3 text-zinc-600 font-mono text-xs tracking-widest pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[#F0B90B] peer-focus:text-[10px] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-zinc-400">
-              Рамзи гузариш
+              Access Key
             </label>
             <Fingerprint className="absolute right-0 top-3 w-4 h-4 text-zinc-600 peer-focus:text-[#F0B90B]" />
           </div>
@@ -151,7 +151,7 @@ export const CinematicAuth = () => {
                   placeholder="Email Address"
                 />
                 <label className="absolute left-0 top-5 text-zinc-600 font-mono text-xs tracking-widest pointer-events-none transition-all peer-focus:-top-2 peer-focus:text-[#F0B90B] peer-focus:text-[10px] peer-valid:-top-2 peer-valid:text-[10px] peer-valid:text-zinc-400">
-                  Суроғаи почтаи электронӣ
+                  Email Address
                 </label>
                 <ScanFace className="absolute right-0 top-5 w-4 h-4 text-zinc-600 peer-focus:text-[#F0B90B]" />
               </motion.div>
@@ -176,11 +176,11 @@ export const CinematicAuth = () => {
             {loading ? (
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-current rounded-full animate-ping"></span>
-                {mode === "LOGIN" ? "Воридшавӣ..." : "Сохтани ҳисоб..."}
+                {mode === "LOGIN" ? "Authenticating..." : "Creating Account..."}
               </span>
             ) : (
               <>
-                <span>{mode === "LOGIN" ? "ВУРУД БА ПЛАТФОРМА" : "СОХТАНИ ҲИСОБ"}</span>
+                <span>{mode === "LOGIN" ? "INITIALIZE SESSION" : "CREATE SOVEREIGN KEY"}</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -195,7 +195,7 @@ export const CinematicAuth = () => {
             }}
             className="text-xs font-mono text-zinc-500 hover:text-white transition-colors tracking-widest uppercase border-b border-transparent hover:border-white pb-1"
           >
-            {mode === "LOGIN" ? "Ҳисоб надоред? Рӯйхатгирӣ" : "Аллакай ҳисоб доред? Воридшавӣ"}
+            {mode === "LOGIN" ? "No account? Register" : "Have an account? Login"}
           </button>
         </div>
       </motion.div>

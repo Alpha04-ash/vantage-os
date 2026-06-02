@@ -8,7 +8,7 @@ import { Scanlines } from "@/components/layout/SovereignUI";
 import { FINANCE_LESSONS } from "@/data/financeLessons";
 import { useAcademyProgress } from "@/hooks/useAcademyProgress";
 import { AcademyHeader, AcademyLessonCard } from "@/components/academy/AcademyComponents";
-import { Sparkles, BookOpen } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { SynapseTutor } from "@/components/layout/SynapseTutor";
 
 export default function AcademyPage() {
@@ -33,7 +33,7 @@ export default function AcademyPage() {
             <div className="flex items-center gap-4">
                <div className="text-[9px] font-extrabold uppercase tracking-[0.6em] text-[#F0B90B] flex items-center gap-2 font-mono">
                  <Sparkles className="w-3.5 h-3.5 text-[#F0B90B] animate-pulse" />
-                 АРХИВИ_БАРНОМАҲО_ОМӮЗИШӢ
+                 CURRICULUM_PROGRAMS_ARCHIVE
                </div>
                <div className="h-[1px] flex-1 bg-gradient-to-r from-[#F0B90B]/30 via-[#2B2F36] to-transparent" />
             </div>
@@ -57,8 +57,8 @@ export default function AcademyPage() {
       </div>
 
       <footer className="mt-40 py-20 border-t border-white/5 px-10 flex flex-col md:flex-row justify-between items-center gap-8 opacity-20">
-         <div className="text-[10px] font-black uppercase tracking-widest italic">Академияи Молиявии VANTAGE — Ҳамаи 8 модул дарсҳои ИИ-и Gemini-ро дар бар мегиранд</div>
-         <div className="text-[10px] font-black uppercase tracking-widest italic">Бо дастгирии Google Gemini Flash Lite</div>
+         <div className="text-[10px] font-black uppercase tracking-widest italic">VANTAGE FINANCIAL ACADEMY — ALL 8 MODULES FEATURE GEMINI AI INTEGRATION</div>
+         <div className="text-[10px] font-black uppercase tracking-widest italic">POWERED BY GOOGLE GEMINI FLASH LITE</div>
       </footer>
       <SynapseTutor />
     </main>
