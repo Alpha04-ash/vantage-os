@@ -11,6 +11,7 @@ import { MonolithCard, ConfirmModal } from "./SovereignUI";
 import { SystemCore3D } from "./SystemCore3D";
 import { useRouter } from "next/navigation";
 
+declare var pendo: any;
 
 export function SettingsView() {
   const { reset, logout, currentUser, balance, timeSpeed, setTimeSpeed } = useVantageStore();
@@ -21,6 +22,13 @@ export function SettingsView() {
   const [diagnosticResult, setDiagnosticResult] = useState("");
 
   const triggerReset = () => {
+    if (typeof pendo !== "undefined") {
+      pendo.track("system_reset", {
+        balanceAtReset: balance,
+        portfolioSizeAtReset: currentUser?.portfolio?.length ?? 0,
+        learningXPAtReset: currentUser?.learningXP ?? 0
+      });
+    }
     reset();
     setShowResetConfirm(false);
   };
@@ -28,6 +36,7 @@ export function SettingsView() {
   const triggerLogout = () => {
     setShowLogoutConfirm(false);
     if (typeof pendo !== "undefined") {
+      pendo.track("user_logged_out");
       pendo.clearSession();
     }
     logout();
@@ -42,6 +51,11 @@ export function SettingsView() {
       setTimeout(() => {
         setDiagnosticResult("Database successfully synchronized! Balance Integrity: INTEGRAL.");
         setIsDiagnosticRunning(false);
+        if (typeof pendo !== "undefined") {
+          pendo.track("database_diagnostic_run", {
+            diagnosticResult: "success"
+          });
+        }
       }, 1000);
     }, 1000);
   };
@@ -240,7 +254,7 @@ export function SettingsView() {
                      ].map(s => (
                        <button
                          key={s.val}
-                         onClick={() => setTimeSpeed(s.val)}
+                         onClick={() => { if (typeof pendo !== "undefined") { pendo.track("time_speed_changed", { newTimeSpeed: s.val, previousTimeSpeed: timeSpeed ?? 1 }); } setTimeSpeed(s.val); }}
                          className={`p-3 rounded-lg border text-left flex flex-col justify-between transition-all cursor-pointer ${
                            (timeSpeed ?? 1) === s.val
                              ? "bg-[#F0B90B]/10 border-[#F0B90B] text-[#F0B90B] shadow-[0_0_15px_rgba(240,185,11,0.1)] font-bold"

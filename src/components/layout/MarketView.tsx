@@ -7,6 +7,8 @@ import { Search, BarChart3, Globe, TrendingUp, TrendingDown } from "lucide-react
 import { MonolithCard, AssetIcon } from "./SovereignUI";
 import { useRouter } from "next/navigation";
 
+declare var pendo: any;
+
 export function MarketView({ onTrade, onDetails }: { onTrade?: (asset: CryptoPrice) => void, onDetails?: (asset: CryptoPrice) => void }) {
   const [assets, setAssets] = useState<CryptoPrice[]>([]);
   const [search, setSearch] = useState("");
@@ -29,10 +31,23 @@ export function MarketView({ onTrade, onDetails }: { onTrade?: (asset: CryptoPri
     return () => unsubscribe();
   }, []);
 
-  const filtered = assets.filter(a => 
-    (a.name || "").toLowerCase().includes(search.toLowerCase()) || 
+  const filtered = assets.filter(a =>
+    (a.name || "").toLowerCase().includes(search.toLowerCase()) ||
     (a.symbol || "").toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    if (!search) return;
+    const timer = setTimeout(() => {
+      if (typeof pendo !== "undefined") {
+        pendo.track("asset_search_executed", {
+          searchQuery: search,
+          resultsCount: filtered.length
+        });
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const handleRouteToTrade = (symbol: string) => {
     router.push(`/trade/${symbol.toUpperCase()}_USDT`);

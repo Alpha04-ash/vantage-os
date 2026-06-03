@@ -5,6 +5,8 @@ import { useVantageStore } from "@/store/useVantageStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Shield, AlertTriangle, CheckCircle2 } from "lucide-react";
 
+declare var pendo: any;
+
 interface MissionModalProps {
   onClose: () => void;
 }
@@ -32,6 +34,13 @@ export function TaxShield({ onClose }: MissionModalProps) {
     setIsFinished(true);
     if (totalScore > 0) {
       completeMission("tax-shield", 400, 100);
+    }
+    if (typeof pendo !== "undefined") {
+      pendo.track("tax_shield_submitted", {
+        totalScore,
+        selectedItemCount: selected.length,
+        passed: totalScore > 0
+      });
     }
   };
 

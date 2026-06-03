@@ -4,6 +4,8 @@ import { persist } from "zustand/middleware";
 import { AVAILABLE_NODES } from "@/data/empireNodes";
 import { AVAILABLE_ASSETS } from "@/data/properties";
 
+declare var pendo: any;
+
 // --- TYPES ---
 export interface Asset {
   id: string; symbol: string; name: string; amount: number; avgPrice: number;
@@ -405,7 +407,15 @@ export const useVantageStore = create<VantageState>()(
           users: newUsers,
           currentUser: newUsers[currentUser.operatorId]
         });
-        
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("achievement_unlocked", {
+            achievementId: id,
+            xpReward: xpBonus,
+            unlockedAt: new Date().toISOString()
+          });
+        }
+
         playAchievementSynthesizer();
       },
 
@@ -482,7 +492,7 @@ export const useVantageStore = create<VantageState>()(
 
         // Trigger achievements
         get().updateAchievementProgress("first_invest", 1);
-        
+
         // Calculate net worth and trigger millionaire_dream
         const portfolioValue = get().portfolio.reduce((sum, a) => sum + a.amount * (a.avgPrice || currentPrice), 0);
         const propertiesValue = get().properties.reduce((sum, p) => sum + p.owned * p.currentValue * (p.appreciationMultiplier || 1.0), 0);
@@ -490,7 +500,7 @@ export const useVantageStore = create<VantageState>()(
         get().updateAchievementProgress("millionaire_dream", totalNetWorth);
       },
 
-      sell: (assetId, amount, currentPrice) => {
+      sell: (assetId: string, amount: number, currentPrice: number) => {
         set((state) => {
           const existing = state.portfolio.find((a) => a.id === assetId);
           if (!existing || existing.amount < amount) return state;
@@ -564,6 +574,17 @@ export const useVantageStore = create<VantageState>()(
 
         set({ balance: newBalance, infrastructure: newInfrastructure, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
 
+        if (typeof pendo !== "undefined") {
+          pendo.track("infrastructure_node_purchased", {
+            nodeId: nodeDef.id,
+            nodeName: nodeDef.name,
+            nodeType: nodeDef.type,
+            purchaseCost: Math.round(currentCost),
+            ownedCountAfter: (existingNode?.owned || 0) + 1,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
+
         // Trigger achievements
         get().updateAchievementProgress("empire_owner", 1);
         
@@ -587,7 +608,7 @@ export const useVantageStore = create<VantageState>()(
         const liquidationValue = currentCost * multiplier * 0.75;
 
         const newBalance = balance + liquidationValue;
-        const newInfrastructure = infrastructure.map(n => 
+        const newInfrastructure = infrastructure.map(n =>
           n.id === nodeId ? { ...n, owned: n.owned - 1 } : n
         ).filter(n => n.owned > 0);
 
@@ -599,6 +620,15 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, infrastructure: newInfrastructure, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("infrastructure_node_sold", {
+            nodeId,
+            liquidationValue: Math.round(liquidationValue),
+            ownedCountAfter: existingNode.owned - 1,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       upgradeNode: (nodeId, upgradeType, cost) => {
@@ -628,6 +658,17 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, infrastructure: newInfrastructure, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedNode = newInfrastructure.find(n => n.id === nodeId);
+          pendo.track("infrastructure_node_upgraded", {
+            nodeId,
+            upgradeType,
+            upgradeCost: cost,
+            newLevel: upgradeType === 'marketing' ? (updatedNode?.marketingLevel ?? 1) : (updatedNode?.efficiencyLevel ?? 1),
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       applyCorporateStrategy: (nodeId, strategyId, cost, yieldBoostPercent) => {
@@ -657,6 +698,18 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, infrastructure: newInfrastructure, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedNode = newInfrastructure.find(n => n.id === nodeId);
+          pendo.track("corporate_strategy_applied", {
+            nodeId,
+            strategyId,
+            strategyCost: cost,
+            yieldBoostPercent,
+            newYieldMultiplier: updatedNode?.customYieldMultiplier ?? 1.0,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       collectYield: () => {
@@ -747,6 +800,17 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], balance: newBalance, properties: newProperties };
         set({ balance: newBalance, properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("property_purchased", {
+            propertyId: propDef.id,
+            propertyName: propDef.name,
+            propertyType: propDef.type,
+            purchaseCost: Math.round(cost),
+            ownedCountAfter: (existing?.owned || 0) + 1,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       sellProperty: (propertyId) => {
@@ -772,6 +836,15 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], balance: newBalance, properties: newProperties };
         set({ balance: newBalance, properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("property_sold", {
+            propertyId,
+            saleValue: Math.round(saleValue),
+            ownedCountAfter: existing.owned - 1,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       renovateProperty: (propertyId, cost) => {
@@ -786,6 +859,17 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], balance: newBalance, properties: newProperties };
         set({ balance: newBalance, properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedProp = newProperties.find(p => p.id === propertyId);
+          pendo.track("property_renovated", {
+            propertyId,
+            renovationCost: cost,
+            newRenovationLevel: updatedProp?.renovationLevel ?? 1,
+            newCurrentValue: Math.round(updatedProp?.currentValue ?? 0),
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       upgradePropertyTenants: (propertyId, cost) => {
@@ -800,6 +884,17 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], balance: newBalance, properties: newProperties };
         set({ balance: newBalance, properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedProp = newProperties.find(p => p.id === propertyId);
+          pendo.track("property_tenants_upgraded", {
+            propertyId,
+            upgradeCost: cost,
+            newTenantQualityLevel: updatedProp?.tenantQualityLevel ?? 1,
+            newAppreciationMultiplier: updatedProp?.appreciationMultiplier ?? 1.08,
+            balanceAfter: Math.round(newBalance)
+          });
+        }
       },
 
       leaseUnit: (propertyId) => {
@@ -822,6 +917,16 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], properties: newProperties };
         set({ properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedProp = newProperties.find(p => p.id === propertyId);
+          pendo.track("property_unit_leased", {
+            propertyId,
+            rentedCountAfter: updatedProp?.rentedCount ?? 0,
+            totalOwned: updatedProp?.owned ?? 0,
+            maxRentable: updatedProp ? ((updatedProp.type === "residential" || updatedProp.type === "luxury") ? Math.max(0, updatedProp.owned - 1) : updatedProp.owned) : 0
+          });
+        }
       },
 
       recallUnit: (propertyId) => {
@@ -840,6 +945,14 @@ export const useVantageStore = create<VantageState>()(
         const newUsers = { ...users };
         newUsers[currentUser.operatorId] = { ...newUsers[currentUser.operatorId], properties: newProperties };
         set({ properties: newProperties, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          const updatedProp = newProperties.find(p => p.id === propertyId);
+          pendo.track("property_unit_recalled", {
+            propertyId,
+            rentedCountAfter: updatedProp?.rentedCount ?? 0
+          });
+        }
       },
 
       updateValuations: (marketAdjustments) => {
@@ -880,6 +993,15 @@ export const useVantageStore = create<VantageState>()(
           return { portfolioAudit: audit, users: newUsers, currentUser: newCurrentUser };
         });
 
+        if (typeof pendo !== "undefined") {
+          pendo.track("portfolio_audit_requested", {
+            portfolioSize: get().portfolio.length,
+            balance: Math.round(get().balance),
+            propertiesCount: get().properties.length,
+            hasActiveLoan: !!get().activeLoan
+          });
+        }
+
         // Trigger neural_audit achievement
         get().updateAchievementProgress("neural_audit", 1);
       },
@@ -900,6 +1022,12 @@ export const useVantageStore = create<VantageState>()(
           }
           return { academyDirectives: directive, users: newUsers, currentUser: newCurrentUser };
         });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("academy_audit_requested", {
+            learningXP: get().learningXP
+          });
+        }
 
         // Trigger neural_audit achievement
         get().updateAchievementProgress("neural_audit", 1);
@@ -928,7 +1056,7 @@ export const useVantageStore = create<VantageState>()(
         set((state) => {
           const newXP = state.learningXP + xpReward;
           const newImpact = state.impactPoints + impactReward;
-          
+
           const newUsers = { ...state.users };
           let newCurrentUser = state.currentUser;
           if (state.currentUser) {
@@ -939,9 +1067,19 @@ export const useVantageStore = create<VantageState>()(
             };
             newCurrentUser = newUsers[state.currentUser.operatorId];
           }
-          
+
           return { learningXP: newXP, impactPoints: newImpact, users: newUsers, currentUser: newCurrentUser };
         });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("mission_completed", {
+            missionId,
+            xpReward,
+            impactReward,
+            outcome: "success"
+          });
+        }
+
         get().updateAchievementProgress("scholar_lvl", get().learningXP);
       },
 
@@ -1103,6 +1241,14 @@ export const useVantageStore = create<VantageState>()(
 
         set({ balance: newBalance, savingsDeposited: newSavings, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
 
+        if (typeof pendo !== "undefined") {
+          pendo.track("savings_deposited", {
+            depositAmount: amount,
+            totalSavingsAfter: newSavings,
+            balanceAfter: newBalance
+          });
+        }
+
         // Trigger achievements
         get().updateAchievementProgress("savings_master", newSavings);
       },
@@ -1122,6 +1268,14 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, savingsDeposited: newSavings, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("savings_withdrawn", {
+            withdrawalAmount: amount,
+            totalSavingsAfter: newSavings,
+            balanceAfter: newBalance
+          });
+        }
       },
 
       applyForLoan: (amount, term, apr, verdict, purpose) => {
@@ -1146,6 +1300,18 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, activeLoan: newLoan, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("loan_applied", {
+            loanAmount: amount,
+            loanTerm: term,
+            apr,
+            verdict,
+            purpose,
+            totalDue,
+            totalEquity: balance
+          });
+        }
       },
 
       repayLoan: () => {
@@ -1162,6 +1328,13 @@ export const useVantageStore = create<VantageState>()(
         };
 
         set({ balance: newBalance, activeLoan: null, users: newUsers, currentUser: newUsers[currentUser.operatorId] });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("loan_repaid", {
+            totalRepaid: activeLoan.totalDue,
+            balanceAfter: newBalance
+          });
+        }
       },
 
       tickLoanTimer: () => {
@@ -1264,6 +1437,16 @@ export const useVantageStore = create<VantageState>()(
           users: newUsers,
           currentUser: newUsers[currentUser.operatorId]
         });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("security_protocol_toggled", {
+            protocolId,
+            enabled: !isEnabled,
+            cost: isEnabled ? 0 : cost,
+            newSecurityScore: score,
+            balanceAfter: newBalance
+          });
+        }
       },
 
       requestSecurityAudit: async () => {
@@ -1324,6 +1507,16 @@ export const useVantageStore = create<VantageState>()(
           users: newUsers,
           currentUser: newUsers[currentUser.operatorId]
         });
+
+        if (typeof pendo !== "undefined") {
+          pendo.track("threat_mitigated", {
+            logId,
+            severity: logToResolve.severity,
+            mitigationCost: cost,
+            newSecurityScore: newScore,
+            balanceAfter: newBalance
+          });
+        }
       },
 
       runSecuritySimulation: (outcome) => {
@@ -1425,6 +1618,15 @@ if (typeof window !== "undefined") {
                   const tgEarningsMsg = `💰 PASSIVE INCOME: You returned after ${elapsedSeconds} seconds and earned $${Math.floor(totalOfflineEarnings).toLocaleString()} in passive yields!`;
                   if (typeof window !== "undefined") {
                     localStorage.setItem("vantage_offline_earnings_msg", tgEarningsMsg);
+                  }
+                  if (typeof pendo !== "undefined") {
+                    pendo.track("offline_income_collected", {
+                      elapsedSeconds,
+                      totalOfflineEarnings: Math.floor(totalOfflineEarnings),
+                      infrastructureYield: Math.floor(baseYield * elapsedSeconds * speed),
+                      savingsInterest: Math.floor(savingsInterest * elapsedSeconds * speed),
+                      propertyRent: Math.floor(rentYield * elapsedSeconds * speed)
+                    });
                   }
                 }
 

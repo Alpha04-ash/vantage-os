@@ -16,6 +16,8 @@ import {
 import { NeuralField, Scanlines } from "@/components/layout/SovereignUI";
 import { SynapseTutor } from "@/components/layout/SynapseTutor";
 
+declare var pendo: any;
+
 const playTradeSound = (type?: string) => {};
 const playAlertSynth = (type?: string) => {};
 
@@ -696,9 +698,17 @@ export default function TradeTerminalPage() {
 
   // Handle timeframe swaps
   const handleTimeframeChange = (tf: "Time" | "1s" | "15m" | "1H" | "4H" | "1D" | "1W") => {
+    const previousTimeframe = activeTimeframe;
     playTradeSound("click");
     setActiveTimeframe(tf);
     setCandles([]); // clear to trigger reload
+    if (typeof pendo !== "undefined") {
+      pendo.track("chart_timeframe_changed", {
+        timeframe: tf,
+        assetId,
+        previousTimeframe
+      });
+    }
   };
 
   // --- ARITHMETIC SYNC ON ORDER ENTRY ---
@@ -777,6 +787,17 @@ export default function TradeTerminalPage() {
       }
       invest(mockAsset, Number(amount), p);
       playTradeSound("success");
+      if (typeof pendo !== "undefined") {
+        pendo.track("crypto_trade_executed", {
+          tradeSide: "buy",
+          assetId,
+          assetSymbol: assetId.toUpperCase(),
+          amount: Number(amount),
+          executionPrice: p,
+          totalCost: transactionCost,
+          orderType
+        });
+      }
       setOrderNotification({ message: `ORDER EXECUTED: BOUGHT ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
@@ -789,6 +810,17 @@ export default function TradeTerminalPage() {
       }
       sell(assetId, Number(amount), p);
       playTradeSound("success");
+      if (typeof pendo !== "undefined") {
+        pendo.track("crypto_trade_executed", {
+          tradeSide: "sell",
+          assetId,
+          assetSymbol: assetId.toUpperCase(),
+          amount: Number(amount),
+          executionPrice: p,
+          totalCost: transactionCost,
+          orderType
+        });
+      }
       setOrderNotification({ message: `ORDER EXECUTED: SOLD ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
@@ -804,6 +836,14 @@ export default function TradeTerminalPage() {
     playTradeSound("click");
     sell(assetId, holding.amount, currentPrice);
     playTradeSound("success");
+    if (typeof pendo !== "undefined") {
+      pendo.track("position_liquidated", {
+        assetId,
+        totalAmount: holding.amount,
+        executionPrice: currentPrice,
+        totalProceeds: holding.amount * currentPrice
+      });
+    }
     setOrderNotification({ message: `FAST AUDIT: TOTAL LIQUIDATION OF ${assetId.toUpperCase()} AT MARKET PRICE`, success: true });
     setTimeout(() => setOrderNotification(null), 3000);
   };
@@ -960,6 +1000,12 @@ export default function TradeTerminalPage() {
   const handleMouseUp = () => {
     if (activeDrawing) {
       setDrawings(prev => [...prev, activeDrawing]);
+      if (typeof pendo !== "undefined") {
+        pendo.track("chart_drawing_created", {
+          drawingType: activeDrawing.type,
+          assetId
+        });
+      }
       setActiveDrawing(null);
     }
   };

@@ -78,6 +78,7 @@ export function SynapseTutor() {
           responseLength: responseText.length
         });
       }
+      
       setMessages(prev => [...prev, {
         sender: "synapse",
         text: responseText,

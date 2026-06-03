@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { AcademyProgress } from "@/types/academy";
 
+declare var pendo: any;
+
 const STORAGE_KEY = "vantage_academy_v5_progress";
 
 const defaultProgress: AcademyProgress = {
@@ -40,6 +42,11 @@ export function useAcademyProgress() {
         lessonProgress: { ...progress.lessonProgress, [slug]: 0 },
       };
       saveProgress(newProgress);
+      if (typeof pendo !== "undefined") {
+        pendo.track("lesson_started", {
+          lessonSlug: slug
+        });
+      }
     }
   };
 
@@ -58,6 +65,12 @@ export function useAcademyProgress() {
         completedLessons: [...progress.completedLessons, slug],
       };
       saveProgress(newProgress);
+      if (typeof pendo !== "undefined") {
+        pendo.track("lesson_completed", {
+          lessonSlug: slug,
+          totalScenesViewed: progress.lessonProgress[slug] ?? 0
+        });
+      }
     }
   };
 
@@ -73,6 +86,14 @@ export function useAcademyProgress() {
       },
     };
     saveProgress(newProgress);
+    if (typeof pendo !== "undefined") {
+      pendo.track("quiz_answer_submitted", {
+        lessonSlug: slug,
+        sceneId,
+        answerIndex,
+        isCorrect
+      });
+    }
   };
 
   const resetLessonProgress = (slug: string) => {

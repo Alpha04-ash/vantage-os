@@ -10,6 +10,8 @@ import { MonolithCard } from "./SovereignUI";
 import { Brain3D } from "./Brain3D";
 import { generateMacroeconomicNews, MacroeconomicNews } from "@/services/aiOracle";
 
+declare var pendo: any;
+
 function StatCard({ label, value, subValue, trend, icon: Icon }: any) {
   const isPositive = trend > 0;
   return (
@@ -70,6 +72,13 @@ export function ControlCenter({ prices, isSyncing, onSync }: { prices: CryptoPri
       const currentPrice = prices?.find(p => p.id === symbol.toLowerCase())?.current_price || 63500;
       const report = await generateMacroeconomicNews(symbol, currentPrice);
       setNews(report);
+      if (typeof pendo !== "undefined") {
+        pendo.track("macroeconomic_news_generated", {
+          symbol,
+          sentiment: report.sentiment,
+          sentimentScore: report.sentimentScore
+        });
+      }
     } catch (e) {
       console.error(e);
     } finally {
