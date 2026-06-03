@@ -194,7 +194,7 @@
       "operatorId": "Alijon",
       "accessKey": "98 714 64",
       "clearance": "psps2021rate@gmail.com",
-      "balance": 1666689.4211999837,
+      "balance": 1667566.6963999772,
       "portfolio": [
         {
           "id": "eth",
@@ -208,7 +208,7 @@
       ],
       "learningXP": 570,
       "impactPoints": 0,
-      "portfolioAudit": "Cash surplus detected. Acquire ETH futures or invest in prime orbital real estate.",
+      "portfolioAudit": "Cash surplus detected. Acquire 500 ETH or invest in downtown digital billboard.",
       "academyDirectives": "Интизори харитасозии когнитивӣ барои роҳҳои оптималии омӯзиш.",
       "infrastructure": [
         {
@@ -249,7 +249,7 @@
       "savingsDeposited": 50000,
       "activeLoan": null,
       "properties": [],
-      "fiscalDays": 316.145833333329,
+      "fiscalDays": 316.30083333332885,
       "achievements": [
         {
           "id": "first_invest",
@@ -312,7 +312,7 @@
           "unlockedAt": "2026-05-28T03:26:12.226Z"
         }
       ],
-      "lastSavedTimestamp": 1780386240422,
+      "lastSavedTimestamp": 1780419517571,
       "timeSpeed": 0.1,
       "securityScore": 50,
       "securityProtocols": {
@@ -355,7 +355,7 @@
     "operatorId": "Alijon",
     "accessKey": "98 714 64",
     "clearance": "psps2021rate@gmail.com",
-    "balance": 1666689.4211999837,
+    "balance": 1667566.6963999772,
     "portfolio": [
       {
         "id": "eth",
@@ -369,7 +369,7 @@
     ],
     "learningXP": 570,
     "impactPoints": 0,
-    "portfolioAudit": "Cash surplus detected. Acquire ETH futures or invest in prime orbital real estate.",
+    "portfolioAudit": "Cash surplus detected. Acquire 500 ETH or invest in downtown digital billboard.",
     "academyDirectives": "Интизори харитасозии когнитивӣ барои роҳҳои оптималии омӯзиш.",
     "infrastructure": [
       {
@@ -410,7 +410,7 @@
     "savingsDeposited": 50000,
     "activeLoan": null,
     "properties": [],
-    "fiscalDays": 316.145833333329,
+    "fiscalDays": 316.30083333332885,
     "achievements": [
       {
         "id": "first_invest",
@@ -473,7 +473,7 @@
         "unlockedAt": "2026-05-28T03:26:12.226Z"
       }
     ],
-    "lastSavedTimestamp": 1780386240422,
+    "lastSavedTimestamp": 1780419517571,
     "timeSpeed": 0.1,
     "securityScore": 50,
     "securityProtocols": {
@@ -512,7 +512,7 @@
     ]
   },
   "isAuthenticated": true,
-  "balance": 1666689.4211999837,
+  "balance": 1667566.6963999772,
   "portfolio": [
     {
       "id": "eth",
@@ -526,7 +526,7 @@
   ],
   "learningXP": 570,
   "impactPoints": 0,
-  "portfolioAudit": "Cash surplus detected. Acquire ETH futures or invest in prime orbital real estate.",
+  "portfolioAudit": "Cash surplus detected. Acquire 500 ETH or invest in downtown digital billboard.",
   "academyDirectives": "Интизори харитасозии когнитивӣ барои роҳҳои оптималии омӯзиш.",
   "infrastructure": [
     {
@@ -567,7 +567,7 @@
   "savingsDeposited": 50000,
   "activeLoan": null,
   "properties": [],
-  "fiscalDays": 316.145833333329,
+  "fiscalDays": 316.30083333332885,
   "achievements": [
     {
       "id": "first_invest",
