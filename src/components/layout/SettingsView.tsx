@@ -37,7 +37,9 @@ export function SettingsView() {
     setShowLogoutConfirm(false);
     if (typeof pendo !== "undefined") {
       pendo.track("user_logged_out");
-      pendo.clearSession();
+      if (typeof pendo.clearSession === "function") {
+        pendo.clearSession();
+      }
     }
     logout();
     router.push("/");
