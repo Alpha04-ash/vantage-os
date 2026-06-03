@@ -3,18 +3,62 @@ import fs from "fs";
 import path from "path";
 
 const DB_PATH = path.join(process.cwd(), "db.json");
+const TMP_DB_PATH = "/tmp/db.json";
+
+// In-memory fallback cache for serverless environments (Vercel)
+let serverMemoryDb: any = { users: {} };
+
+function readDb() {
+  // 1. Try local dev database path
+  try {
+    if (fs.existsSync(DB_PATH)) {
+      return JSON.parse(fs.readFileSync(DB_PATH, "utf-8"));
+    }
+  } catch (e) {
+    console.warn("Failed to read process.cwd db.json, trying temp file:", e);
+  }
+
+  // 2. Try temp writable database path
+  try {
+    if (fs.existsSync(TMP_DB_PATH)) {
+      return JSON.parse(fs.readFileSync(TMP_DB_PATH, "utf-8"));
+    }
+  } catch (e) {
+    console.warn("Failed to read /tmp db.json, falling back to memory:", e);
+  }
+
+  // 3. Fallback to in-memory store
+  return serverMemoryDb;
+}
+
+function writeDb(data: any) {
+  // 1. Update in-memory fallback
+  serverMemoryDb = data;
+
+  // 2. Try writing to process.cwd path (local development)
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf-8");
+    return;
+  } catch (e: any) {
+    // EROFS represents Read-only file system on Vercel
+    console.warn("process.cwd db.json is read-only. Trying /tmp/db.json:", e.message);
+  }
+
+  // 3. Try writing to /tmp path (Vercel serverless writable storage)
+  try {
+    fs.writeFileSync(TMP_DB_PATH, JSON.stringify(data, null, 2), "utf-8");
+  } catch (e: any) {
+    console.error("Failed to write database to /tmp/db.json:", e.message);
+  }
+}
 
 export async function GET() {
   try {
-    if (!fs.existsSync(DB_PATH)) {
-      return NextResponse.json({ users: {} });
-    }
-    const rawData = fs.readFileSync(DB_PATH, "utf-8");
-    const parsed = JSON.parse(rawData);
-    return NextResponse.json(parsed);
+    const data = readDb();
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Local database read error:", error);
-    return NextResponse.json({ error: "Failed to read database" }, { status: 500 });
+    console.error("Database read failure, returning fallback structure:", error);
+    return NextResponse.json({ users: {} });
   }
 }
 
@@ -23,15 +67,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     
     // 1. Read existing database content if it exists
-    let existingData: any = { users: {} };
-    if (fs.existsSync(DB_PATH)) {
-      try {
-        const raw = fs.readFileSync(DB_PATH, "utf-8");
-        existingData = JSON.parse(raw);
-      } catch (e) {
-        console.error("Error parsing existing db.json:", e);
-      }
-    }
+    let existingData = readDb();
 
     // 2. Merge the users dictionary to preserve registrations
     const mergedUsers = { ...existingData.users, ...body.users };
@@ -89,10 +125,10 @@ export async function POST(request: Request) {
       threatLogs: body.threatLogs !== undefined ? body.threatLogs : existingData.threatLogs
     };
 
-    fs.writeFileSync(DB_PATH, JSON.stringify(updatedData, null, 2), "utf-8");
+    writeDb(updatedData);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Local database write error:", error);
-    return NextResponse.json({ error: "Failed to write database" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Failed to write database" });
   }
 }
