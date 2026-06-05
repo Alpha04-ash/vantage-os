@@ -27,7 +27,36 @@ export default function RootLayout({
     z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
 })('b1e2a3c2-07a7-43ad-b8c5-e924f4d56e28');
 
-pendo.initialize();
+(function() {
+  try {
+    var localData = localStorage.getItem("vantage-v15-multiflow");
+    if (localData) {
+      var parsed = JSON.parse(localData);
+      var currentUser = parsed.state ? parsed.state.currentUser : null;
+      if (currentUser) {
+        pendo.initialize({
+          visitor: {
+            id: currentUser.operatorId,
+            email: currentUser.clearance || '',
+            balance: currentUser.balance || 0,
+            learningXP: currentUser.learningXP || 0,
+            impactPoints: currentUser.impactPoints || 0,
+            savingsDeposited: currentUser.savingsDeposited || 0,
+            fiscalDays: currentUser.fiscalDays || 0,
+            lastSavedTimestamp: currentUser.lastSavedTimestamp || 0,
+            timeSpeed: currentUser.timeSpeed || 1,
+            securityScore: currentUser.securityScore || 0,
+            threatLevel: currentUser.threatLevel || 'GUARDED'
+          }
+        });
+        return;
+      }
+    }
+  } catch (e) {
+    console.error("Pendo local storage parse failed:", e);
+  }
+  pendo.initialize();
+})();
         `}</Script>
         {children}
       </body>

@@ -1673,6 +1673,24 @@ if (typeof window !== "undefined") {
               securityAuditText: typeof dbUser.securityAuditText === 'string' ? dbUser.securityAuditText : state.securityAuditText,
               threatLogs: Array.isArray(dbUser.threatLogs) ? dbUser.threatLogs : state.threatLogs
             });
+
+            if (typeof pendo !== "undefined" && typeof pendo.identify === "function") {
+              pendo.identify({
+                visitor: {
+                  id: dbUser.operatorId,
+                  email: dbUser.clearance || '',
+                  balance: dbUser.balance || 0,
+                  learningXP: dbUser.learningXP || 0,
+                  impactPoints: dbUser.impactPoints || 0,
+                  savingsDeposited: dbUser.savingsDeposited || 0,
+                  fiscalDays: dbUser.fiscalDays || 0,
+                  lastSavedTimestamp: dbUser.lastSavedTimestamp || 0,
+                  timeSpeed: dbUser.timeSpeed || 1,
+                  securityScore: dbUser.securityScore || 0,
+                  threatLevel: dbUser.threatLevel || 'GUARDED'
+                }
+              });
+            }
           } else {
             console.log("[VANTAGE DB] Active user not found in DB users dictionary. Hydrating merged users.");
             useVantageStore.setState({ users: mergedUsers });
