@@ -787,17 +787,6 @@ export default function TradeTerminalPage() {
       }
       invest(mockAsset, Number(amount), p);
       playTradeSound("success");
-      if (typeof pendo !== "undefined") {
-        pendo.track("crypto_trade_executed", {
-          tradeSide: "buy",
-          assetId,
-          assetSymbol: assetId.toUpperCase(),
-          amount: Number(amount),
-          executionPrice: p,
-          totalCost: transactionCost,
-          orderType
-        });
-      }
       setOrderNotification({ message: `ORDER EXECUTED: BOUGHT ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
@@ -810,17 +799,6 @@ export default function TradeTerminalPage() {
       }
       sell(assetId, Number(amount), p);
       playTradeSound("success");
-      if (typeof pendo !== "undefined") {
-        pendo.track("crypto_trade_executed", {
-          tradeSide: "sell",
-          assetId,
-          assetSymbol: assetId.toUpperCase(),
-          amount: Number(amount),
-          executionPrice: p,
-          totalCost: transactionCost,
-          orderType
-        });
-      }
       setOrderNotification({ message: `ORDER EXECUTED: SOLD ${Number(amount).toFixed(4)} ${assetId.toUpperCase()} AT $${p.toFixed(2)}`, success: true });
       setAmount("");
       setTotal("");
@@ -836,14 +814,6 @@ export default function TradeTerminalPage() {
     playTradeSound("click");
     sell(assetId, holding.amount, currentPrice);
     playTradeSound("success");
-    if (typeof pendo !== "undefined") {
-      pendo.track("position_liquidated", {
-        assetId,
-        totalAmount: holding.amount,
-        executionPrice: currentPrice,
-        totalProceeds: holding.amount * currentPrice
-      });
-    }
     setOrderNotification({ message: `FAST AUDIT: TOTAL LIQUIDATION OF ${assetId.toUpperCase()} AT MARKET PRICE`, success: true });
     setTimeout(() => setOrderNotification(null), 3000);
   };
