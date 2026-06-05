@@ -34,46 +34,54 @@ export default function RootLayout({
     var _initialize = window.pendo.initialize;
     var _clearSession = window.pendo.clearSession;
     
+    var wrappedTrack = function(name, metadata) {
+      console.log("%c[PENDO TRACK] " + name, "color: #00E5FF; font-weight: bold; font-size: 11px;", metadata);
+      if (typeof _track === 'function') {
+        _track.apply(window.pendo, arguments);
+      }
+    };
+
+    var wrappedIdentify = function(config) {
+      console.log("%c[PENDO IDENTIFY]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
+      if (typeof _identify === 'function') {
+        _identify.apply(window.pendo, arguments);
+      }
+    };
+
+    var wrappedInitialize = function(config) {
+      console.log("%c[PENDO INITIALIZE]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
+      if (typeof _initialize === 'function') {
+        _initialize.apply(window.pendo, arguments);
+      }
+    };
+
+    var wrappedClearSession = function() {
+      console.log("%c[PENDO CLEAR_SESSION]", "color: #00E5FF; font-weight: bold; font-size: 11px;");
+      if (typeof _clearSession === 'function') {
+        _clearSession.apply(window.pendo, arguments);
+      }
+    };
+
     Object.defineProperty(window.pendo, 'track', {
-      get: function() {
-        return function(name, metadata) {
-          console.log("%c[PENDO TRACK] " + name, "color: #00E5FF; font-weight: bold; font-size: 11px;", metadata);
-          _track.apply(window.pendo, arguments);
-        };
-      },
+      get: function() { return wrappedTrack; },
       set: function(val) { _track = val; },
       configurable: true
     });
 
     Object.defineProperty(window.pendo, 'identify', {
-      get: function() {
-        return function(config) {
-          console.log("%c[PENDO IDENTIFY]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
-          _identify.apply(window.pendo, arguments);
-        };
-      },
+      get: function() { return wrappedIdentify; },
       set: function(val) { _identify = val; },
       configurable: true
     });
 
     Object.defineProperty(window.pendo, 'initialize', {
-      get: function() {
-        return function(config) {
-          console.log("%c[PENDO INITIALIZE]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
-          _initialize.apply(window.pendo, arguments);
-        };
-      },
+      get: function() { return wrappedInitialize; },
       set: function(val) { _initialize = val; },
       configurable: true
     });
 
     Object.defineProperty(window.pendo, 'clearSession', {
-      get: function() {
-        return function() {
-          console.log("%c[PENDO CLEAR_SESSION]", "color: #00E5FF; font-weight: bold; font-size: 11px;");
-          _clearSession.apply(window.pendo, arguments);
-        };
-      },
+      get: function() { return wrappedClearSession; },
       set: function(val) { _clearSession = val; },
       configurable: true
     });
