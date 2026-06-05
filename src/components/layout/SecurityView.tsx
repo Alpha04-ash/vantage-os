@@ -55,14 +55,6 @@ export function SecurityView() {
   const handleProtocolClick = (id: "quantumLedger" | "neuralFirewall" | "biometricMfa" | "multisigAuth", cost: number) => {
     playBeep(securityProtocols[id] ? 500 : 1000, "triangle", 0.12);
     toggleSecurityProtocol(id, cost);
-    if (typeof pendo !== "undefined") {
-      pendo.track("security_protocol_toggled", {
-        protocolId: id,
-        enabled: !securityProtocols[id],
-        cost: securityProtocols[id] ? 0 : cost,
-        newSecurityScore: securityScore
-      });
-    }
   };
 
   const handleAuditRequest = async () => {
@@ -86,11 +78,6 @@ export function SecurityView() {
   const handleMitigateClick = (logId: string) => {
     playBeep(980, "sawtooth", 0.15);
     mitigateThreat(logId);
-    if (typeof pendo !== "undefined") {
-      pendo.track("threat_mitigated", {
-        logId
-      });
-    }
   };
 
   const startDefenseGridSimulation = () => {
