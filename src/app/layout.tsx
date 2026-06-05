@@ -28,6 +28,59 @@ export default function RootLayout({
 })('b1e2a3c2-07a7-43ad-b8c5-e924f4d56e28');
 
 (function() {
+  if (typeof window !== 'undefined' && window.pendo) {
+    var _track = window.pendo.track;
+    var _identify = window.pendo.identify;
+    var _initialize = window.pendo.initialize;
+    var _clearSession = window.pendo.clearSession;
+    
+    Object.defineProperty(window.pendo, 'track', {
+      get: function() {
+        return function(name, metadata) {
+          console.log("%c[PENDO TRACK] " + name, "color: #00E5FF; font-weight: bold; font-size: 11px;", metadata);
+          _track.apply(window.pendo, arguments);
+        };
+      },
+      set: function(val) { _track = val; },
+      configurable: true
+    });
+
+    Object.defineProperty(window.pendo, 'identify', {
+      get: function() {
+        return function(config) {
+          console.log("%c[PENDO IDENTIFY]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
+          _identify.apply(window.pendo, arguments);
+        };
+      },
+      set: function(val) { _identify = val; },
+      configurable: true
+    });
+
+    Object.defineProperty(window.pendo, 'initialize', {
+      get: function() {
+        return function(config) {
+          console.log("%c[PENDO INITIALIZE]", "color: #00E5FF; font-weight: bold; font-size: 11px;", config);
+          _initialize.apply(window.pendo, arguments);
+        };
+      },
+      set: function(val) { _initialize = val; },
+      configurable: true
+    });
+
+    Object.defineProperty(window.pendo, 'clearSession', {
+      get: function() {
+        return function() {
+          console.log("%c[PENDO CLEAR_SESSION]", "color: #00E5FF; font-weight: bold; font-size: 11px;");
+          _clearSession.apply(window.pendo, arguments);
+        };
+      },
+      set: function(val) { _clearSession = val; },
+      configurable: true
+    });
+  }
+})();
+
+(function() {
   try {
     var localData = localStorage.getItem("vantage-v15-multiflow");
     if (localData) {
