@@ -87,8 +87,10 @@ export function ControlCenter({ prices, isSyncing, onSync }: { prices: CryptoPri
   };
 
   useEffect(() => {
-    fetchNews();
-  }, [prices]);
+    if (prices && prices.length > 0 && !news && !isLoadingNews) {
+      fetchNews();
+    }
+  }, [prices, news, isLoadingNews]);
 
   const activeAchievements = useMemo(() => {
     return achievements || [];
