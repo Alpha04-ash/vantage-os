@@ -225,7 +225,8 @@ export const CinematicAuth = () => {
             </motion.p>
           )}
 
-          <button 
+          <button
+            id="login-submit"
             type="submit"
             disabled={loading}
             className="mt-4 flex items-center justify-center gap-4 bg-[#F0B90B] text-black px-8 py-4 font-bold tracking-widest uppercase hover:bg-[#F8D33A] transition-all duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_0_30px_rgba(240,185,11,0.3)] w-full disabled:opacity-50 disabled:cursor-not-allowed"
@@ -245,7 +246,8 @@ export const CinematicAuth = () => {
         </form>
 
         <div className="mt-6 flex justify-center">
-          <button 
+          <button
+            id="toggle-auth-mode"
             onClick={() => {
               setMode(mode === "LOGIN" ? "REGISTER" : "LOGIN");
               setError(null);
